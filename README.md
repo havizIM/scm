@@ -1,2 +1,2 @@
-# scm
-New SCM
+# scm_dominos
+SCM Dominos

@@ -62,7 +62,7 @@ $(function(){
                 {
                     "data": null, 'render': function (data, type, row) {
                         return `
-                            <button class="btn btn-sm btn-primary pilih_group" data-id="${row.id_group}" data-name="${row.nama_group}">Pilih</button>
+                            <button class="btn btn-sm btn-primary pilih_group" data-id="${row.id_group}" data-name="${row.nama_group}" data-lokasi="${row.lokasi_group}">Pilih</button>
                             <button class="btn btn-sm btn-danger delete" data-id="${row.id_group}">Hapus</button>
                         `
                     }
@@ -85,6 +85,7 @@ $(function(){
             $('#t_group').on('click', '.pilih_group', function () {
                 var id = $(this).data('id');
                 var name = $(this).data('name');
+                var lokasi = $(this).data('lokasi');
                 var html = '';
 
                 count = count + 1;
@@ -95,14 +96,22 @@ $(function(){
                             <input type="hidden" name="id_group[]" id="id_group" value="${id}">
                             ${name}
                         </td>
-                        <td></td>
-                        <td></td>
+                        <td>${lokasi}</td>
+                        <td>
+                            <button class="btn btn-danger btn-sm remove_group" data-id="${count}"><i class="fa fa-trash"></i></button>
+                        </td>
                     </tr>
                 `;
 
                 $('#t_detail_group').append(html)
 
                 $('#modal_group').modal('hide')
+            })
+        }
+
+        const removeRow = () => {
+            $('#t_detail_group').on('click', '.remove_group', function(){
+                $()
             })
         }
 
@@ -148,6 +157,7 @@ $(function(){
                 GROUP_TABLE;
 
                 openModal();
+                btnPilih();
 
                 deleteData();
             }

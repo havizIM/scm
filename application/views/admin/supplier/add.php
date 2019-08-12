@@ -101,22 +101,22 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <h3 class="card-title mt-2"><i class="fa fa-bank"></i>  Bank Account</h3>
-                            <table class="table table-bordered" id="t_bank">
+                            <table class="table table-bordered" id="t_detail_bank">
                                 <thead>
                                     <tr>
                                         <th>Nama Bank</th>
                                         <th>Cabang</th>
                                         <th>Pemilik Account</th>
                                         <th>No. Rekening</th>
-                                        <th><button type="button" class="btn btn-info btn_increase"><i class="fa fa-plus"></i></button>  </th>
+                                        <th><button type="button" class="btn btn-info add_row"><i class="fa fa-plus"></i></button>  </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td> <input type="text" name="nama_bank[]"  id="nama_bank" class="form-control item_nama_bank"> </td>
-                                        <td> <input type="text" name="cabang[]"  id="cabang" class="form-control item_cabang"> </td>
-                                        <td> <input type="text" name="pemilik_account[]"  id="pemilik_account" class="form-control item_pemilik_account"> </td>
-                                        <td> <input type="text" name="no_rekening[]"  id="no_rekening" class="form-control item_no_rekening"> </td>
+                                        <td><input type="text" name="nama_bank[]"  id="nama_bank" class="form-control"></td>
+                                        <td><input type="text" name="cabang[]"  id="cabang" class="form-control"></td>
+                                        <td><input type="text" name="pemilik_account[]"  id="pemilik_account" class="form-control"></td>
+                                        <td><input type="text" name="no_rekening[]"  id="no_rekening" class="form-control"></td>
                                         <td></td>
                                     </tr>
                                 </tbody>

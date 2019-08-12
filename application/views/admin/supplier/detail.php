@@ -13,7 +13,11 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
+                
             </div>
         </div>
     </div>
 </div>
+<script>
+    $.getScript(`${BASE_URL}source/int/admin/detail_supplier.js`)
+</script>

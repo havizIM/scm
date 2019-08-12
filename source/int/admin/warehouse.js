@@ -20,7 +20,11 @@ $(function () {
                 }
             },
             columns: [
-                { "data": 'id_warehouse' },
+                {
+                    "data": null, 'render': function (data, type, row) {
+                        return `<a href="#/warehouse/${row.id_warehouse}">${row.id_warehouse}</a>`
+                    }
+                },
                 { "data": 'nama_warehouse' },
                 { "data": 'alamat' },
                 { "data": 'telepon' },

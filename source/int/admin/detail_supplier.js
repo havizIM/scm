@@ -7,18 +7,18 @@ $(function () {
 				var html = '';
 
 				html += `
-                    <div class="col-md-6"> <div class="card card-outline-info">
+                <div class="col-md-6"> 
+                    <div class="card card-outline-info">
                         <div class="card-header">
                             <h4 class="m-b-0 text-white">Data Supplier</h4>
                         </div>
                         <div class="card-body">
                             <center class="m-t-30"> <img src="${BASE_URL}assets/image/scm/logo_full.png" width="100%">
-                                <h4 class="card-title m-t-10">${data.nama_supplier}</h4>
-                                <h6 class="card-subtitle"></h6>
                             </center>
                         </div>
-                        <div><hr></div>
                         <div class="card-body">
+                             <h2 class="card-title m-t-10 text-center font-weight-bold">${data.nama_supplier}</h2>
+                             <hr>
                             <small class="text-muted">ID Supplier </small>
                             <h6>${data.id_supplier}</h6>
 
@@ -35,14 +35,28 @@ $(function () {
                             <h6>${data.email}</h6>
 
                             <small class="text-muted p-t-20 db">Tanggal Registrasi</small>
-                            <h6>${data.tgl_reg_warehouse}</h6>
+                            <h6>${data.tgl_reg_supplier}</h6>
 
                             <small class="text-muted p-t-20 db">NPWP</small>
                             <h6>${data.npwp}</h6>
 
-                            </div>
-                        </div>
+                            <small class="text-muted p-t-20 db">Status Supplier</small>
+                            `
+				if (data.status_supplier === "Aktif") {
+					html += `
+                            <h6><span class="label label-success">${data.status_supplier}</span></h6>
+
+                        `
+				} else {
+					html += `
+                            <h6><span class="label label-danger">${data.status_supplier}</span></h6>
+
+                        `
+				}
+
+				html += `</div>
                     </div>
+                </div>
                     
                     <div class="col-md-6">
                         <div class="card card-outline-info">
@@ -72,83 +86,95 @@ $(function () {
                             </div>
                         </div>
 
-                    <div class="table-responsive">
-                <table class="table table-bordered mb-0 table-striped" style="font-size: 12px;">
-                                <thead class="bg-success white">  
-                                    <tr>
-                                        <th>ID Group</th>
-                                        <th>NNama Group</th>
-                                        <th>Lokasi Group</th>
-                                    </tr>
-                                </thead> 
+                        <div class="card card-outline-info">
+                            <div class="card-header">
+                                <h4 class="m-b-0 text-white">Data Supplier</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered mb-0 table-striped" style="font-size: 12px;"> 
+                                        <thead class="bg-scm white">  
+                                            <tr>
+                                                <th>ID Group</th>
+                                                <th>Nama Group</th>
+                                                <th>Lokasi Group</th>
+                                            </tr>
+                                        </thead>
 
-                    <tbody>`
+                                        <tbody>
+                                             `
 				if (data.supply_group.length !== 0) {
 					$.each(data.supply_group, function (k, v) {
+
 						html += `
-                        <tr>
-                            <td>${v.id_group}</td>
-                            <td>${v.nama_group}</td>
-                            <td>${v.lokasi_group}</td>
-                        </tr>
-                        `
-
-
+                                            <tr>
+                                                <td>${v.id_group}</td>
+                                                <td>${v.nama_group}</td>
+                                                <td>${v.lokasi_group}</td>
+                                             </tr>
+                         `
 					});
 				} else {
 					html += `
-                        <tr>
-                            <td colspan="7"><center>Tidak ada peserta yang terdaftar</center></td>
-                        </tr>
-                        `
+                                                <tr>
+                                                    <td colspan="7"><center>Data belum terinput</center></td>
+                                                </tr>
+                    `
 				}
+				html += `
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
 
-				html += `</tbody>
-        </table>
-    </div>
-                   
-                    </div>
+                        <div class="card card-outline-info">
+                            <div class="card-header">
+                                <h4 class="m-b-0 text-white">Data Account</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered mb-0 table-striped" style="font-size: 12px;"> 
+                                        <thead class="bg-scm white">  
+                                            <tr>
+                                                <th>ID Account</th>
+                                                <th>No Rekening</th>
+                                                <th>Nama Bank</th>
+                                                <th>Cabang</th>
+                                                <th>Pemilik Account</th>
+                                            </tr>
+                                        </thead>
 
-                        <div class="col-md-12">
-                              <div class="table-responsive">
-                <table class="table table-bordered mb-0 table-striped" style="font-size: 12px;">
-                                <thead class="bg-success white">  
-                                    <tr>
-                                        <th>ID Account</th>
-                                        <th>No Rekening</th>
-                                        <th>Nama Bank</th>
-                                        <th>Cabang</th>
-                                        <th>Pemilik Account</th>
-                                    </tr>
-                                </thead> 
-
-                    <tbody>`
+                                        <tbody>
+                                             `
 				if (data.bank_account.length !== 0) {
 					$.each(data.bank_account, function (k, v) {
+
 						html += `
-                        <tr>
-                            <td>${v.id_account}</td>
-                            <td>${v.no_rekening}</td>
-                            <td>${v.nama_bank}</td>
-                            <td>${v.cabang}</td>
-                            <td>${v.pemilik_account}</td>
-                        </tr>
-                        `
-
-
+                                           <tr>
+                                                <td>${v.id_account}</td>
+                                                <td>${v.no_rekening}</td>
+                                                <td>${v.nama_bank}</td>
+                                                <td>${v.cabang}</td>
+                                                <td>${v.pemilik_account}</td>
+                                            </tr>
+                         `
 					});
 				} else {
 					html += `
-                        <tr>
-                            <td colspan="7"><center>Tidak ada peserta yang terdaftar</center></td>
-                        </tr>
-                        `
+                                                <tr>
+                                                    <td colspan="7"><center>Data belum terinput</center></td>
+                                                </tr>
+                    `
 				}
-
-				html += `</tbody>
-        </table>
-    </div>
-</div>
+				html += `
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 `;
 
 				$('#content_profile').html(html);

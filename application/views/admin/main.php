@@ -12,6 +12,7 @@
 
     <link href="<?= base_url() ?>assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?= base_url() ?>assets/internal/css/style.css" rel="stylesheet">
+    <link href="<?= base_url() ?>assets/internal/css/costume.css" rel="stylesheet">
     <link href="<?= base_url() ?>assets/internal/css/colors/blue.css" id="theme" rel="stylesheet">
     <link href="<?= base_url() ?>assets/internal/css/animate.css" id="theme" rel="stylesheet">
 

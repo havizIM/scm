@@ -9,16 +9,19 @@ $(function () {
 				html += `
                     <div class="col-md-6"> <div class="card card-outline-info">
                         <div class="card-header">
-                            <h4 class="m-b-0 text-white">Data Warehouse</h4>
+                            <h4 class="m-b-0 text-white">Data Supplier</h4>
                         </div>
                         <div class="card-body">
                             <center class="m-t-30"> <img src="${BASE_URL}assets/image/scm/logo_full.png" width="100%">
-                                <h4 class="card-title m-t-10">${data.nama_warehouse}</h4>
+                                <h4 class="card-title m-t-10">${data.nama_supplier}</h4>
                                 <h6 class="card-subtitle"></h6>
                             </center>
                         </div>
                         <div><hr></div>
                         <div class="card-body">
+                            <small class="text-muted">ID Supplier </small>
+                            <h6>${data.id_supplier}</h6>
+
                             <small class="text-muted">Alamat </small>
                             <h6>${data.alamat}</h6>
                             
@@ -34,6 +37,9 @@ $(function () {
                             <small class="text-muted p-t-20 db">Tanggal Registrasi</small>
                             <h6>${data.tgl_reg_warehouse}</h6>
 
+                            <small class="text-muted p-t-20 db">NPWP</small>
+                            <h6>${data.npwp}</h6>
+
                             </div>
                         </div>
                     </div>
@@ -41,42 +47,108 @@ $(function () {
                     <div class="col-md-6">
                         <div class="card card-outline-info">
                             <div class="card-header">
-                                <h4 class="m-b-0 text-white">Data Grup</h4>
+                                <h4 class="m-b-0 text-white">Data PIC</h4>
                             </div>
                             <div class="card-body">
 
                                     <small class="text-muted">ID Grup</small>
-                                    <h6>${data.group.id_group}</h6>
+                                    <h6>${data.pic.id_pic}</h6>
                                     
                                     <small class="text-muted p-t-20 db">Nama Grup</small>
-                                    <h6>${data.group.nama_group}</h6>
+                                    <h6>${data.pic.nama_pic}</h6>
 
-                                    <small class="text-muted p-t-20 db">Lokasi Grup</small>
-                                    <h6>${data.group.lokasi_group}</h6> 
+                                    <small class="text-muted p-t-20 db">Handphone</small>
+                                    <h6>${data.pic.handphone}</h6> 
+
+                                    <small class="text-muted p-t-20 db">Email Pic</small>
+                                    <h6>${data.pic.email_pic}</h6> 
+
+                                    <small class="text-muted p-t-20 db">Username</small>
+                                    <h6>${data.pic.username}</h6>
+
+                                    <small class="text-muted p-t-20 db">Tgl Registrasi</small>
+                                    <h6>${data.pic.tgl_reg_pic}</h6> 
                                 
                             </div>
                         </div>
-                        <div class="card card-outline-info">
-                            <div class="card-header">
-                                <h4 class="m-b-0 text-white">Data User</h4>
-                            </div>
-                            <div class="card-body">
 
-                                    <small class="text-muted">ID User</small>
-                                    <h6>${data.user.id_user}</h6>
-                                    
-                                    <small class="text-muted p-t-20 db">Nama Lengkap</small>
-                                    <h6>${data.user.nama_lengkap}</h6>
+                    <div class="table-responsive">
+                <table class="table table-bordered mb-0 table-striped" style="font-size: 12px;">
+                                <thead class="bg-success white">  
+                                    <tr>
+                                        <th>ID Group</th>
+                                        <th>NNama Group</th>
+                                        <th>Lokasi Group</th>
+                                    </tr>
+                                </thead> 
 
-                                    <small class="text-muted p-t-20 db">Email User</small>
-                                    <h6>${data.user.email_user}</h6> 
+                    <tbody>`
+				if (data.supply_group.length !== 0) {
+					$.each(data.supply_group, function (k, v) {
+						html += `
+                        <tr>
+                            <td>${v.id_group}</td>
+                            <td>${v.nama_group}</td>
+                            <td>${v.lokasi_group}</td>
+                        </tr>
+                        `
 
-                                    <small class="text-muted p-t-20 db">Telepon</small>
-                                    <h6>${data.user.tlp_user}</h6> 
-                                
-                            </div>
-                        </div>
+
+					});
+				} else {
+					html += `
+                        <tr>
+                            <td colspan="7"><center>Tidak ada peserta yang terdaftar</center></td>
+                        </tr>
+                        `
+				}
+
+				html += `</tbody>
+        </table>
+    </div>
+                   
                     </div>
+
+                        <div class="col-md-12">
+                              <div class="table-responsive">
+                <table class="table table-bordered mb-0 table-striped" style="font-size: 12px;">
+                                <thead class="bg-success white">  
+                                    <tr>
+                                        <th>ID Account</th>
+                                        <th>No Rekening</th>
+                                        <th>Nama Bank</th>
+                                        <th>Cabang</th>
+                                        <th>Pemilik Account</th>
+                                    </tr>
+                                </thead> 
+
+                    <tbody>`
+				if (data.bank_account.length !== 0) {
+					$.each(data.bank_account, function (k, v) {
+						html += `
+                        <tr>
+                            <td>${v.id_account}</td>
+                            <td>${v.no_rekening}</td>
+                            <td>${v.nama_bank}</td>
+                            <td>${v.cabang}</td>
+                            <td>${v.pemilik_account}</td>
+                        </tr>
+                        `
+
+
+					});
+				} else {
+					html += `
+                        <tr>
+                            <td colspan="7"><center>Tidak ada peserta yang terdaftar</center></td>
+                        </tr>
+                        `
+				}
+
+				html += `</tbody>
+        </table>
+    </div>
+</div>
                 `;
 
 				$('#content_profile').html(html);

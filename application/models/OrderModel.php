@@ -2,15 +2,17 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class SupplierModel extends CI_Model {
+class OrderModel extends CI_Model {
 
     function show($where)
     {
         $this->db->select('a.*')
-               ->select('b.id_pic, b.nama_pic, b.handphone, b.email_pic, b.username, b.tgl_reg_pic')
+               ->select('b.*')
+               ->select('c.*')
                
-               ->from('supplier a')
-               ->join('pic b', 'b.id_supplier = a.id_supplier');
+               ->from('order a')
+               ->join('supplier b', 'b.id_supplier = a.id_supplier')
+               ->join('warehouse c', 'c.id_warehouse = a.id_warehouse');
 
         if(!empty($where)){
             foreach($where as $key => $value){
@@ -20,7 +22,29 @@ class SupplierModel extends CI_Model {
             }
         }
 
-        $this->db->order_by('tgl_reg_supplier', 'DESC');
+        $this->db->order_by('a.tgl_order', 'DESC');
+        return $this->db->get();
+    }
+
+    function detail($where)
+    {
+        $this->db->select('a.*')
+               ->select('b.*')
+               ->select('c.*')
+               
+               ->from('order_detail a')
+               ->join('product b', 'b.id_product = a.id_product')
+               ->join('category c', 'c.id_category = a.id_category');
+
+        if(!empty($where)){
+            foreach($where as $key => $value){
+               if($value != null){
+                    $this->db->where($key, $value);
+                }
+            }
+        }
+
+        $this->db->order_by('a.id_product', 'DESC');
         return $this->db->get();
     }
 

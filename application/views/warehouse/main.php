@@ -130,13 +130,10 @@
                             <a class="waves-effect waves-dark" href="#/dashboard"><i class="mdi mdi-gauge"></i> <span class="hide-menu">Dashboard</span></a>
                         </li>
                         <li>
-                            <a class="waves-effect waves-dark" href="#/user"><i class="fa fa-user"></i> <span class="hide-menu">User</span></a>
+                            <a class="waves-effect waves-dark" href="#/order"><i class="fa fa-file"></i> <span class="hide-menu">Order</span></a>
                         </li>
                         <li>
-                            <a class="waves-effect waves-dark" href="#/warehouse"><i class="fa fa-bank"></i> <span class="hide-menu">Warehouse</span></a>
-                        </li>
-                        <li>
-                            <a class="waves-effect waves-dark" href="#/supplier"><i class="fa fa-inbox"></i> <span class="hide-menu">Supplier</span></a>
+                            <a class="waves-effect waves-dark" href="#/shipping"><i class="fa fa-file"></i> <span class="hide-menu">Shipping</span></a>
                         </li>
                     </ul>
                 </nav>

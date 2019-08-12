@@ -3,6 +3,7 @@ console.log('Supplier is running...')
 $(function(){
     const supplierController = (() => {
         var count = 0;
+        var count_row = 0;
 
         const MYTABLE = $('#t_supplier').DataTable({
             columnDefs: [{
@@ -111,12 +112,20 @@ $(function(){
 
         const removeRow = () => {
             $('#t_detail_group').on('click', '.remove_group', function(){
-                $()
+                var id = $(this).data('id');
+
+                $('.row_'+id).remove();
+            })
+
+            $('#t_detail_bank').on('click', '.remove_bank', function(){
+                var id = $(this).data('id');
+
+                $('.row_bank_' + id).remove();
             })
         }
 
 
-        const deleteData = (DOM) => {
+        const deleteData = () => {
             $('#t_supplier').on('click', '.delete', function () {
                 let id_supplier = $(this).data('id');
                 let ask = confirm(`Are you sure delete this data ${id_supplier} ?`);
@@ -143,11 +152,84 @@ $(function(){
             });
         }
 
+        const addRow = () => {
+            $('.add_row').on('click', function(){
+                let html = '';
+                
+                count_row = count_row + 1;
+
+                html += `
+                    <tr class="row_bank_${count_row}">
+                        <td> <input type="text" name="nama_bank[]"  id="nama_bank" class="form-control"> </td>
+                        <td> <input type="text" name="cabang[]"  id="cabang" class="form-control"> </td>
+                        <td> <input type="text" name="pemilik_account[]"  id="pemilik_account" class="form-control"> </td>
+                        <td> <input type="text" name="no_rekening[]"  id="no_rekening" class="form-control"> </td>
+                        <td> <button type="button" name="remove" class="btn btn-danger remove_bank" data-id="${count_row}"><span class="fa fa-minus"></span></button> </td>
+                    </tr>
+                `;
+
+                $('#t_detail_bank tbody').append(html)
+            })
+        }
+
+
+
         const submitAdd = () => {
-            $('#form_add').submit(function(e){
-                e.preventDefault();
-
-
+            $('#form_add').validate({
+                rules: {
+                    "nama_supplier": "required",
+                    "alamat": "required",
+                    "telepon": "required",
+                    "fax": "required",
+                    "npwp": "required",
+                    "email": "required",
+                    "status_supplier": "required",
+                    "nama_pic": "required",
+                    "handphone": "required",
+                    "email_pic": "required",
+                    "username": "required",
+                    "nama_bank[]": "required",
+                    "cabang[]": "required",
+                    "pemilik_account[]": "required",
+                    "no_rekening[]": "required"
+                },
+                checkForm: function () {
+                    this.prepareForm();
+                    for (var i = 0, elements = (this.currentElements = this.elements()); elements[i]; i++) {
+                        if (this.findByName(elements[i].name).length != undefined && this.findByName(elements[i].name).length > 1) {
+                            for (var cnt = 0; cnt < this.findByName(elements[i].name).length; cnt++) {
+                                this.check(this.findByName(elements[i].name)[cnt]);
+                            }
+                        } else {
+                            this.check(elements[i]);
+                        }
+                    }
+                    return this.valid();
+                },
+                submitHandler: function(form){
+                    $.ajax({
+                        url: `${BASE_URL}int/supplier/add`,
+                        type: 'POST',
+                        dataType: 'JSON',
+                        data: $(form).serialize(),
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader("Authorization", "Basic " + btoa(USERNAME + ":" + PASSWORD))
+                            xhr.setRequestHeader("SCM-INT-KEY", TOKEN)
+                            $('#submit_add').html('<i class="fa fa-spin fa-spinner"></i>');
+                        },
+                        success: function (res) {
+                            makeNotif('success', 'Failed', res.message, 'bottom-right')
+                            location.hash = '#/supplier';
+                        },
+                        error: function (err) {
+                            const { message } = err.responseJSON
+                            makeNotif('error', 'Failed', message, 'bottom-right')
+                        },
+                        complete: function () {
+                            $('#submit_add').html('Simpan');
+                        }
+                    })
+                }
             })
         }
 
@@ -158,7 +240,11 @@ $(function(){
 
                 openModal();
                 btnPilih();
+                addRow();
 
+                removeRow();
+
+                submitAdd();
                 deleteData();
             }
         }

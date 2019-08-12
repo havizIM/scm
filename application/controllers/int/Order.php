@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 require APPPATH . 'libraries/REST_Controller.php';
 require APPPATH . 'libraries/Format.php';
 
-class Supplier extends CI_Controller {
+class Order extends CI_Controller {
 
     use REST_Controller {
         REST_Controller::__construct as private __resTraitConstruct;
@@ -19,9 +19,7 @@ class Supplier extends CI_Controller {
         $this->where    = array('token' => $this->input->get_request_header('SCM-INT-KEY', TRUE));
         $this->user     = $this->AuthModel->cekAuthInt($this->where);
 
-        $this->load->model('SupplierModel');
-        $this->load->model('SupplyGroupModel');
-        $this->load->model('BankModel');
+        $this->load->model('OrderModel');
     }
 
     public function index_get()
@@ -29,70 +27,66 @@ class Supplier extends CI_Controller {
         if($this->user->num_rows() == 0){
             $this->response(array('status' => false, 'error' => 'Unauthorization token'), 401);
         } else {
+            $user = $this->user->row();
             
             $where = array(
-                'a.id_supplier' => $this->get('id_supplier')
+                'a.no_order'      => $this->get('no_order'),
+                'a.id_warehouse'  => $user->id_warehouse
             );
 
-            $show   = $this->SupplierModel->show($where)->result();
-            $supplier   = array();
+            $show   = $this->OrderModel->show($where)->result();
+            $order   = array();
 
             foreach($show as $key){
                 $json = array();
 
-                $json['id_supplier']        = $key->id_supplier;
-                $json['nama_supplier']      = $key->nama_supplier;
-                $json['alamat']             = $key->alamat;
-                $json['telepon']            = $key->telepon;
-                $json['fax']                = $key->fax;
-                $json['email']              = $key->email;
-                $json['npwp']               = $key->npwp;
-                $json['status_supplier']    = $key->status_supplier;
-                $json['tgl_reg_supplier']   = $key->tgl_reg_supplier;
-                $json['pic']                = array(
-                                                'id_pic'        => $key->id_pic,
-                                                'nama_pic'      => $key->nama_pic,
-                                                'handphone'     => $key->handphone,
-                                                'email_pic'     => $key->email_pic,
-                                                'username'      => $key->username,
-                                                'tgl_reg_pic'   => $key->tgl_reg_pic
-                                            );
-                $json['bank_account']       = array();
-                $json['supply_group']       = array();
+                $json['no_order']       = $key->no_order;
+                $json['warehouse']      = array(
+                    'id_warehouse'      => $key->id_warehouse,
+                    'nama_warehouse'    => $key->nama_warehouse,
+                    'alamat'            => $key->alamat,
+                    'telepon'           => $key->telepon,
+                    'fax'               => $key->fax,
+                    'email'             => $key->email
+                );
+                $json['supplier']       = array(
+                    'id_supplier'        => $key->id_supplier,
+                    'nama_supplier'      => $key->nama_supplier,
+                    'alamat'             => $key->alamat,
+                    'telepon'            => $key->telepon,
+                    'fax'                => $key->fax,
+                    'email'              => $key->email,
+                    'npwp'               => $key->npwp,
+                    'status_supplier'    => $key->status_supplier
+                );
+                $json['status_order']   = $key->telepon;
+                $json['tgl_order']      = $key->fax;
+                
+                $json['detail']         = array();
 
-                $where_2   = array('id_supplier' => $key->id_supplier);
+                $where_2   = array('a.no_order' => $key->no_order);
+                $detail   = $this->OrderModel->detail($where_2);
 
-                $bank_acc   = $this->BankModel->show($where_2);
-                foreach($bank_acc->result() as $key1){
+                foreach($detail->result() as $key1){
                     $json_ba = array();
 
-                    $json_ba['id_account']      = $key1->id_account;
-                    $json_ba['no_rekening']     = $key1->no_rekening;
-                    $json_ba['nama_bank']       = $key1->nama_bank;
-                    $json_ba['cabang']          = $key1->cabang;
-                    $json_ba['pemilik_account'] = $key1->pemilik_account;
+                    $json_ba['id_product']      = $key1->id_product;
+                    $json_ba['nama_product']    = $key1->nama_product;
+                    $json_ba['harga']           = $key1->harga;
+                    $json_ba['qty']             = $key1->qty;
+                    $json_ba['satuan']          = $key1->satuan;
+                    $json_ba['total']           = $key1->harga * $key1->qty;
 
-                    $json['bank_account'][] = $json_ba;
+                    $json['detail'][] = $json_ba;
                 }
 
-                $supply_group   = $this->SupplyGroupModel->show($where_2);
-                foreach($supply_group->result() as $key2){
-                    $json_sg = array();
-
-                    $json_sg['id_group']        = $key2->id_group;
-                    $json_sg['nama_group']      = $key2->nama_group;
-                    $json_sg['lokasi_group']    = $key2->lokasi_group;
-
-                    $json['supply_group'][] = $json_sg;
-                }
-
-                $supplier[] = $json;
+                $order[] = $json;
             }
 
             $response = array(
                 'status'    => true,
                 'message'   => 'Success fetch warehouses',
-                'data'      => $supplier
+                'data'      => $order
             );
 
             $this->response($response, 200);

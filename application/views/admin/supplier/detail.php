@@ -9,11 +9,9 @@
     </div>
 </div>
 
-<div class="row">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-body">
-            </div>
-        </div>
-    </div>
+<div class="row" id="content_profile">
+   
 </div>
+<script>
+    $.getScript(`${BASE_URL}source/int/admin/detail_supplier.js`)
+</script>

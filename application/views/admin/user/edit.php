@@ -19,9 +19,11 @@
 <!-- ============================================================== -->
 <div class="row">
     <div class="col-12">
-        <div class="card">
+        <div class="card card-outline-primary">
+            <div class="card-header">
+                <h4 class="m-b-0 text-white">Form User</h4>
+            </div>
             <div class="card-body">
-                <h4 class="card-title">Form Edit User</h4>
                 <form id="form_edit">
                     <div class="form-group">
                             <label for="nama_lengkap">Nama</label>

@@ -128,8 +128,8 @@ class Warehouse extends CI_Controller {
             } else {
                 $data = array(
                     'id_warehouse'      => $this->KodeModel->buatKode('warehouse', 'WH-', 'id_warehouse', 8),
-                    'id_group'             => $this->post('id_group'),
-                    'id_user'              => $this->post('id_user'),
+                    'id_group'          => $this->post('id_group'),
+                    'id_user'           => $this->post('id_user'),
                     'nama_warehouse'    => $this->post('nama_warehouse'),
                     'alamat'            => $this->post('alamat'),
                     'telepon'           => $this->post('telepon'),

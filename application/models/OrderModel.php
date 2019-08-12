@@ -34,7 +34,7 @@ class OrderModel extends CI_Model {
                
                ->from('order_detail a')
                ->join('product b', 'b.id_product = a.id_product')
-               ->join('category c', 'c.id_category = a.id_category');
+               ->join('category c', 'c.id_category = b.id_category');
 
         if(!empty($where)){
             foreach($where as $key => $value){
@@ -48,22 +48,13 @@ class OrderModel extends CI_Model {
         return $this->db->get();
     }
 
-    function add($data, $pic, $bank, $supply_group)
+    function add($data, $detail)
     {
         $this->db->trans_start();
-        $this->db->insert('supplier', $data);
+        $this->db->insert('order', $data);
         
-
-        if(!empty($pic)){
-            $this->db->insert('pic', $pic);
-        }
-
-        if(!empty($bank)){
-            $this->db->insert_batch('bank_account', $bank);
-        }
-
-        if(!empty($supply_group)){
-            $this->db->insert_batch('supply_group', $supply_group);
+        if(!empty($detail)){
+            $this->db->insert_batch('order_detail', $detail);
         }
 
         $this->db->trans_complete();
@@ -110,7 +101,7 @@ class OrderModel extends CI_Model {
 
     function delete($where)
     {
-        return $this->db->where($where)->delete('supplier');
+        return $this->db->where($where)->delete('order');
     }
 
 

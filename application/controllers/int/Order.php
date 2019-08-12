@@ -59,8 +59,8 @@ class Order extends CI_Controller {
                     'npwp'               => $key->npwp,
                     'status_supplier'    => $key->status_supplier
                 );
-                $json['status_order']   = $key->telepon;
-                $json['tgl_order']      = $key->fax;
+                $json['status_order']   = $key->status_order;
+                $json['tgl_order']      = $key->tgl_order;
                 
                 $json['detail']         = array();
 
@@ -98,26 +98,12 @@ class Order extends CI_Controller {
         if($this->user->num_rows() == 0){
             $this->response(array('status' => false, 'error' => 'Unauthorization token'), 401);
         } else {
-
+            $user = $this->user->row();
             $this->form_validation->set_data($this->post());
-            $this->form_validation->set_rules('nama_supplier', 'Nama Supplier', 'required|trim');
-            $this->form_validation->set_rules('alamat', 'Alamat', 'required|trim');
-            $this->form_validation->set_rules('telepon', 'Telepon', 'required|trim');
-            $this->form_validation->set_rules('email', 'Email', 'required|trim');
-            $this->form_validation->set_rules('npwp', 'NPWP', 'required|trim');
-            $this->form_validation->set_rules('status_supplier', 'Status', 'required|trim');
-            $this->form_validation->set_rules('nama_pic', 'Nama PIC', 'required|trim');
-            $this->form_validation->set_rules('username', 'Username', 'required|trim');
-            $this->form_validation->set_rules('handphone', 'Handphone', 'required|trim');
-
-            $this->form_validation->set_rules('no_rekening[]', 'No Rekening', 'required|trim');
-            $this->form_validation->set_rules('nama_bank[]', 'Nama Bank', 'required|trim');
-            $this->form_validation->set_rules('cabang[]', 'Cabanag', 'required|trim');
-            $this->form_validation->set_rules('pemilik_account[]', 'Pemilik Account', 'required|trim');
-
-            $this->form_validation->set_rules('id_group[]', 'Group', 'required|trim');
-
-
+            
+            $this->form_validation->set_rules('id_supplier', 'Supplier', 'required|trim');
+            $this->form_validation->set_rules('id_product[]', 'Product', 'required|trim');
+            $this->form_validation->set_rules('qty[]', 'Qty', 'required|trim');
 
             if($this->form_validation->run() == FALSE){
 
@@ -130,67 +116,37 @@ class Order extends CI_Controller {
             } else {
 
                 $post           = $this->post();
-                $id_supplier    = $this->KodeModel->buatKode('supplier', 'SP-', 'id_supplier', 8);
+                $no_order       = $this->KodeModel->buatKode('`order`', 'PO-', 'no_order', 8);
 
 
                 $data           = array(
-                    'id_supplier'       => $id_supplier,
-                    'nama_supplier'     => $post['nama_supplier'],
-                    'alamat'            => $post['alamat'],
-                    'telepon'           => $post['telepon'],
-                    'fax'               => $post['fax'],
-                    'npwp'              => $post['npwp'],
-                    'email'             => $post['email'],
-                    'status_supplier'   => $post['status_supplier']
-                );
-
-                $pic            = array(
-                    'id_supplier'     => $id_supplier,
-                    'nama_pic'     => $post['nama_pic'],
-                    'handphone'    => $post['handphone'],
-                    'email_pic'    => $post['email_pic'],
-                    'username'     => $post['username'],
-                    'password'     => substr(str_shuffle("01234567890abcdefghijklmnopqestuvwxyz"), 0, 5)
+                    'no_order'        => $no_order,
+                    'id_supplier'     => $post['id_supplier'],
+                    'id_warehouse'    => $user->id_warehouse,
+                    'status_order'    => 'Open' 
                 );
                 
-                $bank           = array();
-                $supply_group   = array();
+                $detail  = array();
 
-                foreach($post['no_rekening'] as $key => $val){
-                    $bank[] = array(
-                        'id_supplier'          => $id_supplier,
-                        'nama_bank'         => $post['nama_bank'][$key],
-                        'cabang'            => $post['cabang'][$key],
-                        'pemilik_account'   => $post['pemilik_account'][$key],
-                        'no_rekening'       => $post['no_rekening'][$key]
+                foreach($post['id_product'] as $key => $val){
+                    $detail[] = array(
+                        'no_order'       => $no_order,
+                        'id_product'     => $post['id_product'][$key],
+                        'qty'            => $post['qty'][$key]
                     );
                 }
 
-                foreach($post['id_group'] as $key => $val){
-                    $supply_group[] = array(
-                        'id_supplier'    => $id_supplier,
-                        'id_group'       => $post['id_group'][$key]
-                    );
-                }
-
-                $coba = array(
-                    'data' => $data,
-                    'pic' => $pic,
-                    'bank' => $bank,
-                    'supply_group' => $supply_group
-                );
-
-                $add = $this->SupplierModel->add($data, $pic, $bank, $supply_group);
+                $add = $this->OrderModel->add($data, $detail);
 
                 if(!$add){
                     $this->response(array(
                         'status'    => false,
-                        'error'     => 'Failed add warehouse'
+                        'error'     => 'Failed add order'
                     ), 400);
                 } else {
                     $this->response(array(
                         'status'    => true,
-                        'message'   => 'Success add warehouse'
+                        'message'   => 'Success add order'
                     ), 200);
                 }
             }
@@ -295,8 +251,8 @@ class Order extends CI_Controller {
         } else {
             $config = array(
                 array(
-                    'field' => 'id_supplier',
-                    'label' => 'ID Warehouse',
+                    'field' => 'no_order',
+                    'label' => 'Order',
                     'rules' => 'required|trim'
                 )
             );
@@ -314,20 +270,20 @@ class Order extends CI_Controller {
 
             } else {
                 $where  = array(
-                    'id_supplier'   => $this->delete('id_supplier') 
+                    'no_order'   => $this->delete('no_order') 
                 );
 
-                $delete = $this->SupplierModel->delete($where);
+                $delete = $this->OrderModel->delete($where);
 
                 if(!$delete){
                     $this->response(array(
                         'status'    => false,
-                        'error'     => 'Failed delete warehouse'
+                        'error'     => 'Failed delete order'
                     ), 400);
                 } else {
                     $this->response(array(
                         'status'    => true,
-                        'message'   => 'Success delete warehouse'
+                        'message'   => 'Success delete order'
                     ), 200);
                 }
             }

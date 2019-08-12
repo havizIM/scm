@@ -29,7 +29,8 @@ class Product extends CI_Controller {
         } else {
             
             $where = array(
-                'id_product' => $this->get('id_product')
+                'a.id_product'  => $this->get('id_product'),
+                'a.id_supplier' => $this->get('id_supplier')
             );
 
             $show   = $this->ProductModel->show($where)->result();

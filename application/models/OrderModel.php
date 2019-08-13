@@ -68,24 +68,15 @@ class OrderModel extends CI_Model {
         }
     }
 
-    function edit($where, $data, $pic, $bank, $supply_group)
+    function edit($where, $data, $detail)
     {
         $this->db->trans_start();
-        $this->db->where($where)->update('supplier', $data);
+        $this->db->where($where)->update('order', $data);
         
 
         if(!empty($pic)){
-            $this->db->where($where)->update('pic', $pic);
-        }
-
-        if(!empty($bank)){
-            $this->db->where($where)->delete('bank_account');
-            $this->db->insert_batch('bank_account', $bank);
-        }
-
-        if(!empty($supply_group)){
-            $this->db->where($where)->delete('supply_group');
-            $this->db->insert_batch('supply_group', $supply_group);
+            $this->db->where($where)->delete('order_detail', $detail);
+            $this->db->where($where)->insert_batch('order_detail', $detail);
         }
 
         $this->db->trans_complete();

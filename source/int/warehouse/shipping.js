@@ -48,7 +48,7 @@ $(function () {
             ]
         });
 
-        var btnApprove = () => {
+        const btnApprove = () => {
             $('#t_shipping').on('click', '.approve', function () {
                 let no_shipping = $(this).data('id');
                 let ask = confirm(`Are you sure approve this data ${no_shipping} ?`);

@@ -43,4 +43,26 @@
         return $this->db->get();
     }
 
+    function edit($where, $data, $detail)
+    {
+        $this->db->trans_start();
+        $this->db->where($where)->update('invoice', $data);
+        
+
+        if(!empty($pic)){
+            $this->db->where($where)->delete('invoice_detail', $detail);
+            $this->db->where($where)->insert_batch('invoice_detail', $detail);
+        }
+
+        $this->db->trans_complete();
+
+        if ($this->db->trans_status() === FALSE){
+            $this->db->trans_rollback();
+            return false;
+        } else {
+            $this->db->trans_commit();
+            return true;
+        }
+    }
+
   }

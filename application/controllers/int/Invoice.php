@@ -100,4 +100,56 @@ class Invoice extends CI_Controller {
         }
     }
 
+    public function approve_put()
+    {
+        if($this->user->num_rows() == 0){
+            $this->response(array('status' => false, 'error' => 'Unauthorization token'), 401);
+        } else {
+            $config = array(
+                array(
+                    'field' => 'no_invoice',
+                    'label' => 'No Invoice',
+                    'rules' => 'required|trim'
+                )
+            );
+
+            $this->form_validation->set_data($this->put());
+            $this->form_validation->set_rules($config);
+
+            if($this->form_validation->run() == FALSE){
+
+                $this->response(array(
+                    'status'    => false,
+                    'message'   => 'Field is required',
+                    'error'     => $this->form_validation->error_array()
+                ), 400);
+
+            } else {
+                $where  = array(
+                    'no_invoice'   => $this->put('no_invoice') 
+                );
+
+                $data = array(
+                    'status_invoice' => 'Close',
+                );
+
+                $detail = array();
+
+                $edit = $this->InvoiceModel->edit($where, $data, $detail);
+
+                if(!$edit){
+                    $this->response(array(
+                        'status'    => false,
+                        'message'     => 'Failed update invoice'
+                    ), 400);
+                } else {
+                    $this->response(array(
+                        'status'    => true,
+                        'message'   => 'Success update invoice'
+                    ), 200);
+                }
+            }
+        } 
+    }
+
 }

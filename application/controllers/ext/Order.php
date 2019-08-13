@@ -106,7 +106,7 @@ class Order extends CI_Controller {
                 )
             );
 
-            $this->form_validation->set_data($this->delete());
+            $this->form_validation->set_data($this->put());
             $this->form_validation->set_rules($config);
 
             if($this->form_validation->run() == FALSE){
@@ -119,24 +119,26 @@ class Order extends CI_Controller {
 
             } else {
                 $where  = array(
-                    'no_order'   => $this->delete('no_order') 
+                    'no_order'   => $this->put('no_order') 
                 );
 
-                $where  = array(
+                $data  = array(
                     'status_order' => 'Close'
                 );
 
-                $delete = $this->OrderModel->delete($where);
+                $detail = array();
+
+                $delete = $this->OrderModel->edit($where, $data, $detail);
 
                 if(!$delete){
                     $this->response(array(
                         'status'    => false,
-                        'error'     => 'Failed delete order'
+                        'error'     => 'Failed approve order'
                     ), 400);
                 } else {
                     $this->response(array(
                         'status'    => true,
-                        'message'   => 'Success delete order'
+                        'message'   => 'Success approve order'
                     ), 200);
                 }
             }

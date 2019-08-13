@@ -31,15 +31,56 @@ $(function () {
                 { "data": 'tgl_tempo' },
                 { "data": 'grand_total' },
                 { "data": 'status_invoice' },
+                {
+                    "data": null, 'render': function (data, type, row) {
+                        if (row.status_invoice === 'Open') {
+                            return `
+                                <button class="btn btn-sm btn-info approve" data-id="${row.no_invoice}"><i class="fa fa-check"></i> Approve</button>
+                            `
+                        } else {
+                            return `-`;
+                        }
+
+                    }
+                },
             ],
             order: [
                 [0, 'desc']
             ]
         });
 
+        const btnApprove = () => {
+            $('#t_invoice').on('click', '.approve', function () {
+                let no_invoice = $(this).data('id');
+                let ask = confirm(`Are you sure approve this data ${no_invoice} ?`);
+
+                if (ask) {
+                    $.ajax({
+                        url: `${BASE_URL}int/invoice/approve`,
+                        type: 'PUT',
+                        dataType: 'JSON',
+                        data: { no_invoice },
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader("Authorization", "Basic " + btoa(USERNAME + ":" + PASSWORD))
+                            xhr.setRequestHeader("SCM-INT-KEY", TOKEN)
+                        },
+                        success: function (res) {
+                            MYTABLE.ajax.reload();
+                            makeNotif('success', 'Success', res.message, 'bottom-right')
+                        },
+                        error: function (err) {
+                            const { error } = err.responseJSON
+                            makeNotif('error', 'Failed', error, 'bottom-right')
+                        }
+                    })
+                }
+            });
+        }
+
         return {
             init: () => {
                 MYTABLE;
+                btnApprove();
             }
         }
     })();

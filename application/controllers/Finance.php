@@ -61,6 +61,15 @@ class Finance extends CI_Controller {
 			$this->load->view('Finance/order/detail');
 		}
 	}
+
+	public function shipping($id = null)
+	{
+		if($id == null){
+			$this->load->view('Finance/shipping/data');
+		} else {
+			$this->load->view('Finance/shipping/detail');
+		}
+	}
 	
 	public function invoice($id = null)
 	{
@@ -69,7 +78,6 @@ class Finance extends CI_Controller {
 		} else {
 			$this->load->view('Finance/invoice/detail');
 		}
-		
 	}
 
 	public function payment($id = null)

@@ -143,6 +143,9 @@
                             <a class="waves-effect waves-dark" href="#/order"><i class="fa fa-inbox"></i> <span class="hide-menu">Order</span></a>
                         </li>
                         <li>
+                            <a class="waves-effect waves-dark" href="#/shipping"><i class="fa fa-inbox"></i> <span class="hide-menu">Shipping</span></a>
+                        </li>
+                        <li>
                             <a class="waves-effect waves-dark" href="#/invoice"><i class="fa fa-file"></i> <span class="hide-menu">Invoice</span></a>
                         </li>
                         <li>

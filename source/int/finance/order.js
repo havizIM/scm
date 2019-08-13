@@ -21,12 +21,14 @@ $(function () {
                 },
             },
             columns: [
-                { "data": 'no_order' },
+              { "data": null, 'render': function (data, type, row){
+                  return `<a href="#/order/${row.no_order}">${row.no_order}</a>`
+              }  },
                 { "data": 'warehouse.nama_warehouse' },
                 { "data": 'supplier.nama_supplier' },
                 { "data": 'status_order' },
                 { "data": 'tgl_order' },
-                
+
             ],
             order: [[0, 'desc']]
         });

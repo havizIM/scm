@@ -23,8 +23,8 @@ $(function () {
             columns: [
                 { "data": 'no_shipping' },
                 { "data": 'no_order' },
-                { "data": 'supplier.nama_supplier' },
                 { "data": 'warehouse.nama_warehouse' },
+                { "data": 'supplier.nama_supplier' },
                 { "data": 'tgl_shipping' },
                 { "data": 'tgl_receive' },
                 { "data": 'status_shipping' },

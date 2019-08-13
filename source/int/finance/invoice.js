@@ -21,7 +21,9 @@ $(function () {
                 }
             },
             columns: [
-                { "data": 'no_invoice' },
+              { "data": null, 'render': function (data, type, row){
+                  return `<a href="#/invoice/${row.no_invoice}">${row.no_invoice}</a>`
+              }  },
                 { "data": 'no_order' },
                 { "data": 'supplier.nama_supplier' },
                 { "data": 'warehouse.nama_warehouse' },

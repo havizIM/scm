@@ -80,7 +80,7 @@ class Category extends CI_Controller {
 
             } else {
                 $data = array(
-                    'id_product'     => $this->KodeModel->buatKode('category', 'CAT-', 'id_category', 7),
+                    'id_category'     => $this->KodeModel->buatKode('category', 'CAT-', 'id_category', 7),
                     'nama_category'  => $this->post('nama_category')
                 );
 

@@ -60,8 +60,7 @@ class Supplier extends CI_Controller {
                 $json['bank_account']       = array();
                 $json['supply_group']       = array();
 
-                $where_2   = array('id_supplier' => $key->id_supplier);
-
+                $where_2   = array('a.id_supplier' => $key->id_supplier);
                 $bank_acc   = $this->BankModel->show($where_2);
                 foreach($bank_acc->result() as $key1){
                     $json_ba = array();
@@ -75,7 +74,8 @@ class Supplier extends CI_Controller {
                     $json['bank_account'][] = $json_ba;
                 }
 
-                $supply_group   = $this->SupplyGroupModel->show($where_2);
+                $where_3   = array('id_supplier' => $key->id_supplier);
+                $supply_group   = $this->SupplyGroupModel->show($where_3);
                 foreach($supply_group->result() as $key2){
                     $json_sg = array();
 

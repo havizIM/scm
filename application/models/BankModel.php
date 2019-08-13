@@ -6,8 +6,11 @@ class BankModel extends CI_Model {
 
     function show($where)
     {
-        $this->db->select('*')
-               ->from('bank_account');
+        $this->db->select('a.*')
+               ->select('b.nama_supplier')
+               ->from('bank_account a')
+               
+               ->from('supplier b', 'b.id_supplier = a.id_supplier');
 
         if(!empty($where)){
             foreach($where as $key => $value){
@@ -17,7 +20,7 @@ class BankModel extends CI_Model {
             }
         }
 
-        $this->db->order_by('id_account', 'DESC');
+        $this->db->order_by('a.id_account', 'DESC');
         return $this->db->get();
     }
 

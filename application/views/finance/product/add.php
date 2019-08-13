@@ -60,7 +60,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">Lookup Product</h4>
+                <h4 class="modal-title" id="myModalLabel">Lookup Category</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
@@ -69,7 +69,7 @@
                         <label for="">Nama Kategori</label>
                         <input type="text" class="form-control" id="nama_category" name="nama_category">
                     </div>
-                    <button class="btn btn-primary btn-block">Simpan</button>
+                    <button class="btn btn-primary btn-block" id="submit_category">Simpan</button>
                 </form>
             </div>
             <div class="modal-footer">

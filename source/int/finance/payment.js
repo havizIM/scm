@@ -1,9 +1,9 @@
-console.log('Supplier is running...')
+console.log('Payment is running...')
 
 $(function () {
-    const productController = (() => {
+    const paymentController = (() => {
 
-        const MYTABLE = $('#t_product').DataTable({
+        const MYTABLE = $('#t_payment').DataTable({
             columnDefs: [{
                 targets: [],
                 searchable: true
@@ -12,7 +12,7 @@ $(function () {
             responsive: true,
             processing: true,
             ajax: {
-                url: `${BASE_URL}int/product`,
+                url: `${BASE_URL}int/payment`,
                 type: 'GET',
                 dataType: 'JSON',
                 beforeSend: function (xhr) {
@@ -21,17 +21,22 @@ $(function () {
                 }
             },
             columns: [
-                { "data": 'id_product' },
-                { "data": 'nama_product' },
-                { "data": 'nama_category' },
-                { "data": 'nama_supplier' },
-                { "data": 'satuan' },
-                { "data": 'harga' },
+                { "data": 'no_payment' },
+                { "data": 'supplier.nama_supplier' },
                 {
                     "data": null, 'render': function (data, type, row) {
                         return `
-                            <a class="btn btn-sm btn-success" href="#/product/edit/${row.id_product}"><i class="fa fa-pencil"></i></a>
-                            <button class="btn btn-sm btn-danger delete" data-id="${row.id_product}"><i class="fa fa-trash"></i></button>
+                            ${row.account.nama_bank} - ${row.account.no_rekening}
+                        `
+                    }
+                },
+                { "data": 'tgl_payment' },
+                { "data": 'total_bayar' },
+                {
+                    "data": null, 'render': function (data, type, row) {
+                        return `
+                            <a class="btn btn-sm btn-success" href="#/payment/edit/${row.no_payment}"><i class="fa fa-pencil"></i></a>
+                            <button class="btn btn-sm btn-danger delete" data-id="${row.no_payment}"><i class="fa fa-trash"></i></button>
                         `
                     }
                 },
@@ -41,7 +46,7 @@ $(function () {
             ]
         });
 
-        const CATEGORY = $('#t_category').DataTable({
+        const BANK = $('#t_bank').DataTable({
             columnDefs: [{
                 targets: [],
                 searchable: true
@@ -50,7 +55,7 @@ $(function () {
             responsive: true,
             processing: true,
             ajax: {
-                url: `${BASE_URL}int/category`,
+                url: `${BASE_URL}int/bank`,
                 type: 'GET',
                 dataType: 'JSON',
                 beforeSend: function (xhr) {
@@ -59,28 +64,25 @@ $(function () {
                 }
             },
             columns: [
-            {
-                "data": null,
-                'render': function (data, type, row) {
-                    return `
-                            <button class="btn btn-sm btn-primary pilih_category" data-id="${row.id_category}" data-name="${row.nama_category}">Pilih</button>
-                            <button class="btn btn-sm btn-danger delete" data-id="${row.id_category}">Hapus</button>
+                {
+                    "data": null,
+                    'render': function (data, type, row) {
+                        return `
+                            <button class="btn btn-sm btn-primary pilih_bank" data-id="${row.id_account}" data-name="${row.nama_bank}" data-no="${row.no_rekening}" data-id_supp="${row.id_supplier}" data-supplier="${row.nama_supplier}">Pilih</button>
                         `
-                }
-            },
-            {
-                "data": 'id_category'
-            },
-            {
-                "data": 'nama_category'
-            },
+                    }
+                },
+                {"data": 'nama_bank'},
+                {"data": 'cabang'},
+                {"data": 'pemilik_account'},
+                {"data": 'no_rekening'},
             ],
             order: [
                 [0, 'desc']
             ]
         });
 
-        const SUPPLIER = $('#t_supplier').DataTable({
+        const INVOICE = $('#t_invoice').DataTable({
             columnDefs: [{
                 targets: [],
                 searchable: true
@@ -89,7 +91,7 @@ $(function () {
             responsive: true,
             processing: true,
             ajax: {
-                url: `${BASE_URL}int/supplier`,
+                url: `${BASE_URL}int/invoice`,
                 type: 'GET',
                 dataType: 'JSON',
                 beforeSend: function (xhr) {
@@ -101,79 +103,83 @@ $(function () {
                 {
                     "data": null, 'render': function (data, type, row) {
                         return `
-                            <button class="btn btn-sm btn-primary pilih_supplier" data-id="${row.id_supplier}" data-name="${row.nama_supplier}">Pilih</button>
+                            <button class="btn btn-sm btn-primary pilih_invoice" data-id="${row.no_invoice}" data-name="${row.supplier.nama_supplier}" data-total="${row.grand_total}">Pilih</button>
                         `
                     }
                 },
-                { "data": 'id_supplier' },
-                { "data": 'nama_supplier' },
-                { "data": 'alamat' },
-                { "data": 'telepon' },
-                { "data": 'fax' },
-                { "data": 'email' },
-                { "data": 'status_supplier' },
+                { "data": 'no_invoice' },
+                { "data": 'no_order' },
+                { "data": 'tgl_invoice' },
+                { "data": 'tgl_tempo' },
+                { "data": 'supplier.nama_supplier' },
+                { "data": 'warehouse.nama_warehouse' },
+                { "data": 'grand_total' },
+                { "data": 'status_invoice' },
             ],
             order: [[0, 'desc']]
         });
 
         const openModal = () => {
 
-            $('#lookup_category').on('click', function () {
-                $('#modal_category').modal('show');
+            $('#lookup_bank').on('click', function () {
+                $('#modal_bank').modal('show');
             })
 
-            $('#lookup_supplier').on('click', function () {
-                $('#modal_supplier').modal('show');
+            $('.lookup_invoice').on('click', function () {
+                let bank_account = $('#bank_account').val();
+
+                if (bank_account === '') {
+                    makeNotif('warning', 'Failed', 'Silahkan pilih account bank', 'bottom-right')
+                } else {
+                    $('#modal_invoice').modal('show');
+                }
+
             })
         }
 
         const btnPilih = () => {
-            $('#t_category').on('click', '.pilih_category', function () {
+            $('#t_bank').on('click', '.pilih_bank', function () {
                 let id = $(this).data('id')
+                let no = $(this).data('no')
                 let name = $(this).data('name')
+                let id_supp = $(this).data('id_supp')
+                let supplier = $(this).data('supplier')
 
-                $('#id_category').val(id);
-                $('#category').val(`${id} - ${name}`);
+                $('#id_account').val(id);
+                $('#bank_account').val(`${supplier} (${no} - ${name})`);
 
-                $('#modal_category').modal('hide');
+                $('#t_detail_payment tbody').html('');
+                INVOICE.ajax.url(`${BASE_URL}int/invoice?id_supplier=${id_supp}`).load();
+                $('#modal_bank').modal('hide');
             })
 
-            $('#t_supplier').on('click', '.pilih_supplier', function () {
+            $('#t_invoice').on('click', '.pilih_invoice', function () {
                 let id = $(this).data('id')
                 let name = $(this).data('name')
+                let total = $(this).data('total')
+                let html = '';
 
-                $('#id_supplier').val(id);
-                $('#supplier').val(`${id} - ${name}`);
+                html += `
+                    <tr class="row_${id}">
+                        <td>
+                            ${id} - ${name}
+                            <input type="hidden" name="no_invoice[]" id="no_invoice" value="${id}">
+                        </td>
+                        <td>
+                            <input type="number" name="total_hutang[]" id="total_hutang" class="form-control" readonly value="${total}">
+                        </td>
+                        <td>    
+                            <input type="number" name="jml_dibayar[]" id="jml_dibayar" class="form-control">
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-danger remove" data-id="${id}"><i class="fa fa-trash"></i></button>
+                        </td>
+                    </tr>
+                `;
 
-                $('#modal_supplier').modal('hide');
+                $('#t_detail_payment tbody').append(html);
+                $('#modal_invoice').modal('hide');
             })
-        }
-
-        const deleteCategory = () => {
-            $('#t_category').on('click', '.delete', function () {
-                let id_category = $(this).data('id');
-                let ask = confirm(`Are you sure delete this data ${id_category} ?`);
-
-                if (ask) {
-                    $.ajax({
-                        url: `${BASE_URL}int/category/delete`,
-                        type: 'DELETE',
-                        dataType: 'JSON',
-                        data: { id_category },
-                        beforeSend: function (xhr) {
-                            xhr.setRequestHeader("Authorization", "Basic " + btoa(USERNAME + ":" + PASSWORD))
-                            xhr.setRequestHeader("SCM-INT-KEY", TOKEN)
-                        },
-                        success: function (res) {
-                            CATEGORY.ajax.reload();
-                            makeNotif('success', 'Success', res.message, 'bottom-right')
-                        },
-                        error: function ({ responseJSON }) {
-                            makeNotif('error', 'Failed', responseJSON.message, 'bottom-right')
-                        }
-                    })
-                }
-            });
         }
 
         const deleteData = () => {
@@ -201,39 +207,6 @@ $(function () {
                     })
                 }
             });
-        }
-
-        const submitCategory = () => {
-            $('#form_category').validate({
-                rules: {
-                    "nama_category": "required",
-                },
-                submitHandler: function (form) {
-                    $.ajax({
-                        url: `${BASE_URL}int/category/add`,
-                        type: 'POST',
-                        dataType: 'JSON',
-                        data: $(form).serialize(),
-                        beforeSend: function (xhr) {
-                            xhr.setRequestHeader("Authorization", "Basic " + btoa(USERNAME + ":" + PASSWORD))
-                            xhr.setRequestHeader("SCM-INT-KEY", TOKEN)
-                            $('#submit_category').html('<i class="fa fa-spin fa-spinner"></i>');
-                        },
-                        success: function (res) {
-                            makeNotif('success', 'Success', res.message, 'bottom-right')
-                            $('#form_category')[0].reset();
-                            CATEGORY.ajax.reload();
-                        },
-                        error: function (err) {
-                            const { message } = err.responseJSON
-                            makeNotif('error', 'Failed', message, 'bottom-right')
-                        },
-                        complete: function () {
-                            $('#submit_category').html('Simpan');
-                        }
-                    })
-                }
-            })
         }
 
         const submitAdd = () => {
@@ -275,20 +248,17 @@ $(function () {
         return {
             init: () => {
                 MYTABLE;
-                CATEGORY;
-                SUPPLIER;
+                BANK;
+                INVOICE;
 
                 openModal();
                 btnPilih();
 
-                deleteCategory();
-                deleteData();
-
-                submitCategory();
-                submitAdd();
+                // deleteData();
+                // submitAdd();
             }
         }
     })();
 
-    productController.init();
+    paymentController.init();
 })

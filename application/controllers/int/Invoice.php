@@ -74,7 +74,7 @@ class Invoice extends CI_Controller {
                 foreach($detail->result() as $key1){
                     $json_ba = array();
                     $sub_total += $key1->total_harga;
-                    $ppn_total += $key1->ppn_total;
+                    $ppn_total += $key1->ppn;
 
                     $json_ba['deskripsi']   = $key1->deskripsi;
                     $json_ba['harga']       = $key1->harga;

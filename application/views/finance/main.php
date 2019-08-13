@@ -316,7 +316,7 @@
             <!-- footer -->
             <!-- ============================================================== -->
             <footer class="footer">
-                © 2019 SCM Dominos by Ulfia
+                © 2019 SCM Dominos. Made with <i class="fas fa-heart text-danger"></i> by Ulfia
             </footer>
             <!-- ============================================================== -->
             <!-- End footer -->

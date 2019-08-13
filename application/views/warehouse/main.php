@@ -19,6 +19,7 @@
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.2/css/responsive.bootstrap4.min.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
     <script src="<?= base_url() ?>assets/plugins/jquery/jquery.min.js"></script>
     <script src="<?= base_url() ?>source/int/additional.js"></script>
@@ -300,7 +301,7 @@
             <!-- footer -->
             <!-- ============================================================== -->
             <footer class="footer">
-                © 2019 SCM Dominos by Ulfia
+                © 2019 SCM Dominos. Made with <i class="fas fa-heart text-danger"></i> by Ulfia
             </footer>
             <!-- ============================================================== -->
             <!-- End footer -->

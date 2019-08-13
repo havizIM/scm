@@ -97,4 +97,55 @@ class Shipping extends CI_Controller {
         }
     }
 
+    public function approve_put()
+    {
+        if($this->user->num_rows() == 0){
+            $this->response(array('status' => false, 'error' => 'Unauthorization token'), 401);
+        } else {
+            $config = array(
+                array(
+                    'field' => 'no_shipping',
+                    'label' => 'No Shipping',
+                    'rules' => 'required|trim'
+                )
+            );
+
+            $this->form_validation->set_data($this->put());
+            $this->form_validation->set_rules($config);
+
+            if($this->form_validation->run() == FALSE){
+
+                $this->response(array(
+                    'status'    => false,
+                    'message'   => 'Field is required',
+                    'error'     => $this->form_validation->error_array()
+                ), 400);
+
+            } else {
+                $where  = array(
+                    'no_shipping'   => $this->put('no_shipping') 
+                );
+
+                $data = array(
+                    'status_shipping' => 'Close',
+                    'tgl_receive' => date('Y-m-d')
+                );
+
+                $edit = $this->ShippingModel->edit($where, $data);
+
+                if(!$edit){
+                    $this->response(array(
+                        'status'    => false,
+                        'message'     => 'Failed delete shipping'
+                    ), 400);
+                } else {
+                    $this->response(array(
+                        'status'    => true,
+                        'message'   => 'Success delete shipping'
+                    ), 200);
+                }
+            }
+        } 
+    }
+
 }

@@ -72,6 +72,7 @@ $(function () {
                         `
                     }
                 },
+                {"data": 'nama_supplier'},
                 {"data": 'nama_bank'},
                 {"data": 'cabang'},
                 {"data": 'pemilik_account'},
@@ -224,7 +225,8 @@ $(function () {
             $('#form_add').validate({
                 rules: {
                     "id_account": "required",
-                    "tgl_payment": "required"
+                    "tgl_payment": "required",
+                    "total_bayar": "required",
                 },
                 submitHandler: function (form) {
                     $.ajax({

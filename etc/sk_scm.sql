@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 12 Agu 2019 pada 15.28
+-- Waktu pembuatan: 13 Agu 2019 pada 18.02
 -- Versi server: 10.1.40-MariaDB
 -- Versi PHP: 7.1.29
 
@@ -42,9 +42,7 @@ CREATE TABLE `bank_account` (
 --
 
 INSERT INTO `bank_account` (`id_account`, `id_supplier`, `nama_bank`, `cabang`, `pemilik_account`, `no_rekening`) VALUES
-(1, 'SP-00000001', 'BCA', 'Jembatan 5', 'Hendarjr', '123123'),
-(4, 'SP-00000002', 'BCA', 'Coba Cabang', 'Coba Pemilik', '1791606298'),
-(5, 'SP-00000002', 'BRI', 'Coba Cabang 2', 'Coba Pemilik', '123123');
+(7, 'SP-00000001', 'BCA', 'Jembatan 5', 'Haviz Indra Maulana', '1791606298');
 
 -- --------------------------------------------------------
 
@@ -56,6 +54,15 @@ CREATE TABLE `category` (
   `id_category` varchar(11) NOT NULL,
   `nama_category` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `category`
+--
+
+INSERT INTO `category` (`id_category`, `nama_category`) VALUES
+('CAT-0000001', 'Makanan'),
+('CAT-0000002', 'Minuman'),
+('CAT-0000003', 'Perlengkapan');
 
 -- --------------------------------------------------------
 
@@ -74,7 +81,8 @@ CREATE TABLE `group` (
 --
 
 INSERT INTO `group` (`id_group`, `nama_group`, `lokasi_group`) VALUES
-(2, 'Area 1', 'DKI Jakarta');
+(2, 'Area 1', 'DKI Jakarta'),
+(5, 'Area 2', 'Depok');
 
 -- --------------------------------------------------------
 
@@ -85,10 +93,17 @@ INSERT INTO `group` (`id_group`, `nama_group`, `lokasi_group`) VALUES
 CREATE TABLE `invoice` (
   `no_invoice` varchar(11) NOT NULL,
   `no_order` varchar(11) NOT NULL,
-  `status_invoice` enum('open','close','','') NOT NULL,
+  `status_invoice` enum('Open','Close') NOT NULL,
   `tgl_invoice` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `tgl_tempo` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `invoice`
+--
+
+INSERT INTO `invoice` (`no_invoice`, `no_order`, `status_invoice`, `tgl_invoice`, `tgl_tempo`) VALUES
+('INV-0000001', 'PO-00000001', 'Open', '2019-08-13 08:36:35', '2019-08-15');
 
 -- --------------------------------------------------------
 
@@ -105,6 +120,14 @@ CREATE TABLE `invoice_detail` (
   `total_harga` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data untuk tabel `invoice_detail`
+--
+
+INSERT INTO `invoice_detail` (`no_invoice`, `deskripsi`, `harga`, `qty`, `ppn`, `total_harga`) VALUES
+('INV-0000001', 'Test 1', 200000, 1, 20000, 220000),
+('INV-0000001', 'Test 2', 100000, 1, 10000, 110000);
+
 -- --------------------------------------------------------
 
 --
@@ -115,9 +138,17 @@ CREATE TABLE `order` (
   `no_order` varchar(11) NOT NULL,
   `id_warehouse` varchar(11) NOT NULL,
   `id_supplier` varchar(11) NOT NULL,
-  `status_order` enum('open','close','') NOT NULL,
+  `status_order` enum('Open','Close') NOT NULL,
   `tgl_order` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `order`
+--
+
+INSERT INTO `order` (`no_order`, `id_warehouse`, `id_supplier`, `status_order`, `tgl_order`) VALUES
+('PO-00000001', 'WH-00000001', 'SP-00000001', 'Open', '2019-08-13 08:31:18'),
+('PO-00000002', 'WH-00000001', 'SP-00000001', 'Open', '2019-08-13 15:37:49');
 
 -- --------------------------------------------------------
 
@@ -130,6 +161,17 @@ CREATE TABLE `order_detail` (
   `id_product` varchar(11) NOT NULL,
   `qty` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `order_detail`
+--
+
+INSERT INTO `order_detail` (`no_order`, `id_product`, `qty`) VALUES
+('PO-00000001', 'PR-00000002', 2),
+('PO-00000001', 'PR-00000001', 100),
+('PO-00000002', 'PR-00000003', 2),
+('PO-00000002', 'PR-00000002', 3),
+('PO-00000002', 'PR-00000001', 100);
 
 -- --------------------------------------------------------
 
@@ -145,6 +187,13 @@ CREATE TABLE `payment` (
   `tgl_input_payment` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data untuk tabel `payment`
+--
+
+INSERT INTO `payment` (`no_payment`, `id_account`, `tgl_payment`, `total_bayar`, `tgl_input_payment`) VALUES
+('PVC-0000001', 7, '2019-08-13', 220000, '2019-08-13 15:59:14');
+
 -- --------------------------------------------------------
 
 --
@@ -156,6 +205,13 @@ CREATE TABLE `payment_detail` (
   `no_invoice` varchar(11) NOT NULL,
   `jml_bayar` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `payment_detail`
+--
+
+INSERT INTO `payment_detail` (`no_payment`, `no_invoice`, `jml_bayar`) VALUES
+('PVC-0000001', 'INV-0000001', 220000);
 
 -- --------------------------------------------------------
 
@@ -180,8 +236,7 @@ CREATE TABLE `pic` (
 --
 
 INSERT INTO `pic` (`id_pic`, `id_supplier`, `nama_pic`, `handphone`, `email_pic`, `username`, `password`, `token`, `tgl_reg_pic`) VALUES
-(1, 'SP-00000001', 'Hendar Junior', '123123', '123123', 'hendarjr', '12345', '50471475f0c31d4d1116', '2019-08-11 17:48:22'),
-(4, 'SP-00000002', 'Wahyu Alfarisi', '123123', 'viz.ndinq@gmail.com', 'BBBwahyu', 'f8xwk', 'f1c15383a006993717c5', '2019-08-11 17:48:22');
+(6, 'SP-00000001', 'Ndi', '081355754092', 'viz.ndinq@gmail.cm', 'havizim', '9bdok', '', '2019-08-13 04:38:03');
 
 -- --------------------------------------------------------
 
@@ -193,10 +248,19 @@ CREATE TABLE `product` (
   `id_product` varchar(11) NOT NULL,
   `id_supplier` varchar(11) NOT NULL,
   `id_category` varchar(11) NOT NULL,
-  `satuan` int(5) NOT NULL,
+  `satuan` varchar(10) NOT NULL,
   `nama_product` varchar(100) NOT NULL,
   `harga` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `product`
+--
+
+INSERT INTO `product` (`id_product`, `id_supplier`, `id_category`, `satuan`, `nama_product`, `harga`) VALUES
+('PR-00000001', 'SP-00000001', 'CAT-0000002', 'Crat', 'Fanta', 2),
+('PR-00000002', 'SP-00000001', 'CAT-0000002', 'Meter', 'Coba', 20000),
+('PR-00000003', 'SP-00000001', 'CAT-0000002', 'Pcs', 'Lap Basah', 15000);
 
 -- --------------------------------------------------------
 
@@ -206,11 +270,18 @@ CREATE TABLE `product` (
 
 CREATE TABLE `shipping` (
   `no_shipping` varchar(11) NOT NULL,
-  `no_invoice` varchar(11) NOT NULL,
+  `no_order` varchar(11) NOT NULL,
   `tgl_shipping` date NOT NULL,
-  `status_shipping` enum('open','close','','') NOT NULL,
-  `tgl_recieve` date NOT NULL
+  `status_shipping` enum('Open','Close') NOT NULL,
+  `tgl_receive` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `shipping`
+--
+
+INSERT INTO `shipping` (`no_shipping`, `no_order`, `tgl_shipping`, `status_shipping`, `tgl_receive`) VALUES
+('DO-00000001', 'PO-00000001', '2019-08-13', 'Close', '2019-08-13');
 
 -- --------------------------------------------------------
 
@@ -235,8 +306,7 @@ CREATE TABLE `supplier` (
 --
 
 INSERT INTO `supplier` (`id_supplier`, `nama_supplier`, `alamat`, `telepon`, `fax`, `npwp`, `email`, `tgl_reg_supplier`, `status_supplier`) VALUES
-('SP-00000001', 'PT. AAA Abadi', 'Jakarta', '123123', '123123', '123123', 'viz.ndinq@gmail.com', '2019-07-25 07:19:07', 'Aktif'),
-('SP-00000002', 'PT. BBB Maju Terus', 'Jakarta', '123123', '123123', '123123', 'viz.ndinq@gmail.com', '2019-07-25 08:07:14', 'Aktif');
+('SP-00000001', 'PT. AAA', 'Jakarta', '081355754092', '021 13758371', '13768137691', 'viz.ndinq@gmail.com', '2019-08-13 04:38:03', 'Aktif');
 
 -- --------------------------------------------------------
 
@@ -254,8 +324,7 @@ CREATE TABLE `supply_group` (
 --
 
 INSERT INTO `supply_group` (`id_group`, `id_supplier`) VALUES
-(2, 'SP-00000001'),
-(2, 'SP-00000002');
+(2, 'SP-00000001');
 
 -- --------------------------------------------------------
 
@@ -284,8 +353,9 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id_user`, `nama_lengkap`, `email`, `telepon`, `jenis_kelamin`, `alamat`, `username`, `password`, `level`, `status`, `token`, `tgl_reg_user`) VALUES
 ('USR-0000001', 'Helpdesk - Administrator', 'helpdesk-scm@gmail.com', '081355754092', 'L', 'Jakarta', 'helpdesk', 'helpdesk', 'Admin', 'Aktif', '875a8f2f42c570f', '2019-08-11 19:49:47'),
-('USR-0000002', 'Rudi Kurniawan a', 'rudikubk@gmail.com', '081355754092', 'L', 'Jakarta', 'rudiubk', '8vg21', 'Warehouse', 'Aktif', '6f0f639126c5d9e', '2019-08-12 03:26:51'),
-('USR-0000003', 'Yugi Setiawan', 'yugisetiawan@gmail.com', '081355754092', 'L', 'Jakarta', 'yugi', 'yugi', 'Finance', 'Aktif', '72c9b19f83c4468', '2019-08-12 01:20:10');
+('USR-0000002', 'Rudi Kurniawan a', 'rudikubk@gmail.com', '081355754092', 'L', 'Jakarta', 'rudiubk', 'rudi', 'Warehouse', 'Aktif', '6f0f639126c5d9e', '2019-08-13 08:30:44'),
+('USR-0000003', 'Yugi Setiawan', 'yugisetiawan@gmail.com', '081355754092', 'L', 'Jakarta', 'yugi', 'yugi', 'Finance', 'Aktif', '72c9b19f83c4468', '2019-08-12 01:20:10'),
+('USR-0000004', 'Ulfia Risqika', 'ulfia@gmail.com', '08135891385', 'P', 'Jakarta', 'ulfia', 'u3moa', 'Warehouse', 'Aktif', 'f3ff4c466a058ef', '2019-08-13 15:13:07');
 
 -- --------------------------------------------------------
 
@@ -310,7 +380,8 @@ CREATE TABLE `warehouse` (
 --
 
 INSERT INTO `warehouse` (`id_warehouse`, `id_group`, `id_user`, `nama_warehouse`, `alamat`, `telepon`, `fax`, `email`, `tgl_reg_warehouse`) VALUES
-('WH-00000001', 2, 'USR-0000002', 'Dominos Angke Jaya', 'Jl. Angke Jaya Raya', '081355754092', '021123123', 'viz.ndinq@gmail.com', '2019-07-25 12:05:59');
+('WH-00000001', 2, 'USR-0000002', 'Dominos Angke Jaya', 'Jl. Angke Jaya Raya', '081355754092', '021123123', 'viz.ndinq@gmail.com', '2019-07-25 12:05:59'),
+('WH-00000002', 5, 'USR-0000004', 'Dominos Pizza Depok', 'Depok', '081257832131', '138691378691', 'dominozdepok@gmail.com', '2019-08-13 15:14:20');
 
 --
 -- Indexes for dumped tables
@@ -398,7 +469,7 @@ ALTER TABLE `product`
 --
 ALTER TABLE `shipping`
   ADD PRIMARY KEY (`no_shipping`),
-  ADD KEY `invoice` (`no_invoice`);
+  ADD KEY `invoice` (`no_order`);
 
 --
 -- Indeks untuk tabel `supplier`
@@ -435,19 +506,19 @@ ALTER TABLE `warehouse`
 -- AUTO_INCREMENT untuk tabel `bank_account`
 --
 ALTER TABLE `bank_account`
-  MODIFY `id_account` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_account` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT untuk tabel `group`
 --
 ALTER TABLE `group`
-  MODIFY `id_group` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_group` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT untuk tabel `pic`
 --
 ALTER TABLE `pic`
-  MODIFY `id_pic` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_pic` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
@@ -515,7 +586,7 @@ ALTER TABLE `product`
 -- Ketidakleluasaan untuk tabel `shipping`
 --
 ALTER TABLE `shipping`
-  ADD CONSTRAINT `shipping_ibfk_1` FOREIGN KEY (`no_invoice`) REFERENCES `invoice` (`no_invoice`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `shipping_ibfk_1` FOREIGN KEY (`no_order`) REFERENCES `order` (`no_order`);
 
 --
 -- Ketidakleluasaan untuk tabel `supply_group`

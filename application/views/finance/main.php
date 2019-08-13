@@ -150,6 +150,9 @@
                         <li>
                             <a class="waves-effect waves-dark" href="#/lap_hutang"><i class="fa fa-copy"></i> <span class="hide-menu">Laporan Hutang</span></a>
                         </li>
+                        <li>
+                            <a class="waves-effect waves-dark" href="#/lap_payment"><i class="fa fa-copy"></i> <span class="hide-menu">Laporan Payment</span></a>
+                        </li>
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->

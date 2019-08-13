@@ -28,14 +28,14 @@ $(function(){
         }
 
         const btnLogout = () => {
-            $('#logout').on('click', function(){
+            $('.logout').on('click', function(){
                 sessionStorage.removeItem('INT-TOKEN')
                 window.location.replace(`${BASE_URL}internal`)
             })
         }
 
         const btnSetting = () => {
-            $('#setting').on('click', function(){
+            $('.setting').on('click', function(){
                 $('#form_pass')[0].reset();
                 $('#modal_setting').modal('show');
             })

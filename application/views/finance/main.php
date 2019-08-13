@@ -19,6 +19,7 @@
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.2/css/responsive.bootstrap4.min.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
     <script src="<?= base_url() ?>assets/plugins/jquery/jquery.min.js"></script>
     <script src="<?= base_url() ?>source/int/additional.js"></script>
@@ -89,10 +90,10 @@
                                         <div class="dw-user-box">
                                             <div class=""><img src="<?= base_url() ?>doc/default_user.png" class="img-fluid" alt="user"></div>
                                             <div class="mt-2 text-center">
-                                                <h6 id="session_name"></h6>
+                                                <h6 class="session_name"></h6>
                                                 <p class="text-muted" id="session_email"></p>
-                                                <button id="setting" class="btn btn-rounded btn-info btn-sm btn-block mb-1">Account Settings</button>
-                                                <button id="logout" class="btn btn-rounded btn-danger btn-sm btn-block">Logout</button>
+                                                <button class="btn btn-rounded btn-info btn-sm btn-block mb-1 setting">Account Settings</button>
+                                                <button  class="btn btn-rounded btn-danger btn-sm btn-block logout">Logout</button>
                                             </div>
                                         </div>
                                     </li>
@@ -117,7 +118,7 @@
                     <!-- User profile image -->
                     <div class="profile-img"> <img src="<?= base_url() ?>doc/default_user.png"  alt="user" /> </div>
                     <!-- User profile text-->
-                    <div class="profile-text"> <a class="" role="button" aria-haspopup="true" aria-expanded="true">Markarn Doe</a>
+                    <div class="profile-text"> <a class="session_name" role="button" aria-haspopup="true" aria-expanded="true"></a>
 
                     </div>
                 </div>
@@ -161,11 +162,11 @@
             <!-- Bottom points-->
             <div class="sidebar-footer">
                 <!-- item-->
-                <a href="" class="link" data-toggle="tooltip" title="Settings"><i class="ti-settings"></i></a>
+                <a class="link setting" data-toggle="tooltip" title="Settings" style="cursor:pointer;"><i class="ti-settings"></i></a>
                 <!-- item-->
-                <a href="" class="link" data-toggle="tooltip" title="Email"><i class="mdi mdi-gmail"></i></a>
+                <a href="https://mail.google.com/mail" target="_blank" class="link" data-toggle="tooltip" title="Email"><i class="mdi mdi-gmail"></i></a>
                 <!-- item-->
-                <a href="" class="link" data-toggle="tooltip" title="Logout"><i class="mdi mdi-power"></i></a>
+                <a  class="link logout" data-toggle="tooltip" title="Logout" style="cursor:pointer;"><i class="mdi mdi-power"></i></a>
             </div>
             <!-- End Bottom points-->
         </aside>

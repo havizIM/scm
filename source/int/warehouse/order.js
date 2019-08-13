@@ -21,7 +21,9 @@ $(function () {
                 },
             },
             columns: [
-                { "data": 'no_order' },
+                { "data": null, 'render': function (data, type, row){
+                    return `<a href="#/order/${row.no_order}">${row.no_order}</a>`
+                }  },
                 { "data": 'warehouse.nama_warehouse' },
                 { "data": 'supplier.nama_supplier' },
                 { "data": 'status_order' },
@@ -36,7 +38,7 @@ $(function () {
                         } else {
                             return ``;
                         }
-                        
+
                     }
                 },
             ],
@@ -163,7 +165,7 @@ $(function () {
                         <td>
                             <input type="number" name="qty[]" id="qty" class="form-control count">
                         </td>
-                        <td>    
+                        <td>
                             <input type="text" name="status[]" id="status" class="form-control" readonly>
                         </td>
                         <td>
@@ -171,7 +173,7 @@ $(function () {
                         </td>
                     </tr>
                 `;
-                
+
                 $('#t_detail_product tbody').append(html);
                 $('#modal_product').modal('hide');
             })
@@ -282,5 +284,3 @@ $(function () {
 
     orderController.init();
 })
-
-

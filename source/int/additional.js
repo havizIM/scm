@@ -21,7 +21,7 @@ var makeNotif = (icon, heading, text, position) => {
 }
 
 var setSession = (data) => {
-	$('#session_name').text(data.nama_lengkap);
+	$('.session_name').text(data.nama_lengkap);
 	$('#session_email').text(data.email);
 
 	$('#info_id_user').text(data.id_user);
@@ -35,6 +35,6 @@ var setSession = (data) => {
 	$('#info_tgl_reg_user').text(data.tgl_reg_user);
 
 	if(data.warehouse.length !== 0){
-		
+
 	}
 }

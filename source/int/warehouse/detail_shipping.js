@@ -9,7 +9,7 @@ $(function () {
          <div class="col-md-12">
            <div class="card card-body printableArea">
            <img src="${BASE_URL}assets/image/scm/logo_full.png" alt="homepage" class="light-logo" style="width:200px; margin-bottom:0px; position:absolute;" />
-             <h3> <span class="pull-right">#${data.no_order}</span><b class="text-danger pull-right">No Order</b></h3>
+             <h3> <span class="pull-right">${data.no_shipping}</span><b class="text-danger pull-right">Shipping number #</b></h3>
              <hr>
              <div class="row">
                <div class="col-md-12">
@@ -19,6 +19,8 @@ $(function () {
                      <p class="text-muted m-l-5">${data.warehouse.alamat},
                        <br/> Telepon : ${data.warehouse.telepon},
                        <br/> Fax : ${data.warehouse.fax}
+
+                       <h3> <span class="pull-right"> #${data.no_order}</span><b class="text-danger pull-right">No Order</b></h3>
                      </address>
                    </div>
                    <div class="pull-right text-right">
@@ -27,7 +29,8 @@ $(function () {
                      <p class="text-muted m-l-5">${data.supplier.alamat},
                        <br/> Telepon : ${data.supplier.telepon},
                        <br/> Fax : ${data.supplier.fax}
-                         <p class="m-t-30"><b>Order Date :</b> <i class="fa fa-calendar"></i> ${data.tgl_order}</p>
+                         <p class="m-t-30"><b>Shipping Date :</b> <i class="fa fa-calendar"></i> ${data.tgl_shipping}</p>
+                         <p class="m-t-30"><b>Received Date :</b> <i class="fa fa-calendar"></i> ${data.tgl_receive}</p>
                        </address>
                      </div>
                    </div>
@@ -56,7 +59,11 @@ $(function () {
                      </div>
                    </div>
                    <div class="col-md-12">
-
+                   <div class="pull-right m-t-30 text-right">
+                       <hr style="margin-bottom:200px;">
+                       <h3>(_____________________)</h3>
+                     </div>
+                     <div class="clearfix"></div>
                      <hr>
                      <div class="text-right">
                        <button id="print" class="btn btn-warning btn-outline" type="button"> <span><i class="fa fa-print"></i> Print</span> </button>
@@ -78,10 +85,10 @@ $(function () {
 
 	const detailController = ((UI) => {
 		const fetchData = () => {
-			let ID_ORDER = location.hash.substr(8);
+			let ID_SHIPPING = location.hash.substr(11);
 			// alert(ID_WAREHOUSE)
 			$.ajax({
-				url: `${BASE_URL}int/order?no_order=${ID_ORDER}`,
+				url: `${BASE_URL}int/shipping?no_shipping=${ID_SHIPPING}`,
 				type: 'GET',
 				dataType: 'JSON',
 				beforeSend: function (xhr) {
@@ -89,7 +96,7 @@ $(function () {
 					xhr.setRequestHeader("SCM-INT-KEY", TOKEN)
 				},
 				success: function (res) {
-					$.each(res.data, function (k, v) {
+					$.each(res.data, function (k,v) {
 						UI.renderDetail(v)
 					})
           console.log(res);

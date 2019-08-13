@@ -21,7 +21,9 @@ $(function () {
                 }
             },
             columns: [
-                { "data": 'no_payment' },
+                { "data": null, 'render': function (data, type, row){
+                    return `<a href="#/payment/${row.no_payment}">${row.no_payment}</a>`
+                }  },
                 { "data": 'supplier.nama_supplier' },
                 {
                     "data": null, 'render': function (data, type, row) {
@@ -169,10 +171,10 @@ $(function () {
                         <td>
                             <input type="number" name="total_hutang[]" id="total_hutang" class="form-control" readonly value="${total}">
                         </td>
-                        <td>    
+                        <td>
                             <input type="number" name="jml_bayar[]" id="jml_bayar" class="form-control">
                         </td>
-                        <td>    
+                        <td>
                             <input type="text" name="status[]" id="status" class="form-control" readonly>
                         </td>
                         <td>

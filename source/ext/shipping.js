@@ -144,7 +144,60 @@ $(function () {
                 rules: {
                     no_order: "required",
                     tgl_shipping: "required"
+                },
+                submitHandler: function(form){
+                    $.ajax({
+                        url: `${BASE_URL}ext/shipping/add`,
+                        type: 'POST',
+                        dataType: 'JSON',
+                        data: $(form).serialize(),
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader("Authorization", "Basic " + btoa(USERNAME + ":" + PASSWORD))
+                            xhr.setRequestHeader("SCM-EXT-KEY", TOKEN)
+                            $('#submit_add').html('<i class="fa fa-spin fa-spinner"></i>');
+                        },
+                        success: function (res) {
+                            makeNotif('success', 'Success', res.message, 'bottom-right')
+                            location.hash = '#/shipping'
+                        },
+                        error: function (err) {
+                            const { message } = err.responseJSON
+                            makeNotif('error', 'Failed', message, 'bottom-right')
+                        },
+                        complete: function () {
+                            $('#submit_add').html('Simpan');
+                        }
+                    })
                 }
+            })
+        }
+
+        const deleteShipping = () => {
+            $('#t_shipping').on('click', '.delete', function(){
+                let no_shipping = $(this).data('id');
+                let valid = confirm('Apakah anda yakin ingin menghapus data ini ?');
+
+                if (valid) {
+                    $.ajax({
+                        url: `${BASE_URL}ext/shipping/delete`,
+                        type: 'DELETE',
+                        dataType: 'JSON',
+                        data: { no_shipping },
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader("Authorization", "Basic " + btoa(USERNAME + ":" + PASSWORD))
+                            xhr.setRequestHeader("SCM-EXT-KEY", TOKEN)
+                        },
+                        success: function (res) {
+                            MYTABLE.ajax.reload();
+                            makeNotif('success', 'Success', res.message, 'bottom-right')
+                        },
+                        error: function (err) {
+                            const { error } = err.responseJSON
+                            makeNotif('error', 'Failed', error, 'bottom-right')
+                        }
+                    })
+                }
+                
             })
         }
 
@@ -155,6 +208,10 @@ $(function () {
 
                 openModal();
                 btnPilih();
+
+                deleteShipping();
+
+                submitForm();
             }
         }
     })(renderUI);

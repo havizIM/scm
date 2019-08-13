@@ -39,7 +39,8 @@ class Invoice extends CI_Controller {
 
             foreach($show as $key){
                 $json           = array();
-                $grand_total    = 0;
+                $sub_total      = 0;
+                $ppn_total      = 0;
 
                 $json['no_invoice']         = $key->no_invoice;
                 $json['no_order']           = $key->no_order;
@@ -72,7 +73,8 @@ class Invoice extends CI_Controller {
 
                 foreach($detail->result() as $key1){
                     $json_ba = array();
-                    $grand_total += $key1->total_harga;
+                    $sub_total += $key1->total_harga;
+                    $ppn_total += $key1->ppn_total;
 
                     $json_ba['deskripsi']   = $key1->deskripsi;
                     $json_ba['harga']       = $key1->harga;
@@ -83,7 +85,7 @@ class Invoice extends CI_Controller {
                     $json['detail'][] = $json_ba;
                 }
 
-                $json['grand_total']         = $grand_total;
+                $json['grand_total']         = $sub_total + $ppn_total;
 
                 $invoice[] = $json;
             }

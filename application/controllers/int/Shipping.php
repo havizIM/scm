@@ -68,8 +68,8 @@ class Shipping extends CI_Controller {
                 
                 $json['detail']         = array();
 
-                $where_2   = array('a.no_order' => $key->no_order);
-                $detail   = $this->OrderModel->detail($where_2);
+                $where_2   = array('a.no_shipping' => $key->no_shipping);
+                $detail   = $this->ShippingModel->detail($where_2);
 
                 foreach($detail->result() as $key1){
                     $json_ba = array();
@@ -77,9 +77,9 @@ class Shipping extends CI_Controller {
                     $json_ba['id_product']      = $key1->id_product;
                     $json_ba['nama_product']    = $key1->nama_product;
                     $json_ba['harga']           = $key1->harga;
-                    $json_ba['qty']             = $key1->qty;
+                    $json_ba['qty']             = $key1->actual_qty;
                     $json_ba['satuan']          = $key1->satuan;
-                    $json_ba['total']           = $key1->harga * $key1->qty;
+                    $json_ba['total']           = $key1->harga * $key1->actual_qty;
 
                     $json['detail'][] = $json_ba;
                 }

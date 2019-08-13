@@ -68,8 +68,8 @@ class Shipping extends CI_Controller {
                 
                 $json['detail']         = array();
 
-                $where_2   = array('a.no_order' => $key->no_order);
-                $detail   = $this->OrderModel->detail($where_2);
+                $where_2   = array('a.no_shipping' => $key->no_shipping);
+                $detail   = $this->ShippingModel->detail($where_2);
 
                 foreach($detail->result() as $key1){
                     $json_ba = array();
@@ -77,9 +77,9 @@ class Shipping extends CI_Controller {
                     $json_ba['id_product']      = $key1->id_product;
                     $json_ba['nama_product']    = $key1->nama_product;
                     $json_ba['harga']           = $key1->harga;
-                    $json_ba['qty']             = $key1->qty;
+                    $json_ba['qty']             = $key1->actual_qty;
                     $json_ba['satuan']          = $key1->satuan;
-                    $json_ba['total']           = $key1->harga * $key1->qty;
+                    $json_ba['total']           = $key1->harga * $key1->actual_qty;
 
                     $json['detail'][] = $json_ba;
                 }
@@ -95,6 +95,113 @@ class Shipping extends CI_Controller {
 
             $this->response($response, 200);
         }
+    }
+
+    public function add_post()
+    {
+        if($this->user->num_rows() == 0){
+            $this->response(array('status' => false, 'error' => 'Unauthorization token'), 401);
+        } else {
+            $user = $this->user->row();
+            $this->form_validation->set_data($this->post());
+            
+            $this->form_validation->set_rules('no_order', 'Order', 'required|trim');
+            $this->form_validation->set_rules('tgl_shipping', 'Tanggal Shipping', 'required|trim');
+            $this->form_validation->set_rules('id_product[]', 'Product', 'required|trim');
+            $this->form_validation->set_rules('actual_qty[]', 'Qty', 'required|trim');
+
+            if($this->form_validation->run() == FALSE){
+
+                $this->response(array(
+                    'status'    => false,
+                    'message'   => 'Field is required',
+                    'error'     => $this->form_validation->error_array()
+                ), 400);
+
+            } else {
+
+                $post           = $this->post();
+                $no_shipping    = $this->KodeModel->buatKode('shipping', 'DO-', 'no_shipping', 8);
+
+
+                $data           = array(
+                    'no_shipping'       => $no_shipping,
+                    'no_order'          => $post['no_order'],
+                    'tgl_shipping'      => $post['tgl_shipping'],
+                    'status_shipping'   => 'Open' 
+                );
+                
+                $detail  = array();
+
+                foreach($post['id_product'] as $key => $val){
+                    $detail[] = array(
+                        'no_shipping'    => $no_shipping,
+                        'id_product'     => $post['id_product'][$key],
+                        'actual_qty'     => $post['actual_qty'][$key]
+                    );
+                }
+
+                $add = $this->ShippingModel->add($data, $detail);
+
+                if(!$add){
+                    $this->response(array(
+                        'status'    => false,
+                        'error'     => 'Failed add shipping'
+                    ), 400);
+                } else {
+                    $this->response(array(
+                        'status'    => true,
+                        'message'   => 'Success add shipping'
+                    ), 200);
+                }
+            }
+        } 
+    }
+
+    public function delete_delete()
+    {
+        if($this->user->num_rows() == 0){
+            $this->response(array('status' => false, 'error' => 'Unauthorization token'), 401);
+        } else {
+            $config = array(
+                array(
+                    'field' => 'no_shipping',
+                    'label' => 'Shipping',
+                    'rules' => 'required|trim'
+                )
+            );
+
+            $this->form_validation->set_data($this->delete());
+            $this->form_validation->set_rules($config);
+
+            if($this->form_validation->run() == FALSE){
+
+                $this->response(array(
+                    'status'    => false,
+                    'message'   => 'Field is required',
+                    'error'     => $this->form_validation->error_array()
+                ), 400);
+
+            } else {
+                $where  = array(
+                    'no_shipping'   => $this->delete('no_shipping') 
+                );
+
+                $delete = $this->ShippingModel->delete($where);
+
+                if(!$delete){
+                    $this->response(array(
+                        'status'    => false,
+                        'error'     => 'Failed delete shipping'
+                    ), 400);
+                } else {
+                    $this->response(array(
+                        'status'    => true,
+                        'message'   => 'Success delete shipping'
+                    ), 200);
+                }
+            }
+        } 
     }
 
 }

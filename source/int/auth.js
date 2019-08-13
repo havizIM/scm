@@ -13,7 +13,7 @@ const authController = (() => {
             show_pass: '#show_password'
         }
     }
-    
+
     const submitLogin = () => {
         let {form, btn} = DOM
 

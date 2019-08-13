@@ -11,7 +11,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="<?= base_url().'assets/image/scm/small_logo.png' ?>">
     <title>SCM Dominos | Private</title>
 
-    
+
     <link href="<?= base_url() ?>assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?= base_url() ?>assets/internal/css/style.css" rel="stylesheet">
     <link href="<?= base_url() ?>assets/internal/css/colors/blue.css" id="theme" rel="stylesheet">
@@ -34,11 +34,11 @@
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
     <section id="wrapper">
-        <div class="login-register" style="background-image:url('<?= base_url() ?>assets/image/scm/login.jpg'); width:100%; background-size:cover; height:126%;">        
+        <div class="login-register" style="background-image:url('<?= base_url() ?>assets/image/scm/login.jpg'); width:100%; background-size:cover; height:126%;">
             <div class="login-box card">
             <div class="card-body">
                 <form class="form-horizontal form-material" id="login_form">
-                    <h3 class="box-title m-b-20">Log In</h3>
+                    <h3 class="box-title m-b-20 text-center">Welcome</h3>
                     <div class="form-group ">
                         <div class="col-xs-12">
                             <input class="form-control" type="text" name="username" id="username" placeholder="Username"> </div>
@@ -81,9 +81,9 @@
             </div>
           </div>
         </div>
-        
+
     </section>
-    
+
     <script src="<?= base_url() ?>assets/plugins/bootstrap/js/popper.min.js"></script>
     <script src="<?= base_url() ?>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="<?= base_url() ?>assets/internal/js/jquery.slimscroll.js"></script>

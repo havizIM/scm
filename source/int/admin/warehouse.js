@@ -137,7 +137,7 @@ $(function () {
                             $('#submit_group').html('<i class="fa fa-spin fa-spinner"></i>');
                         },
                         success: function (res) {
-                            makeNotif('success', 'Failed', res.message, 'bottom-right')
+                            makeNotif('success', 'Success', res.message, 'bottom-right')
                             $('#form_group')[0].reset();
                             GROUP_TABLE.ajax.reload();
                         },
@@ -176,7 +176,7 @@ $(function () {
                             $('#submit_add').html('<i class="fa fa-spin fa-spinner"></i>');
                         },
                         success: function (res) {
-                            makeNotif('success', 'Failed', res.message, 'bottom-right')
+                            makeNotif('success', 'Success', res.message, 'bottom-right')
                             location.hash = '#/warehouse'
                         },
                         error: function (err) {
@@ -231,7 +231,7 @@ $(function () {
                         },
                         success: function (res) {
                             MYTABLE.ajax.reload();
-                            makeNotif('success', 'Failed', res.message, 'bottom-right')
+                            makeNotif('success', 'Success', res.message, 'bottom-right')
                         },
                         error: function ({ responseJSON }) {
                             makeNotif('error', 'Failed', responseJSON.message, 'bottom-right')
@@ -258,7 +258,7 @@ $(function () {
                         },
                         success: function (res) {
                             GROUP_TABLE.ajax.reload();
-                            makeNotif('success', 'Failed', res.message, 'bottom-right')
+                            makeNotif('success', 'Success', res.message, 'bottom-right')
                         },
                         error: function ({ responseJSON }) {
                             makeNotif('error', 'Failed', responseJSON.message, 'bottom-right')

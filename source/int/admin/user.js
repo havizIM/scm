@@ -55,7 +55,7 @@ $(function(){
                         },
                         success: function (res) {
                             MYTABLE.ajax.reload();
-                            makeNotif('success', 'Failed', res.message, 'bottom-right')
+                            makeNotif('success', 'Success', res.message, 'bottom-right')
                         },
                         error: function (err) {
                             const { error } = err.responseJSON
@@ -90,7 +90,7 @@ $(function(){
                             $('#submit_add').html('<i class="fa fa-spin fa-spinner"></i>');
                         },
                         success: function(res){
-                            makeNotif('success', 'Failed', res.message, 'bottom-right')
+                            makeNotif('success', 'Success', res.message, 'bottom-right')
                             location.hash = '#/user'
                         },
                         error: function(err){

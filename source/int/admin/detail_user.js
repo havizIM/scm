@@ -72,7 +72,7 @@ $(function(){
                             $('#submit_edit').html('<i class="fa fa-spin fa-spinner"></i>');
                         },
                         success: function (res) {
-                            makeNotif('success', 'Failed', res.message, 'bottom-right')
+                            makeNotif('success', 'Success', res.message, 'bottom-right')
                             location.hash = '#/user'
                         },
                         error: function (err) {

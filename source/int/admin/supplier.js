@@ -114,74 +114,6 @@ $(function(){
                     </tr>
                 `;
 
-<<<<<<< HEAD
-				$('#t_detail_group').append(html)
-
-				$('#modal_group').modal('hide')
-			})
-		}
-
-		const removeRow = () => {
-			$('#t_detail_group').on('click', '.remove_group', function () {
-				$()
-			})
-		}
-
-
-		const deleteData = (DOM) => {
-			$('#t_supplier').on('click', '.delete', function () {
-				let id_supplier = $(this).data('id');
-				let ask = confirm(`Are you sure delete this data ${id_supplier} ?`);
-
-				if (ask) {
-					$.ajax({
-						url: `${BASE_URL}int/supplier/delete`,
-						type: 'DELETE',
-						dataType: 'JSON',
-						data: {
-							id_supplier
-						},
-						beforeSend: function (xhr) {
-							xhr.setRequestHeader("Authorization", "Basic " + btoa(USERNAME + ":" + PASSWORD))
-							xhr.setRequestHeader("SCM-INT-KEY", TOKEN)
-						},
-						success: function (res) {
-							MYTABLE.ajax.reload();
-							makeNotif('success', 'Failed', res.message, 'bottom-right')
-						},
-						error: function ({
-							responseJSON
-						}) {
-							makeNotif('error', 'Failed', responseJSON.message, 'bottom-right')
-						}
-					})
-				}
-			});
-		}
-
-		const submitAdd = () => {
-			$('#form_add').submit(function (e) {
-				e.preventDefault();
-
-
-			})
-		}
-
-		return {
-			init: () => {
-				MYTABLE;
-				GROUP_TABLE;
-
-				openModal();
-				btnPilih();
-
-				deleteData();
-			}
-		}
-	})();
-
-	supplierController.init();
-=======
                 $('#t_detail_group').append(html)
 
                 $('#modal_group').modal('hide')
@@ -220,7 +152,7 @@ $(function(){
                         },
                         success: function (res) {
                             MYTABLE.ajax.reload();
-                            makeNotif('success', 'Failed', res.message, 'bottom-right')
+                            makeNotif('success', 'Success', res.message, 'bottom-right')
                         },
                         error: function ({ responseJSON }) {
                             makeNotif('error', 'Failed', responseJSON.message, 'bottom-right')
@@ -296,7 +228,7 @@ $(function(){
                             $('#submit_add').html('<i class="fa fa-spin fa-spinner"></i>');
                         },
                         success: function (res) {
-                            makeNotif('success', 'Failed', res.message, 'bottom-right')
+                            makeNotif('success', 'Success', res.message, 'bottom-right')
                             location.hash = '#/supplier';
                         },
                         error: function (err) {
@@ -329,5 +261,4 @@ $(function(){
     })();
 
     supplierController.init();
->>>>>>> af15eaa3b52a68d46eba7be434546e26dddd91cc
 })

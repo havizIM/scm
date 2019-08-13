@@ -19,8 +19,8 @@
 <!-- ============================================================== -->
 <div class="row">
     <div class="col-12">
-        <div class="card card-outline-primary">
-            <div class="card-header">
+        <div class="card">
+            <div class="card-header bg-danger">
                 <h4 class="m-b-0 text-white">Form User</h4>
             </div>
             <div class="card-body">

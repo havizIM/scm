@@ -45,9 +45,9 @@ class Warehouse extends CI_Controller {
 	public function shipping($id = null)
 	{
 		if($id == null){
-			$this->load->view('Warehouse/order/data');
+			$this->load->view('Warehouse/shipping/data');
 		} else {
-			$this->load->view('Warehouse/order/detail');
+			$this->load->view('Warehouse/shipping/detail');
 		}
 	}
 

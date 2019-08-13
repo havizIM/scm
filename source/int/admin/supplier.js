@@ -23,7 +23,9 @@ $(function(){
                 }
             },
             columns: [
-                { "data": 'id_supplier' },
+                { "data": null, 'render': function (data, type, row){
+                    return `<a href="#/supplier/${row.id_supplier}">${row.id_supplier}</a>`
+                }  },
                 { "data": 'nama_supplier' },
                 { "data": 'alamat' },
                 { "data": 'telepon' },

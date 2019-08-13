@@ -4,6 +4,7 @@ $(function () {
 	const renderUI = (() => {
 		return {
 			renderDetail: function (data) {
+                console.log(data);
 				var html = '';
 
 				html += `
@@ -151,15 +152,15 @@ $(function () {
                                         <tbody>
                                              `
                 if (data.bank_account.length !== 0) {
-                    $.each(data.bank_account, function (k, v) {
+                    $.each(data.bank_account, function (k1, v1) {
 
                         html += `
                                            <tr>
-                                                <td>${v.id_account}</td>
-                                                <td>${v.no_rekening}</td>
-                                                <td>${v.nama_bank}</td>
-                                                <td>${v.cabang}</td>
-                                                <td>${v.pemilik_account}</td>
+                                                <td>${v1.id_account}</td>
+                                                <td>${v1.no_rekening}</td>
+                                                <td>${v1.nama_bank}</td>
+                                                <td>${v1.cabang}</td>
+                                                <td>${v1.pemilik_account}</td>
                                             </tr>
                          `
                     });

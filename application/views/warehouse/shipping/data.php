@@ -26,6 +26,7 @@
                                 <th>Tgl Shipping</th>
                                 <th>Tgl Receive</th>
                                 <th>Status</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody></tbody>

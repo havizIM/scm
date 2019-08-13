@@ -101,6 +101,7 @@ class Payment extends CI_Controller {
             
             $this->form_validation->set_rules('id_account', 'Account', 'required|trim');
             $this->form_validation->set_rules('tgl_payment', 'Tanggal Payment', 'required|trim');
+            $this->form_validation->set_rules('total_bayar', 'Total Bayar', 'required|trim');
 
             $this->form_validation->set_rules('no_invoice[]', 'No invoice', 'required|trim');
             $this->form_validation->set_rules('jml_bayar[]', 'Jumlah Bayar', 'required|trim');
@@ -133,7 +134,7 @@ class Payment extends CI_Controller {
                     'no_payment'      => $no_payment,
                     'id_account'      => $post['id_account'],
                     'tgl_payment'     => $post['tgl_payment'],
-                    'total_bayar'     => $grand_total
+                    'total_bayar'     => $post['total_bayar']
                 );
 
                 $add = $this->PaymentModel->add($data, $detail);

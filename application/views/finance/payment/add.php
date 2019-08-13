@@ -31,6 +31,10 @@
                         <label for="">Tanggal Payment</label>
                         <input type="date" class="form-control" id="tgl_payment" name="tgl_payment"> 
                     </div>
+                    <div class="form-group">
+                        <label for="">Total Bayar</label>
+                        <input type="number" class="form-control" id="total_bayar" name="total_bayar"> 
+                    </div>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="table-responsive">
@@ -103,6 +107,7 @@
                         <thead>
                             <tr>
                                 <th>Action</th>
+                                <th>Nama Supplier</th>
                                 <th>Nama Bank</th>
                                 <th>Cabang</th>
                                 <th>Pemilik Account</th>

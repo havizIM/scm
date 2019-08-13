@@ -8,9 +8,9 @@ class BankModel extends CI_Model {
     {
         $this->db->select('a.*')
                ->select('b.nama_supplier')
-               ->from('bank_account a')
                
-               ->from('supplier b', 'b.id_supplier = a.id_supplier');
+               ->from('bank_account a')
+               ->join('supplier b', 'b.id_supplier = a.id_supplier');
 
         if(!empty($where)){
             foreach($where as $key => $value){

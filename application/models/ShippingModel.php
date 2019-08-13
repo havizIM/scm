@@ -28,4 +28,20 @@
         return $this->db->get();
     }
 
+    function edit($where, $data)
+    {
+        $this->db->trans_start();
+        $this->db->where($where)->update('shipping', $data);
+
+        $this->db->trans_complete();
+
+        if ($this->db->trans_status() === FALSE){
+            $this->db->trans_rollback();
+            return false;
+        } else {
+            $this->db->trans_commit();
+            return true;
+        }
+    }
+
   }

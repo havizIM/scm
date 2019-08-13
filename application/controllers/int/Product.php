@@ -42,6 +42,8 @@ class Product extends CI_Controller {
                 $json['id_product']    = $key->id_product;
                 $json['id_category']   = $key->id_category;
                 $json['nama_category'] = $key->nama_category;
+                $json['id_supplier']   = $key->id_supplier;
+                $json['nama_supplier'] = $key->nama_supplier;
                 $json['satuan']        = $key->satuan;
                 $json['nama_product']  = $key->nama_product;
                 $json['harga']         = $key->harga;
@@ -66,28 +68,28 @@ class Product extends CI_Controller {
         } else {
             $config = array(
                 array(
-                    'field' => 'nama_lengkap',
-                    'label' => 'Nama Lengkap',
+                    'field' => 'id_supplier',
+                    'label' => 'Supplier',
                     'rules' => 'required|trim'
                 ),
                 array(
-                    'field' => 'email',
-                    'label' => 'Email',
+                    'field' => 'id_category',
+                    'label' => 'Kategori',
                     'rules' => 'required|trim'
                 ),
                 array(
-                    'field' => 'username',
-                    'label' => 'Username',
+                    'field' => 'nama_product',
+                    'label' => 'Nama Product',
                     'rules' => 'required|trim'
                 ),
                 array(
-                    'field' => 'level',
-                    'label' => 'Level',
+                    'field' => 'satuan',
+                    'label' => 'Satuan',
                     'rules' => 'required|trim'
                 ),
                 array(
-                    'field' => 'status',
-                    'label' => 'Status',
+                    'field' => 'harga',
+                    'label' => 'Harga',
                     'rules' => 'required|trim'
                 )
             );
@@ -105,30 +107,25 @@ class Product extends CI_Controller {
 
             } else {
                 $data = array(
-                    'id_user'       => $this->KodeModel->buatKode('user', 'USR-', 'id_user', 7),
-                    'nama_lengkap'  => $this->post('nama_lengkap'),
-                    'email'         => $this->post('email'),
-                    'telepon'       => $this->post('telepon'),
-                    'jenis_kelamin' => $this->post('jenis_kelamin'),
-                    'alamat'        => $this->post('alamat'),
-                    'username'      => $this->post('username'),
-                    'password'      => substr(str_shuffle("01234567890abcdefghijklmnopqestuvwxyz"), 0, 5),
-                    'level'         => $this->post('level'),
-                    'status'        => $this->post('status'),
-                    'token'         => sha1($this->post('email'))
+                    'id_product'   => $this->KodeModel->buatKode('product', 'PR-', 'id_product', 8),
+                    'id_supplier'  => $this->post('id_supplier'),
+                    'id_category'  => $this->post('id_category'),
+                    'satuan'       => $this->post('satuan'),
+                    'nama_product' => $this->post('nama_product'),
+                    'harga'        => $this->post('harga')
                 );
 
-                $add = $this->UserModel->add($data);
+                $add = $this->ProductModel->add($data);
 
                 if(!$add){
                     $this->response(array(
                         'status'    => false,
-                        'message'     => 'Failed add user'
+                        'message'     => 'Failed add product'
                     ), 400);
                 } else {
                     $this->response(array(
                         'status'    => true,
-                        'message'   => 'Success add user'
+                        'message'   => 'Success add product'
                     ), 200);
                 }
             }
@@ -142,33 +139,28 @@ class Product extends CI_Controller {
         } else {
             $config = array(
                 array(
-                    'field' => 'id_user',
-                    'label' => 'ID User',
+                    'field' => 'id_product',
+                    'label' => 'Product',
                     'rules' => 'required|trim'
                 ),
                 array(
-                    'field' => 'nama_lengkap',
-                    'label' => 'Nama Lengkap',
+                    'field' => 'id_category',
+                    'label' => 'Kategori',
                     'rules' => 'required|trim'
                 ),
                 array(
-                    'field' => 'email',
-                    'label' => 'Email',
+                    'field' => 'nama_product',
+                    'label' => 'Nama Product',
                     'rules' => 'required|trim'
                 ),
                 array(
-                    'field' => 'username',
-                    'label' => 'Username',
+                    'field' => 'satuan',
+                    'label' => 'Satuan',
                     'rules' => 'required|trim'
                 ),
                 array(
-                    'field' => 'level',
-                    'label' => 'Level',
-                    'rules' => 'required|trim'
-                ),
-                array(
-                    'field' => 'status',
-                    'label' => 'Status',
+                    'field' => 'harga',
+                    'label' => 'Harga',
                     'rules' => 'required|trim'
                 )
             );
@@ -186,31 +178,28 @@ class Product extends CI_Controller {
 
             } else {
                 $where  = array(
-                    'id_user'   => $this->put('id_user') 
+                    'id_product'   => $this->put('id_product') 
                 );
 
                 $data   = array(
-                    'nama_lengkap'  => $this->put('nama_lengkap'),
-                    'email'         => $this->put('email'),
-                    'telepon'       => $this->put('telepon'),
-                    'jenis_kelamin' => $this->put('jenis_kelamin'),
-                    'alamat'        => $this->put('alamat'),
-                    'username'      => $this->put('username'),
-                    'level'         => $this->put('level'),
-                    'status'        => $this->put('status')
+                    'id_supplier'  => $this->post('id_supplier'),
+                    'id_category'  => $this->post('id_category'),
+                    'satuan'       => $this->post('satuan'),
+                    'nama_product' => $this->post('nama_product'),
+                    'harga'        => $this->post('harga')
                 );
 
-                $edit = $this->UserModel->edit($where, $data);
+                $edit = $this->ProductModel->edit($where, $data);
 
                 if(!$edit){
                     $this->response(array(
                         'status'    => false,
-                        'message'     => 'Failed edit user'
+                        'message'     => 'Failed edit product'
                     ), 400);
                 } else {
                     $this->response(array(
                         'status'    => true,
-                        'message'   => 'Success edit user'
+                        'message'   => 'Success edit product'
                     ), 200);
                 }
             }
@@ -224,8 +213,8 @@ class Product extends CI_Controller {
         } else {
             $config = array(
                 array(
-                    'field' => 'id_user',
-                    'label' => 'ID User',
+                    'field' => 'id_product',
+                    'label' => 'ID Product',
                     'rules' => 'required|trim'
                 )
             );
@@ -243,20 +232,20 @@ class Product extends CI_Controller {
 
             } else {
                 $where  = array(
-                    'id_user'   => $this->delete('id_user') 
+                    'id_product'   => $this->delete('id_product') 
                 );
 
-                $delete = $this->UserModel->delete($where);
+                $delete = $this->ProductModel->delete($where);
 
                 if(!$delete){
                     $this->response(array(
                         'status'    => false,
-                        'message'     => 'Failed delete user'
+                        'message'     => 'Failed delete product'
                     ), 400);
                 } else {
                     $this->response(array(
                         'status'    => true,
-                        'message'   => 'Success delete user'
+                        'message'   => 'Success delete product'
                     ), 200);
                 }
             }

@@ -8,8 +8,8 @@ $(function () {
 
 				html += `
                 <div class="col-md-6"> 
-                    <div class="card card-outline-info">
-                        <div class="card-header">
+                    <div class="card">
+                        <div class="bg-danger card-header">
                             <h4 class="m-b-0 text-white">Data Supplier</h4>
                         </div>
                         <div class="card-body">
@@ -59,22 +59,22 @@ $(function () {
                 </div>
                     
                     <div class="col-md-6">
-                        <div class="card card-outline-info">
-                            <div class="card-header">
+                        <div class="card">
+                            <div class="bg-danger card-header">
                                 <h4 class="m-b-0 text-white">Data PIC</h4>
                             </div>
                             <div class="card-body">
 
-                                    <small class="text-muted">ID Grup</small>
+                                    <small class="text-muted">ID PIC</small>
                                     <h6>${data.pic.id_pic}</h6>
                                     
-                                    <small class="text-muted p-t-20 db">Nama Grup</small>
+                                    <small class="text-muted p-t-20 db">Nama PIC</small>
                                     <h6>${data.pic.nama_pic}</h6>
 
                                     <small class="text-muted p-t-20 db">Handphone</small>
                                     <h6>${data.pic.handphone}</h6> 
 
-                                    <small class="text-muted p-t-20 db">Email Pic</small>
+                                    <small class="text-muted p-t-20 db">Email</small>
                                     <h6>${data.pic.email_pic}</h6> 
 
                                     <small class="text-muted p-t-20 db">Username</small>
@@ -86,14 +86,14 @@ $(function () {
                             </div>
                         </div>
 
-                        <div class="card card-outline-info">
-                            <div class="card-header">
+                        <div class="card">
+                            <div class="bg-danger card-header">
                                 <h4 class="m-b-0 text-white">Data Supplier</h4>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-bordered mb-0 table-striped" style="font-size: 12px;"> 
-                                        <thead class="bg-scm white">  
+                                        <thead class="bg-info text-white">  
                                             <tr>
                                                 <th>ID Group</th>
                                                 <th>Nama Group</th>
@@ -128,15 +128,17 @@ $(function () {
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="card card-outline-info">
-                            <div class="card-header">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="bg-danger card-header">
                                 <h4 class="m-b-0 text-white">Data Account</h4>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table table-bordered mb-0 table-striped" style="font-size: 12px;"> 
-                                        <thead class="bg-scm white">  
+                                    <table class="table table-bordered mb-0 table-striped" style="font-size: 12px;">
+                                        <thead class="bg-info text-white">
                                             <tr>
                                                 <th>ID Account</th>
                                                 <th>No Rekening</th>
@@ -148,10 +150,10 @@ $(function () {
 
                                         <tbody>
                                              `
-				if (data.bank_account.length !== 0) {
-					$.each(data.bank_account, function (k, v) {
+                if (data.bank_account.length !== 0) {
+                    $.each(data.bank_account, function (k, v) {
 
-						html += `
+                        html += `
                                            <tr>
                                                 <td>${v.id_account}</td>
                                                 <td>${v.no_rekening}</td>
@@ -160,15 +162,15 @@ $(function () {
                                                 <td>${v.pemilik_account}</td>
                                             </tr>
                          `
-					});
-				} else {
-					html += `
+                    });
+                } else {
+                    html += `
                                                 <tr>
                                                     <td colspan="7"><center>Data belum terinput</center></td>
                                                 </tr>
                     `
-				}
-				html += `
+                }
+                html += `
                                         </tbody>
                                     </table>
                                 </div>

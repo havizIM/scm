@@ -9,7 +9,8 @@ class ProductModel extends CI_Model {
         $this->db->select('*')
                ->from('product a')
 
-               ->join('category b', 'b.id_category = a.id_category');
+               ->join('category b', 'b.id_category = a.id_category')
+               ->join('supplier c', 'c.id_supplier = a.id_supplier');
 
         if(!empty($where)){
             foreach($where as $key => $value){
@@ -25,17 +26,17 @@ class ProductModel extends CI_Model {
 
     function add($data)
     {
-        return $this->db->insert('user', $data);
+        return $this->db->insert('product', $data);
     }
 
     function edit($where, $data)
     {
-        return $this->db->where($where)->update('user', $data);
+        return $this->db->where($where)->update('product', $data);
     }
 
     function delete($where)
     {
-        return $this->db->where($where)->delete('user');
+        return $this->db->where($where)->delete('product');
     }
 
 

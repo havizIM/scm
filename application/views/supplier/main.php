@@ -132,6 +132,21 @@
                         <li>
                             <a class="" href="#/dashboard" aria-expanded="false"><i class="mdi mdi-home"></i><span class="hide-menu">Dashboard </span></a> 
                         </li>
+                        <li>
+                            <a class="" href="#/product" aria-expanded="false"><i class="mdi mdi-home"></i><span class="hide-menu">Product </span></a> 
+                        </li>
+                        <li>
+                            <a class="" href="#/order" aria-expanded="false"><i class="mdi mdi-home"></i><span class="hide-menu">Order </span></a> 
+                        </li>
+                        <li>
+                            <a class="" href="#/shipping" aria-expanded="false"><i class="mdi mdi-home"></i><span class="hide-menu">Shipping </span></a> 
+                        </li>
+                        <li>
+                            <a class="" href="#/invoice" aria-expanded="false"><i class="mdi mdi-home"></i><span class="hide-menu">Invoice </span></a> 
+                        </li>
+                        <li>
+                            <a class="" href="#/lap_piutang" aria-expanded="false"><i class="mdi mdi-home"></i><span class="hide-menu">Laporan Piutang </span></a> 
+                        </li>
                         
                     </ul>
                 </nav>

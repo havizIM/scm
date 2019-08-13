@@ -130,13 +130,25 @@
                             <a class="waves-effect waves-dark" href="#/dashboard"><i class="mdi mdi-gauge"></i> <span class="hide-menu">Dashboard</span></a>
                         </li>
                         <li>
-                            <a class="waves-effect waves-dark" href="#/user"><i class="fa fa-user"></i> <span class="hide-menu">User</span></a>
-                        </li>
-                        <li>
                             <a class="waves-effect waves-dark" href="#/warehouse"><i class="fa fa-bank"></i> <span class="hide-menu">Warehouse</span></a>
                         </li>
                         <li>
                             <a class="waves-effect waves-dark" href="#/supplier"><i class="fa fa-inbox"></i> <span class="hide-menu">Supplier</span></a>
+                        </li>
+                        <li>
+                            <a class="waves-effect waves-dark" href="#/product"><i class="fa fa-bank"></i> <span class="hide-menu">Product</span></a>
+                        </li>
+                        <li>
+                            <a class="waves-effect waves-dark" href="#/order"><i class="fa fa-inbox"></i> <span class="hide-menu">Order</span></a>
+                        </li>
+                        <li>
+                            <a class="waves-effect waves-dark" href="#/invoice"><i class="fa fa-inbox"></i> <span class="hide-menu">Invoice</span></a>
+                        </li>
+                        <li>
+                            <a class="waves-effect waves-dark" href="#/payment"><i class="fa fa-inbox"></i> <span class="hide-menu">Payment</span></a>
+                        </li>
+                        <li>
+                            <a class="waves-effect waves-dark" href="#/lap_hutang"><i class="fa fa-inbox"></i> <span class="hide-menu">Laporan Hutang</span></a>
                         </li>
                     </ul>
                 </nav>

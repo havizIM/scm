@@ -5,32 +5,52 @@ class Warehouse extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('warehouse/main');
+		$this->load->view('Warehouse/main');
     }
     
     public function dashboard()
 	{
-		$this->load->view('warehouse/dashboard');
+		$this->load->view('Warehouse/dashboard');
+	}
+
+	public function supplier($id = null)
+	{
+		if($id == null){
+			$this->load->view('Warehouse/supplier/data');
+		} else {
+			$this->load->view('Warehouse/supplier/detail');
+		}
 	}
 	
 	public function order($id = null)
 	{
 		if($id == null){
-			$this->load->view('warehouse/order/data');
+			$this->load->view('Warehouse/order/data');
 		} else {
 			switch($id){
 				case 'add':
-					$this->load->view('warehouse/order/add');
+					$this->load->view('Warehouse/order/add');
 				break;
 
 				case 'edit':
-					$this->load->view('warehouse/order/edit');
+					$this->load->view('Warehouse/order/edit');
 				break;
 
 				default:
-					$this->load->view('warehouse/order/detail');
+					$this->load->view('Warehouse/order/detail');
 			}
 		}
 	}
+
+	public function shipping($id = null)
+	{
+		if($id == null){
+			$this->load->view('Warehouse/order/data');
+		} else {
+			$this->load->view('Warehouse/order/detail');
+		}
+	}
+
+	
     
 }

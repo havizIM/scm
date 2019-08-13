@@ -130,6 +130,9 @@
                             <a class="waves-effect waves-dark" href="#/dashboard"><i class="mdi mdi-gauge"></i> <span class="hide-menu">Dashboard</span></a>
                         </li>
                         <li>
+                            <a class="waves-effect waves-dark" href="#/supplier"><i class="fa fa-file"></i> <span class="hide-menu">Supplier</span></a>
+                        </li>
+                        <li>
                             <a class="waves-effect waves-dark" href="#/order"><i class="fa fa-file"></i> <span class="hide-menu">Order</span></a>
                         </li>
                         <li>

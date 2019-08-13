@@ -5,30 +5,30 @@ class Admin extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('admin/main');
+		$this->load->view('Admin/main');
     }
     
     public function dashboard()
 	{
-		$this->load->view('admin/dashboard');
+		$this->load->view('Admin/dashboard');
 	}
 	
     public function user($id = null)
 	{
 		if($id == null){
-			$this->load->view('admin/user/data');
+			$this->load->view('Admin/user/data');
 		} else {
 			switch($id){
 				case 'add':
-					$this->load->view('admin/user/add');
+					$this->load->view('Admin/user/add');
 				break;
 
 				case 'edit':
-					$this->load->view('admin/user/edit');
+					$this->load->view('Admin/user/edit');
 				break;
 
 				default:
-					$this->load->view('admin/user/detail');
+					$this->load->view('Admin/user/detail');
 			}
 		}
 	}
@@ -36,19 +36,19 @@ class Admin extends CI_Controller {
     public function warehouse($id = null)
 	{
 		if($id == null){
-			$this->load->view('admin/warehouse/data');
+			$this->load->view('Admin/warehouse/data');
 		} else {
 			switch($id){
 				case 'add':
-					$this->load->view('admin/warehouse/add');
+					$this->load->view('Admin/warehouse/add');
 				break;
 
 				case 'edit':
-					$this->load->view('admin/warehouse/edit');
+					$this->load->view('Admin/warehouse/edit');
 				break;
 
 				default:
-					$this->load->view('admin/warehouse/detail');
+					$this->load->view('Admin/warehouse/detail');
 			}
 		}
 	}
@@ -56,19 +56,19 @@ class Admin extends CI_Controller {
     public function supplier($id = null)
 	{
 		if($id == null){
-			$this->load->view('admin/supplier/data');
+			$this->load->view('Admin/supplier/data');
 		} else {
 			switch($id){
 				case 'add':
-					$this->load->view('admin/supplier/add');
+					$this->load->view('Admin/supplier/add');
 				break;
 
 				case 'edit':
-					$this->load->view('admin/supplier/edit');
+					$this->load->view('Admin/supplier/edit');
 				break;
 
 				default:
-					$this->load->view('admin/supplier/detail');
+					$this->load->view('Admin/supplier/detail');
 			}
 		}
 	}

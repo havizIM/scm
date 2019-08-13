@@ -23,6 +23,8 @@ $(function(){
             columns: [
                 { "data": 'id_user' },
                 { "data": 'nama_lengkap' },
+                { "data": 'username' },
+                { "data": 'level' },
                 { "data": 'email' },
                 { "data": 'telepon' },
                 { "data": 'jenis_kelamin' },

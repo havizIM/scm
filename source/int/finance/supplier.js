@@ -32,14 +32,7 @@ $(function(){
                 { "data": 'fax' },
                 { "data": 'email' },
                 { "data": 'status_supplier' },
-                {
-                    "data": null, 'render': function (data, type, row) {
-                        return `
-                            <a class="btn btn-sm btn-success" href="#/supplier/edit/${row.id_supplier}"><i class="fa fa-pencil"></i></a>
-                            <button class="btn btn-sm btn-danger delete" data-id="${row.id_supplier}"><i class="fa fa-trash"></i></button>
-                        `
-					}
-				},
+                
 			],
 			order: [
 				[0, 'desc']

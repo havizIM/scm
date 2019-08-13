@@ -20,7 +20,7 @@
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.2/css/responsive.bootstrap4.min.css"/>
-    
+
     <script src="<?= base_url() ?>assets/plugins/jquery/jquery.min.js"></script>
     <script src="<?= base_url() ?>source/int/additional.js"></script>
     <script src="<?= base_url() ?>source/int/admin/at_main.js"></script>
@@ -48,7 +48,7 @@
                         <b>
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                             <!-- Light Logo icon -->
-                            <img src="<?= base_url() ?>assets/image/logo-light-icon.png" alt="homepage" class="light-logo" />
+                            <img src="<?= base_url() ?>assets/image/scm/small_logo.png" alt="homepage" class="light-logo" style="width:40px;" />
                         </b>
                         <!--End Logo icon -->
                         <!-- Logo text -->
@@ -56,7 +56,7 @@
                             <b>SCM</b> Dominos
                          <!-- dark Logo text -->
                          <!-- <img src="<?= base_url() ?>assets/image/logo-text.png" alt="homepage" class="dark-logo" /> -->
-                         <!-- Light Logo text -->    
+                         <!-- Light Logo text -->
                          <!-- <img src="<?= base_url() ?>assets/image/logo-light-text.png" class="light-logo" alt="homepage" />  -->
                         </span>
                     </a>
@@ -73,7 +73,7 @@
                         <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="mdi mdi-menu"></i></a> </li>
                         <li class="nav-item"> <a class="nav-link sidebartoggler hidden-sm-down text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
                         <!-- ============================================================== -->
-                                    
+
                     </ul>
                     <!-- ============================================================== -->
                     <!-- User profile and search -->
@@ -119,7 +119,7 @@
                     <div class="profile-img"> <img src="<?= base_url() ?>doc/default_user.png"  alt="user" /> </div>
                     <!-- User profile text-->
                     <div class="profile-text"> <a class="" role="button" aria-haspopup="true" aria-expanded="true">Markarn Doe</a>
-                        
+
                     </div>
                 </div>
                 <!-- End User profile text-->
@@ -170,7 +170,7 @@
                 <!-- ============================================================== -->
                 <!-- LOAD PAGE CONTENT -->
                 <!-- ============================================================== -->
-                
+
             </div>
 
             <div id="modal_setting" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -264,7 +264,7 @@
                                                     <td>Tgl Registrasi</td>
                                                     <td id="info_tgl_reg_warehouse">-</td>
                                                 </tr>
-                                                
+
                                             </table>
                                         </div>
                                     </div>
@@ -311,8 +311,8 @@
         <!-- End Page wrapper  -->
         <!-- ============================================================== -->
     </div>
-    
-    
+
+
     <script src="<?= base_url() ?>assets/plugins/bootstrap/js/popper.min.js"></script>
     <script src="<?= base_url() ?>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="<?= base_url() ?>assets/internal/js/jquery.slimscroll.js"></script>
@@ -333,7 +333,7 @@
     <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.2/js/responsive.bootstrap4.min.js"></script>
 
     <script src="<?= base_url() ?>source/int/admin/main.js"></script>
-    
+
 
 </body>
 </html>

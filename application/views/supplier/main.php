@@ -28,8 +28,8 @@
     <script src="<?= base_url() ?>assets/plugins/jquery/jquery.min.js"></script>
     <script src="<?= base_url() ?>source/ext/additional.js"></script>
     <script src="<?= base_url() ?>source/ext/at_main.js"></script>
-    
-<![endif]-->
+
+
 </head>
 
 <body class="fix-header card-no-border logo-center">
@@ -68,7 +68,7 @@
                             <b>SCM</b> Dominos
                          <!-- dark Logo text -->
                          <!-- <img src="<?= base_url() ?>assets/image/logo-text.png" alt="homepage" class="dark-logo" /> -->
-                         <!-- Light Logo text -->    
+                         <!-- Light Logo text -->
                          <!-- <img src="<?= base_url() ?>assets/image/logo-light-text.png" class="light-logo" alt="homepage" /> -->
                         </span>
                     </a>
@@ -84,7 +84,7 @@
                         <!-- This is  -->
                         <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="mdi mdi-menu"></i></a> </li>
                         <!-- ============================================================== -->
-                        
+
                         <!-- ============================================================== -->
                     </ul>
                     <!-- ============================================================== -->
@@ -92,7 +92,7 @@
                     <!-- ============================================================== -->
                     <ul class="navbar-nav my-lg-0">
                         <!-- ============================================================== -->
-                        
+
                         <!-- ============================================================== -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="<?= base_url() ?>doc/default_user.png" alt="user" class="profile-pic" /></a>
@@ -130,24 +130,24 @@
                     <ul id="sidebarnav">
                         <li class="nav-small-cap">PERSONAL</li>
                         <li>
-                            <a class="" href="#/dashboard" aria-expanded="false"><i class="mdi mdi-home"></i><span class="hide-menu">Dashboard </span></a> 
+                            <a class="" href="#/dashboard" aria-expanded="false"><i class="mdi mdi-home"></i><span class="hide-menu">Dashboard </span></a>
                         </li>
                         <li>
-                            <a class="" href="#/product" aria-expanded="false"><i class="mdi mdi-home"></i><span class="hide-menu">Product </span></a> 
+                            <a class="" href="#/product" aria-expanded="false"><i class="mdi mdi-home"></i><span class="hide-menu">Product </span></a>
                         </li>
                         <li>
-                            <a class="" href="#/order" aria-expanded="false"><i class="mdi mdi-home"></i><span class="hide-menu">Order </span></a> 
+                            <a class="" href="#/order" aria-expanded="false"><i class="mdi mdi-home"></i><span class="hide-menu">Order </span></a>
                         </li>
                         <li>
-                            <a class="" href="#/shipping" aria-expanded="false"><i class="mdi mdi-home"></i><span class="hide-menu">Shipping </span></a> 
+                            <a class="" href="#/shipping" aria-expanded="false"><i class="mdi mdi-home"></i><span class="hide-menu">Shipping </span></a>
                         </li>
                         <li>
-                            <a class="" href="#/invoice" aria-expanded="false"><i class="mdi mdi-home"></i><span class="hide-menu">Invoice </span></a> 
+                            <a class="" href="#/invoice" aria-expanded="false"><i class="mdi mdi-home"></i><span class="hide-menu">Invoice </span></a>
                         </li>
                         <li>
-                            <a class="" href="#/lap_piutang" aria-expanded="false"><i class="mdi mdi-home"></i><span class="hide-menu">Laporan Piutang </span></a> 
+                            <a class="" href="#/lap_piutang" aria-expanded="false"><i class="mdi mdi-home"></i><span class="hide-menu">Laporan Piutang </span></a>
                         </li>
-                        
+
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
@@ -261,7 +261,7 @@
                                                     <td>Tgl Registrasi</td>
                                                     <td id="info_tgl_reg_warehouse">-</td>
                                                 </tr>
-                                                
+
                                             </table>
                                         </div>
                                     </div>
@@ -291,7 +291,7 @@
                 </div>
                 <!-- /.modal-dialog -->
             </div>
-            
+
             <footer class="footer">
                 © 2019 SCM Dominos by Ulfia
             </footer>
@@ -309,7 +309,7 @@
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
-    
+
     <!-- Bootstrap tether Core JavaScript -->
     <script src="<?= base_url() ?>assets/plugins/bootstrap/js/popper.min.js"></script>
     <script src="<?= base_url() ?>assets/plugins/bootstrap/js/bootstrap.min.js"></script>

@@ -293,7 +293,7 @@
             </div>
 
             <footer class="footer">
-                © 2019 SCM Dominos by Ulfia
+                © 2019 SCM Dominos. Made with <i class="fa fa-heart text-danger"></i> by Ulfia Risqika
             </footer>
             <!-- ============================================================== -->
             <!-- End footer -->
@@ -323,7 +323,7 @@
     <script src="<?= base_url() ?>assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
     <script src="<?= base_url() ?>assets/plugins/sparkline/jquery.sparkline.min.js"></script>
     <!--Custom JavaScript -->
-    <script src="<?= base_url() ?>assets/eksternal/js/custom.min.js"></script>
+    <script src="<?= base_url() ?>assets/eksternal/js/custom.js"></script>
     <!-- ============================================================== -->
     <!-- Style switcher -->
     <!-- ============================================================== -->
@@ -336,7 +336,7 @@
     <script src="<?= base_url() ?>assets/plugins/toast-master/js/jquery.toast.js"></script>
     <script src="<?= base_url() ?>assets/plugins/wizard/jquery.validate.min.js"></script>
 
-    <script src="<?= base_url() ?>source/int/finance/main.js"></script>
+    <script src="<?= base_url() ?>source/ext/main.js"></script>
 </body>
 
 </html>

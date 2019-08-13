@@ -16,8 +16,8 @@ class Invoice extends CI_Controller {
         parent::__construct();
         $this->__resTraitConstruct();
 
-        $this->where    = array('token' => $this->input->get_request_header('SCM-INT-KEY', TRUE));
-        $this->user     = $this->AuthModel->cekAuthInt($this->where);
+        $this->where    = array('token' => $this->input->get_request_header('SCM-EXT-KEY', TRUE));
+        $this->user     = $this->AuthModel->cekAuthExt($this->where);
 
         $this->load->model('InvoiceModel');
     }
@@ -31,7 +31,7 @@ class Invoice extends CI_Controller {
             
             $where = array(
                 'a.no_invoice'    => $this->get('no_invoice'),
-                'd.id_supplier'   => $this->get('id_supplier')
+                'd.id_supplier'   => $user->id_supplier
             );
 
             $show   = $this->InvoiceModel->show($where)->result();
@@ -39,8 +39,7 @@ class Invoice extends CI_Controller {
 
             foreach($show as $key){
                 $json           = array();
-                $sub_total      = 0;
-                $ppn_total      = 0;
+                $grand_total    = 0;
 
                 $json['no_invoice']         = $key->no_invoice;
                 $json['no_order']           = $key->no_order;
@@ -73,8 +72,7 @@ class Invoice extends CI_Controller {
 
                 foreach($detail->result() as $key1){
                     $json_ba = array();
-                    $sub_total += $key1->total_harga;
-                    $ppn_total += $key1->ppn_total;
+                    $grand_total += $key1->total_harga;
 
                     $json_ba['deskripsi']   = $key1->deskripsi;
                     $json_ba['harga']       = $key1->harga;
@@ -85,7 +83,7 @@ class Invoice extends CI_Controller {
                     $json['detail'][] = $json_ba;
                 }
 
-                $json['grand_total']         = $sub_total + $ppn_total;
+                $json['grand_total']         = $grand_total;
 
                 $invoice[] = $json;
             }

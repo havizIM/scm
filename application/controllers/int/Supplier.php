@@ -156,7 +156,8 @@ class Supplier extends CI_Controller {
                     'handphone'    => $post['handphone'],
                     'email_pic'    => $post['email_pic'],
                     'username'     => $post['username'],
-                    'password'     => substr(str_shuffle("01234567890abcdefghijklmnopqestuvwxyz"), 0, 5)
+                    'password'     => $post['username'],
+                    'password'     => substr(str_shuffle("01234567890abcdefghijklmnopqestuvwxyz"), 0, 20)
                 );
                 
                 $bank           = array();

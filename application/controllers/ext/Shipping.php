@@ -16,8 +16,8 @@ class Shipping extends CI_Controller {
         parent::__construct();
         $this->__resTraitConstruct();
 
-        $this->where    = array('token' => $this->input->get_request_header('SCM-INT-KEY', TRUE));
-        $this->user     = $this->AuthModel->cekAuthInt($this->where);
+        $this->where    = array('token' => $this->input->get_request_header('SCM-EXT-KEY', TRUE));
+        $this->user     = $this->AuthModel->cekAuthExt($this->where);
 
         $this->load->model('ShippingModel');
         $this->load->model('OrderModel');
@@ -32,7 +32,7 @@ class Shipping extends CI_Controller {
             
             $where = array(
                 'a.no_shipping'    => $this->get('no_shipping'),
-                'd.id_supplier'   => $this->get('id_supplier')
+                'd.id_supplier'   => $user->id_supplier
             );
 
             $show   = $this->ShippingModel->show($where)->result();
@@ -97,7 +97,68 @@ class Shipping extends CI_Controller {
         }
     }
 
-    public function approve_put()
+    public function add_post()
+    {
+        if($this->user->num_rows() == 0){
+            $this->response(array('status' => false, 'error' => 'Unauthorization token'), 401);
+        } else {
+            $user = $this->user->row();
+            $this->form_validation->set_data($this->post());
+            
+            $this->form_validation->set_rules('no_order', 'Order', 'required|trim');
+            $this->form_validation->set_rules('tgl_shipping', 'Tanggal Shipping', 'required|trim');
+            $this->form_validation->set_rules('id_product[]', 'Product', 'required|trim');
+            $this->form_validation->set_rules('actual_qty[]', 'Qty', 'required|trim');
+
+            if($this->form_validation->run() == FALSE){
+
+                $this->response(array(
+                    'status'    => false,
+                    'message'   => 'Field is required',
+                    'error'     => $this->form_validation->error_array()
+                ), 400);
+
+            } else {
+
+                $post           = $this->post();
+                $no_shipping    = $this->KodeModel->buatKode('shipping', 'DO-', 'no_shipping', 8);
+
+
+                $data           = array(
+                    'no_shipping'       => $no_shipping,
+                    'no_order'          => $post['no_order'],
+                    'tgl_shipping'      => $post['tgl_shipping'],
+                    'status_shipping'   => 'Open' 
+                );
+                
+                $detail  = array();
+
+                foreach($post['id_product'] as $key => $val){
+                    $detail[] = array(
+                        'no_shipping'    => $no_shipping,
+                        'id_product'     => $post['id_product'][$key],
+                        'actual_qty'     => $post['actual_qty'][$key]
+                    );
+                }
+
+                $add = $this->ShippingModel->add($data, $detail);
+
+                if(!$add){
+                    $this->response(array(
+                        'status'    => false,
+                        'error'     => 'Failed add shipping'
+                    ), 400);
+                } else {
+                    $this->response(array(
+                        'status'    => true,
+                        'message'   => 'Success add shipping'
+                    ), 200);
+                }
+            }
+        } 
+    }
+
+    public function delete_delete()
     {
         if($this->user->num_rows() == 0){
             $this->response(array('status' => false, 'error' => 'Unauthorization token'), 401);
@@ -105,12 +166,12 @@ class Shipping extends CI_Controller {
             $config = array(
                 array(
                     'field' => 'no_shipping',
-                    'label' => 'No Shipping',
+                    'label' => 'Shipping',
                     'rules' => 'required|trim'
                 )
             );
 
-            $this->form_validation->set_data($this->put());
+            $this->form_validation->set_data($this->delete());
             $this->form_validation->set_rules($config);
 
             if($this->form_validation->run() == FALSE){
@@ -123,20 +184,15 @@ class Shipping extends CI_Controller {
 
             } else {
                 $where  = array(
-                    'no_shipping'   => $this->put('no_shipping') 
+                    'no_shipping'   => $this->delete('no_shipping') 
                 );
 
-                $data = array(
-                    'status_shipping' => 'Close',
-                    'tgl_receive' => date('Y-m-d')
-                );
+                $delete = $this->ShippingModel->delete($where);
 
-                $edit = $this->ShippingModel->edit($where, $data);
-
-                if(!$edit){
+                if(!$delete){
                     $this->response(array(
                         'status'    => false,
-                        'message'     => 'Failed delete shipping'
+                        'error'     => 'Failed delete shipping'
                     ), 400);
                 } else {
                     $this->response(array(

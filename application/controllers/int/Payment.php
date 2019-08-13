@@ -99,9 +99,11 @@ class Payment extends CI_Controller {
             $user = $this->user->row();
             $this->form_validation->set_data($this->post());
             
-            $this->form_validation->set_rules('id_supplier', 'Supplier', 'required|trim');
-            $this->form_validation->set_rules('id_product[]', 'Product', 'required|trim');
-            $this->form_validation->set_rules('qty[]', 'Qty', 'required|trim');
+            $this->form_validation->set_rules('id_account', 'Account', 'required|trim');
+            $this->form_validation->set_rules('tgl_payment', 'Tanggal Payment', 'required|trim');
+
+            $this->form_validation->set_rules('no_invoice[]', 'No invoice', 'required|trim');
+            $this->form_validation->set_rules('jml_bayar[]', 'Jumlah Bayar', 'required|trim');
 
             if($this->form_validation->run() == FALSE){
 
@@ -114,37 +116,37 @@ class Payment extends CI_Controller {
             } else {
 
                 $post           = $this->post();
-                $no_order       = $this->KodeModel->buatKode('`order`', 'PO-', 'no_order', 8);
+                $no_payment     = $this->KodeModel->buatKode('payment', 'PVC-', 'no_payment', 7);
+                $grand_total    = 0;
 
-
-                $data           = array(
-                    'no_order'        => $no_order,
-                    'id_supplier'     => $post['id_supplier'],
-                    'id_warehouse'    => $user->id_warehouse,
-                    'status_order'    => 'Open' 
-                );
-                
                 $detail  = array();
 
-                foreach($post['id_product'] as $key => $val){
+                foreach($post['no_invoice'] as $key => $val){
                     $detail[] = array(
-                        'no_order'       => $no_order,
-                        'id_product'     => $post['id_product'][$key],
-                        'qty'            => $post['qty'][$key]
+                        'no_payment'     => $no_payment,
+                        'no_invoice'     => $post['no_invoice'][$key],
+                        'jml_bayar'      => $post['jml_bayar'][$key]
                     );
                 }
+
+                $data           = array(
+                    'no_payment'      => $no_payment,
+                    'id_account'      => $post['id_account'],
+                    'tgl_payment'     => $post['tgl_payment'],
+                    'total_bayar'     => $grand_total
+                );
 
                 $add = $this->PaymentModel->add($data, $detail);
 
                 if(!$add){
                     $this->response(array(
                         'status'    => false,
-                        'error'     => 'Failed add order'
+                        'error'     => 'Failed add payment'
                     ), 400);
                 } else {
                     $this->response(array(
                         'status'    => true,
-                        'message'   => 'Success add order'
+                        'message'   => 'Success add payment'
                     ), 200);
                 }
             }
@@ -249,8 +251,8 @@ class Payment extends CI_Controller {
         } else {
             $config = array(
                 array(
-                    'field' => 'no_order',
-                    'label' => 'Order',
+                    'field' => 'no_payment',
+                    'label' => 'Payment',
                     'rules' => 'required|trim'
                 )
             );
@@ -268,7 +270,7 @@ class Payment extends CI_Controller {
 
             } else {
                 $where  = array(
-                    'no_order'   => $this->delete('no_order') 
+                    'no_payment'   => $this->delete('no_payment') 
                 );
 
                 $delete = $this->PaymentModel->delete($where);
@@ -276,12 +278,12 @@ class Payment extends CI_Controller {
                 if(!$delete){
                     $this->response(array(
                         'status'    => false,
-                        'error'     => 'Failed delete order'
+                        'error'     => 'Failed delete payment'
                     ), 400);
                 } else {
                     $this->response(array(
                         'status'    => true,
-                        'message'   => 'Success delete order'
+                        'message'   => 'Success delete payment'
                     ), 200);
                 }
             }

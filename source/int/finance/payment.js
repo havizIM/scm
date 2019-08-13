@@ -169,7 +169,10 @@ $(function () {
                             <input type="number" name="total_hutang[]" id="total_hutang" class="form-control" readonly value="${total}">
                         </td>
                         <td>    
-                            <input type="number" name="jml_dibayar[]" id="jml_dibayar" class="form-control">
+                            <input type="number" name="jml_bayar[]" id="jml_bayar" class="form-control">
+                        </td>
+                        <td>    
+                            <input type="text" name="status[]" id="status" class="form-control" readonly>
                         </td>
                         <td>
                             <button type="button" class="btn btn-danger remove" data-id="${id}"><i class="fa fa-trash"></i></button>
@@ -183,16 +186,16 @@ $(function () {
         }
 
         const deleteData = () => {
-            $('#t_product').on('click', '.delete', function () {
-                let id_product = $(this).data('id');
-                let ask = confirm(`Are you sure delete this data ${id_product} ?`);
+            $('#t_payment').on('click', '.delete', function () {
+                let no_payment = $(this).data('id');
+                let ask = confirm(`Are you sure delete this data ${no_payment} ?`);
 
                 if (ask) {
                     $.ajax({
-                        url: `${BASE_URL}int/product/delete`,
+                        url: `${BASE_URL}int/payment/delete`,
                         type: 'DELETE',
                         dataType: 'JSON',
-                        data: { id_product },
+                        data: { no_payment },
                         beforeSend: function (xhr) {
                             xhr.setRequestHeader("Authorization", "Basic " + btoa(USERNAME + ":" + PASSWORD))
                             xhr.setRequestHeader("SCM-INT-KEY", TOKEN)
@@ -209,18 +212,23 @@ $(function () {
             });
         }
 
+        const removeInvoice = () => {
+            $('#t_detail_payment').on('click', '.remove', function () {
+                let id = $(this).data('id');
+
+                $('.row_' + id).remove();
+            })
+        }
+
         const submitAdd = () => {
             $('#form_add').validate({
                 rules: {
-                    "nama_product": "required",
-                    "supplier": "required",
-                    "category": "required",
-                    "satuan": "required",
-                    "harga": "required"
+                    "id_account": "required",
+                    "tgl_payment": "required"
                 },
                 submitHandler: function (form) {
                     $.ajax({
-                        url: `${BASE_URL}int/product/add`,
+                        url: `${BASE_URL}int/payment/add`,
                         type: 'POST',
                         dataType: 'JSON',
                         data: $(form).serialize(),
@@ -231,7 +239,7 @@ $(function () {
                         },
                         success: function (res) {
                             makeNotif('success', 'Success', res.message, 'bottom-right')
-                            location.hash = '#/product';
+                            location.hash = '#/payment';
                         },
                         error: function (err) {
                             const { message } = err.responseJSON
@@ -254,8 +262,10 @@ $(function () {
                 openModal();
                 btnPilih();
 
-                // deleteData();
-                // submitAdd();
+                removeInvoice();
+                deleteData();
+
+                submitAdd();
             }
         }
     })();

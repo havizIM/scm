@@ -49,4 +49,28 @@
         return $this->db->get();
     }
 
+    public function add($data, $detail)
+    {
+        $this->db->insert('payment', $data);
+
+        if(!empty($detail)){
+            $this->db->insert_batch('payment_detail', $detail);
+        }
+
+        $this->db->trans_complete();
+
+        if ($this->db->trans_status() === FALSE){
+            $this->db->trans_rollback();
+            return false;
+        } else {
+            $this->db->trans_commit();
+            return true;
+        }
+    }
+
+    public function delete($where)
+    {
+        return $this->db->where($where)->delete('payment');
+    }
+
   }

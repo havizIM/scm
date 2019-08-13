@@ -164,7 +164,7 @@ $(function () {
                             <input type="number" name="qty[]" id="qty" class="form-control count">
                         </td>
                         <td>    
-                            <input type="number" name="total_harga[]" id="total_harga" class="form-control" readonly>
+                            <input type="text" name="status[]" id="status" class="form-control" readonly>
                         </td>
                         <td>
                             <button type="button" class="btn btn-danger remove" data-id="${id}"><i class="fa fa-trash"></i></button>

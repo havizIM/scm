@@ -27,14 +27,19 @@
                             </span>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="">Tanggal Payment</label>
+                        <input type="date" class="form-control" id="tgl_payment" name="tgl_payment"> 
+                    </div>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="t_detail_payment"> 
                                     <thead>
-                                        <th style="width: 40%">No Invoice</th>
-                                        <th style="width: 25%">Total Hutang</th>
-                                        <th style="width: 25%">Total Dibayar</th>
+                                        <th style="width: 35%">No Invoice</th>
+                                        <th style="width: 20%">Total Hutang</th>
+                                        <th style="width: 20%">Total Dibayar</th>
+                                        <th style="width: 15%">Status</th>
                                         <th style="width: 10%"><button type="button" class="btn btn-info lookup_invoice"><i class="fa fa-plus"></i></button></th>
                                     </thead>
                                     <tbody></tbody>

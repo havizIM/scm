@@ -6,9 +6,6 @@
             <li class="breadcrumb-item active">Invoice</li>
         </ol>
     </div>
-    <div class="col-md-7 col-4 align-self-center">
-        <a style="float: right;" href="#/invoice/add" class="btn btn-md btn-info">Add</a>
-    </div>
 </div>
 
 <div class="row">

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 13 Agu 2019 pada 18.02
+-- Waktu pembuatan: 13 Agu 2019 pada 21.53
 -- Versi server: 10.1.40-MariaDB
 -- Versi PHP: 7.1.29
 
@@ -236,7 +236,7 @@ CREATE TABLE `pic` (
 --
 
 INSERT INTO `pic` (`id_pic`, `id_supplier`, `nama_pic`, `handphone`, `email_pic`, `username`, `password`, `token`, `tgl_reg_pic`) VALUES
-(6, 'SP-00000001', 'Ndi', '081355754092', 'viz.ndinq@gmail.cm', 'havizim', '9bdok', '', '2019-08-13 04:38:03');
+(6, 'SP-00000001', 'Ndi', '081355754092', 'viz.ndinq@gmail.cm', 'havizim', 'havizim', '9a64164ce3c1429c5854', '2019-08-13 16:45:48');
 
 -- --------------------------------------------------------
 
@@ -281,7 +281,29 @@ CREATE TABLE `shipping` (
 --
 
 INSERT INTO `shipping` (`no_shipping`, `no_order`, `tgl_shipping`, `status_shipping`, `tgl_receive`) VALUES
-('DO-00000001', 'PO-00000001', '2019-08-13', 'Close', '2019-08-13');
+('DO-00000001', 'PO-00000001', '2019-08-13', 'Close', '2019-08-13'),
+('DO-00000002', 'PO-00000002', '2019-08-13', 'Open', '0000-00-00');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `shipping_detail`
+--
+
+CREATE TABLE `shipping_detail` (
+  `no_shipping` varchar(11) NOT NULL,
+  `id_product` varchar(11) NOT NULL,
+  `actual_qty` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `shipping_detail`
+--
+
+INSERT INTO `shipping_detail` (`no_shipping`, `id_product`, `actual_qty`) VALUES
+('DO-00000002', 'PR-00000003', 2),
+('DO-00000002', 'PR-00000002', 3),
+('DO-00000002', 'PR-00000001', 100);
 
 -- --------------------------------------------------------
 
@@ -472,6 +494,13 @@ ALTER TABLE `shipping`
   ADD KEY `invoice` (`no_order`);
 
 --
+-- Indeks untuk tabel `shipping_detail`
+--
+ALTER TABLE `shipping_detail`
+  ADD KEY `no_shipping` (`no_shipping`),
+  ADD KEY `id_product` (`id_product`);
+
+--
 -- Indeks untuk tabel `supplier`
 --
 ALTER TABLE `supplier`
@@ -587,6 +616,13 @@ ALTER TABLE `product`
 --
 ALTER TABLE `shipping`
   ADD CONSTRAINT `shipping_ibfk_1` FOREIGN KEY (`no_order`) REFERENCES `order` (`no_order`);
+
+--
+-- Ketidakleluasaan untuk tabel `shipping_detail`
+--
+ALTER TABLE `shipping_detail`
+  ADD CONSTRAINT `Detail to Product` FOREIGN KEY (`id_product`) REFERENCES `product` (`id_product`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `Detail to Shipping` FOREIGN KEY (`no_shipping`) REFERENCES `shipping` (`no_shipping`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `supply_group`

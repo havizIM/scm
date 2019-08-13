@@ -93,4 +93,54 @@ class Order extends CI_Controller {
         }
     }
 
+    public function approve_put()
+    {
+        if($this->user->num_rows() == 0){
+            $this->response(array('status' => false, 'error' => 'Unauthorization token'), 401);
+        } else {
+            $config = array(
+                array(
+                    'field' => 'no_order',
+                    'label' => 'Order',
+                    'rules' => 'required|trim'
+                )
+            );
+
+            $this->form_validation->set_data($this->delete());
+            $this->form_validation->set_rules($config);
+
+            if($this->form_validation->run() == FALSE){
+
+                $this->response(array(
+                    'status'    => false,
+                    'message'   => 'Field is required',
+                    'error'     => $this->form_validation->error_array()
+                ), 400);
+
+            } else {
+                $where  = array(
+                    'no_order'   => $this->delete('no_order') 
+                );
+
+                $where  = array(
+                    'status_order' => 'Close'
+                );
+
+                $delete = $this->OrderModel->delete($where);
+
+                if(!$delete){
+                    $this->response(array(
+                        'status'    => false,
+                        'error'     => 'Failed delete order'
+                    ), 400);
+                } else {
+                    $this->response(array(
+                        'status'    => true,
+                        'message'   => 'Success delete order'
+                    ), 200);
+                }
+            }
+        } 
+    }
+
 }

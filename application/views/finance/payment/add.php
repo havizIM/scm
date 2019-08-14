@@ -40,10 +40,9 @@
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="t_detail_payment"> 
                                     <thead>
-                                        <th style="width: 35%">No Invoice</th>
-                                        <th style="width: 20%">Total Hutang</th>
-                                        <th style="width: 20%">Total Dibayar</th>
-                                        <th style="width: 15%">Status</th>
+                                        <th style="width: 30%">No Invoice</th>
+                                        <th style="width: 30%">Total Hutang</th>
+                                        <th style="width: 30%">Total Dibayar</th>
                                         <th style="width: 10%"><button type="button" class="btn btn-info lookup_invoice"><i class="fa fa-plus"></i></button></th>
                                     </thead>
                                     <tbody></tbody>

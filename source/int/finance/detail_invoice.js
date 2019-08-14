@@ -7,84 +7,129 @@ $(function () {
 				var total_ppn = 0
 				var sub_total = 0
 
-			   html += `
+        html += `
+					<div class="card">
+						<div class="card-body">
+							<div class="col-md-12">
+								<div class="text-right">
+									<button id="print" class="btn btn-default btn-success" type="button"> <span><i class="fa fa-print"></i> Print</span> </button>
+								</div>
+							</div>
+						</div>
+					</div>
 
-         <div class="col-md-12">
-           <div class="card card-body printableArea">
-           <img src="${BASE_URL}assets/image/scm/logo_full.png" alt="homepage" class="light-logo" style="width:200px; margin-bottom:0px; position:absolute;" />
-             <h3> <span class="pull-right">#${data.no_invoice}</span><b class="text-danger pull-right">No Invoice</b></h3>
-             <hr>
-             <div class="row">
-               <div class="col-md-12">
-                 <div class="pull-left mt-3">
-                   <address>
-									 	 <h5>To,</h5>
-										 <h3> &nbsp;<b>PT.Dominos Pizza Indonesia</b></h3>
-										 <p class="text-muted m-l-5">Jl. Tomang Raya No.32 Blok B.11 Kav.No.39 Kel. Jatipulo Kec. Palmerah,
-											 <br/> Telepon :  021-2933 6741<br/>
+           			<div class="card card-body printableArea">
+             			<div class="row">
+						 
+                    <div class="col-md-12 mb-3">
+                      <table width="100%" border="0">
+                        <tr>
+                          <td>
+                            <img src="${BASE_URL}assets/image/scm/logo_full.png" alt="homepage" class="light-logo mb-3" style="width:300px;" />
+                          </td>
+                          <td class="text-right">
+                            <h2>Invoice</h2>
+                            <h3> &nbsp;<b class="text-danger">No Invoice : ${data.no_invoice}</b></h3>
+                            <p class="">
+                              <b>No Order :</b> ${data.no_order} <br/>
+                              <b>Invoice Date :</b> ${data.tgl_invoice}
+                            </p>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
 
-                       <h3> <b class="text-danger pull-left">No Order</b> <span class="pull-left">#${data.no_order}</span></h3>
-                     </address>
-                   </div>
-                   <div class="pull-right text-right">
-                     <address>
-										 <h5>From,</h5>
-                     <h3> &nbsp;<b>${data.supplier.nama_supplier}</b></h3>
-                     <p class="text-muted m-l-5">${data.supplier.alamat},
-                       <br/> Telepon : ${data.supplier.telepon},
-                       <br/> Fax : ${data.supplier.fax}
-                         <p class="m-t-30"><b>Invoice Date :</b> <i class="fa fa-calendar"></i> ${data.tgl_invoice}</p>
-                         <p class="m-t-30"><b>Due Date :</b> <i class="fa fa-calendar"></i> ${data.tgl_tempo}</p>
-                       </address>
-                     </div>
-                   </div>
-                   <div class="col-md-12">
-                     <div class="table-responsive m-t-40" style="clear: both;">
-                       <table class="table table-hover">
-                         <thead>
-                           <tr>
-                             <th>Produk</th>
-                             <th>Qty</th>
-                             <th>Price</th>
-                             <th>Total</th>
-                           </tr>
-                         </thead>
-                         <tbody>`
-                         $.each(data.detail,function(k,v) {
-													 total_ppn += parseInt(v.ppn)
-													 sub_total += parseInt(v.total_harga)
-                   html+= `<tr>
-                             <td>${v.deskripsi}</td>
-                             <td>${v.qty}</td>
-                             <td>${v.harga}</td>
-                             <td>${v.total_harga}</td>
-                           </tr>`
+                    <div class="col-md-12 mb-3">
+                      <table width="100%" border="0">
+                        <tr>
+                          <td style="width: 50%">
+                            <div class="pull-left">
+                              <h5 class="ml-2">From :</h5>
+                              <address>
+                                <h3> &nbsp;<b>${data.supplier.nama_supplier}</b></h3>
+                                <p class="text-muted m-l-5">${data.supplier.alamat},
+                                <br/> Telepon : ${data.supplier.telepon},
+                                <br/> Fax : ${data.supplier.fax}
+                              </address>
+                              
+                            </div>
+                          </td>
+                          <td style="width: 50%">
+                            <div class="pull-right text-right">
+                              <h5>To :</h5>
+                              <address>
+                                <h3> &nbsp;<b>PT. Mitra Adi Perkasa</b></h3>
+                                <p class="text-muted m-l-5">Sahid Sudirman Centre,  Karet Tengsin,
+                                  <br> Jl. Jend. Sudirman No.Kav. 86, RT.10/RW.11,
+                                  <br> Tanahabang, Kota Jakarta Pusat,
+                                  <br> Daerah Khusus Ibukota Jakarta 10220</p>
+                              </address>
+                            </div>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
 
-                         });
-                    html+= `</tbody>
-                       </table>
-                     </div>
-                   </div>
-                   <div class="col-md-12">
-                   <div class="pull-left m-t-30 text-left">
-                           <div style="margin-bottom:140px;"></div>
-											<h3>(_____________________)</h3>
-                     </div>
-                   <div class="pull-right m-t-30 text-right">
-										 <h5>Sub Total : Rp. ${sub_total}</h5>
-										 <h5>Tax 10% : Rp. ${total_ppn}</h5>
-                    	<hr>
-											<h3>Grand Total : Rp. ${data.grand_total}</h3>
-                     </div>
-                     <div class="clearfix"></div>
-                     <hr>
-                     <div class="text-right">
-                       <button id="print" class="btn btn-warning btn-outline" type="button"> <span><i class="fa fa-print"></i> Print</span> </button>
-                     </div>
-                   </div>
-                 </div>
+
+                      <div class="col-md-12">
+                        <div class="table-responsive m-t-40" style="clear: both;">
+                          <table class="table table-bordered">
+                            <thead>
+                              <tr>
+                                <th>Deskripsi</th>
+                                <th class="text-right">Price</th>
+                                <th class="text-right">Qty</th>
+                                <th class="text-right">Total</th>
+                              </tr>
+                            </thead>
+                            <tbody>`
+                $.each(data.detail, function (k, v) {
+                  total_ppn += parseInt(v.ppn)
+                  sub_total += parseInt(v.total_harga)
+
+                  html += `
+                                <tr>
+                                  <td>${v.deskripsi}</td>
+                                  <td class="text-right">Rp. ${parseInt(v.harga).toLocaleString(['ban', 'id'])}</td>
+                                  <td class="text-right">${v.qty}</td>
+                                  <td class="text-right">Rp. ${parseInt(v.total_harga).toLocaleString(['ban', 'id'])}</td>
+                                </tr>`
+
+                });
+                html += `
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+
+
+                      <div class="col-md-12 mt-3">
+                        <table width="100%">
+                          <tr>
+                            <td class="text-left">
+                              <div class="text-center">
+                                <h4>Pembuat</h4>
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+                                (________________________)
+                              </div>
+                            </td>
+                            <td class="text-right">
+                              <h5 class="mt-3">Sub Total : Rp. ${sub_total.toLocaleString(['ban', 'id'])}</h5>
+                              <h5>Tax 10% : Rp. ${total_ppn.toLocaleString(['ban', 'id'])}</h5>
+                              <hr>
+                              <h3>Grand Total : Rp. ${data.grand_total.toLocaleString(['ban', 'id'])}</h3>
+                            </td>
+                          <tr>
+                        </table>
+
+                      <div class="clearfix"></div>
+                    </div>
+                 	</div>
                </div>
-             </div>
 
          `
 

@@ -4,78 +4,124 @@ $(function () {
 			renderDetail: function (data) {
 				var html = '';
 
-			   html += `
+        html += `
+                <div class="card">
+                  <div class="card-body">
+                    <div class="col-md-12">
+                      <div class="text-right">
+                        <button id="print" class="btn btn-default btn-success" type="button"> <span><i class="fa fa-print"></i> Print</span> </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
-         <div class="col-md-12">
-           <div class="card card-body printableArea">
-           <img src="${BASE_URL}assets/image/scm/logo_full.png" alt="homepage" class="light-logo" style="width:200px; margin-bottom:0px; position:absolute;" />
-             <h3> <span class="pull-right">${data.no_shipping}</span><b class="text-danger pull-right">Shipping number #</b></h3>
-             <hr>
-             <div class="row">
-               <div class="col-md-12">
-                 <div class="pull-left mt-3">
-                   <address>
-									 <h5>To,</h5>
-                     <h3> &nbsp;<b>${data.warehouse.nama_warehouse}</b></h3>
-                     <p class="text-muted m-l-5">${data.warehouse.alamat},
-                       <br/> Telepon : ${data.warehouse.telepon},
-                       <br/> Fax : ${data.warehouse.fax}
+           			<div class="card card-body printableArea">
+             			<div class="row">
+                    <div class="col-md-12 mb-3">
+                      <table width="100%" border="0">
+                        <tr>
+                          <td>
+                            <img src="${BASE_URL}assets/image/scm/logo_full.png" alt="homepage" class="light-logo mb-3" style="width:300px;" />
+                          </td>
+                          <td class="text-right">
+                            <h2>Shipping</h2>
+                            <h3> &nbsp;<b class="text-danger">No Shipping : ${data.no_shipping}</b></h3>
+                            <p class="">
+                              <b>Shipping Date :</b> ${data.tgl_shipping} <br/>
+                              <b>Receive Date :</b> ${data.tgl_receive}
+                            </p>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
 
-                       <h3> <span class="pull-right"> #${data.no_order}</span><b class="text-danger pull-right">No Order</b></h3>
-                     </address>
-                   </div>
-                   <div class="pull-right text-right">
-                     <address>
-										 <h5>From,</h5>
-                     <h3> &nbsp;<b>${data.supplier.nama_supplier}</b></h3>
-                     <p class="text-muted m-l-5">${data.supplier.alamat},
-                       <br/> Telepon : ${data.supplier.telepon},
-                       <br/> Fax : ${data.supplier.fax}
-                         <p class="m-t-30"><b>Shipping Date :</b> <i class="fa fa-calendar"></i> ${data.tgl_shipping}</p>
-                         <p class="m-t-30"><b>Received Date :</b> <i class="fa fa-calendar"></i> ${data.tgl_receive}</p>
-                       </address>
-                     </div>
-                   </div>
-                   <div class="col-md-12">
-                     <div class="table-responsive m-t-40" style="clear: both;">
-                       <table class="table table-hover">
-                         <thead>
-                           <tr>
-                             <th>Produk</th>
-                             <th>Qty</th>
-                             <th>Satuan</th>
-                           </tr>
-                         </thead>
-                         <tbody>`
-                         $.each(data.detail,function(k,v) {
+                    <div class="col-md-12 mb-3">
+                      <table width="100%" border="0">
+                        <tr>
+                          <td style="width: 50%">
+                            <div class="pull-left">
+                              <h5 class="ml-2">From :</h5>
+                              <address>
+                                <h3> &nbsp;<b>${data.supplier.nama_supplier}</b></h3>
+                                <p class="text-muted m-l-5">${data.supplier.alamat},
+                                <br/> Telepon : ${data.supplier.telepon},
+                                <br/> Fax : ${data.supplier.fax}
+                              </address>
+                              
+                            </div>
+                          </td>
+                          <td style="width: 50%">
+                            <div class="pull-right text-right">
+                              <h5>To :</h5>
+                              <address>
+                                <h3> &nbsp;<b>${data.warehouse.nama_warehouse}</b></h3>
+                                <p class="text-muted m-l-5">${data.warehouse.alamat},
+                                <br/> Telepon : ${data.warehouse.telepon},
+                                <br/> Fax : ${data.warehouse.fax}
+                              </address>
+                            </div>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
 
-                   html+= `<tr>
-                             <td>${v.nama_product}</td>
-                             <td>${v.qty}</td>
-                             <td>${v.satuan}</td>
-                           </tr>`
+                    <div class="col-md-12">
+                      <div class="table-responsive" style="clear: both;">
+                        <table class="table table-bordered">
+                          <thead>
+                            <tr>
+                              <th>ID Product</th>
+                              <th>Nama Product</th>
+                              <th class="text-right">Qty</th>
+                            </tr>
+                          </thead>
+                          <tbody>`
 
-                         });
-                    html+= `</tbody>
-                       </table>
-                     </div>
-                   </div>
-                   <div class="col-md-12">
-                   <div class="pull-right m-t-30 text-right">
-                       <div style="margin-bottom:140px;"></div>
-                       <h3>(_____________________)</h3>
-                     </div>
-                     <div class="clearfix"></div>
-                     <hr>
-                     <div class="text-right">
-                       <button id="print" class="btn btn-warning btn-outline" type="button"> <span><i class="fa fa-print"></i> Print</span> </button>
-                     </div>
-                   </div>
-                 </div>
-               </div>
-             </div>
+              $.each(data.detail, function (k, v) {
 
-         `
+                html += `<tr>
+                                  <td>${v.id_product}</td>
+                                  <td>${v.nama_product}</td>
+                                  <td class="text-right">${v.qty} ${v.satuan}</td>
+                                </tr>`
+              });
+
+              html += `
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+
+                              <div class="col-md-12 mt-3 mb-3">
+                      <table width="100%">
+                        <tr>
+                          <td>
+                            <div class="text-center">
+                              <h4>Pengirim</h4>
+                              <br>
+                              <br>
+                              <br>
+                              <br>
+                              <br>
+                              (________________________)
+                            </div>
+                          </td>
+                          <td>
+                            <div class="text-center">
+                              <h4>Penerima</h4>
+                              <br>
+                              <br>
+                              <br>
+                              <br>
+                              <br>
+                              (_________________________)
+                            </div>
+                          </td>
+                        </tr>
+                      </table>
+                   			</div>
+                 		</div>
+               		</div> `
 
 				$('#content_profile').html(html);
 			},

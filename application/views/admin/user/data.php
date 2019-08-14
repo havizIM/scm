@@ -34,7 +34,8 @@
                                 <th>Email</th>
                                 <th>Telepon</th>
                                 <th>Jenis Kelamin</th>
-                                <th>Action</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody></tbody>

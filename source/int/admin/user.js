@@ -30,8 +30,17 @@ $(function(){
                 { "data": 'jenis_kelamin' },
                 {
                     "data": null, 'render': function (data, type, row) {
+                        if(row.status === 'Aktif'){
+                            return `<span class="label label-info m-r-10">${row.status}</span>`;
+                        } else {
+                            return `<span class="label label-danger m-r-10">${row.status}</span>`;
+                        }
+                    }
+                },
+                {
+                    "data": null, 'render': function (data, type, row) {
                         return `
-                            <a class="btn btn-sm btn-success" href="#/user/edit/${row.id_user}"><i class="fa fa-pencil"></i></a>
+                            <a class="btn btn-sm btn-success" href="#/user/edit/${row.id_user}"><i class="mdi mdi-grease-pencil"></i></a>
                             <button class="btn btn-sm btn-danger btn_delete" data-id="${row.id_user}"><i class="fa fa-trash"></i></button>
                         `
                     }

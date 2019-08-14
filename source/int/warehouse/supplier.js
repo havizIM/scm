@@ -31,7 +31,15 @@ $(function(){
                 { "data": 'telepon' },
                 { "data": 'fax' },
                 { "data": 'email' },
-                { "data": 'status_supplier' },
+                {
+                    "data": null, 'render': function (data, type, row) {
+                        if (row.status_supplier === 'Aktif') {
+                            return `<span class="label label-info m-r-10">${row.status_supplier}</span>`;
+                        } else {
+                            return `<span class="label label-danger m-r-10">${row.status_supplier}</span>`;
+                        }
+                    }
+                },
                 
 			],
 			order: [

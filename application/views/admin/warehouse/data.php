@@ -28,7 +28,7 @@
                                 <th>Telepon</th>
                                 <th>Fax</th>
                                 <th>Email</th>
-                                <th>Action</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody></tbody>

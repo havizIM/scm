@@ -36,8 +36,17 @@ $(function () {
                 { "data": 'total_bayar' },
                 {
                     "data": null, 'render': function (data, type, row) {
+                        if (row.status_payment === 'Open') {
+                            return `<span class="label label-info m-r-10">${row.status_payment}</span>`;
+                        } else {
+                            return `<span class="label label-danger m-r-10">${row.status_payment}</span>`;
+                        }
+                    }
+                },
+                {
+                    "data": null, 'render': function (data, type, row) {
                         return `
-                            <a class="btn btn-sm btn-success" href="#/payment/edit/${row.no_payment}"><i class="fa fa-pencil"></i></a>
+                            <a class="btn btn-sm btn-success" href="#/payment/edit/${row.no_payment}"><i class="mdi mdi-grease-pencil"></i></a>
                             <button class="btn btn-sm btn-danger delete" data-id="${row.no_payment}"><i class="fa fa-trash"></i></button>
                         `
                     }

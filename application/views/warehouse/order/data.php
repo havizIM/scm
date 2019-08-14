@@ -27,7 +27,7 @@
                                 <th>Supplier</th>
                                 <th>Status</th>
                                 <th>Tanggal</th>
-                                <th></th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody></tbody>

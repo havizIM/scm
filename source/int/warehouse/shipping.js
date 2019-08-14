@@ -29,7 +29,15 @@ $(function () {
                 { "data": 'supplier.nama_supplier' },
                 { "data": 'tgl_shipping' },
                 { "data": 'tgl_receive' },
-                { "data": 'status_shipping' },
+                {
+                    "data": null, 'render': function (data, type, row) {
+                        if (row.status_shipping === 'Open') {
+                            return `<span class="label label-info m-r-10">${row.status_shipping}</span>`;
+                        } else {
+                            return `<span class="label label-danger m-r-10">${row.status_shipping}</span>`;
+                        }
+                    }
+                },
                 {
                     "data": null, 'render': function (data, type, row) {
                         if (row.status_shipping === 'Open') {

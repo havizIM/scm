@@ -27,7 +27,8 @@
                                 <th>Bank</th>
                                 <th>Tanggal</th>
                                 <th>Total Bayar</th>
-                                <th></th>
+                                <th>Status</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody></tbody>

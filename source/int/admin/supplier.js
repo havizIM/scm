@@ -31,11 +31,19 @@ $(function(){
                 { "data": 'telepon' },
                 { "data": 'fax' },
                 { "data": 'email' },
-                { "data": 'status_supplier' },
+                {
+                    "data": null, 'render': function (data, type, row) {
+                        if (row.status_supplier === 'Aktif') {
+                            return `<span class="label label-info m-r-10">${row.status_supplier}</span>`;
+                        } else {
+                            return `<span class="label label-danger m-r-10">${row.status_supplier}</span>`;
+                        }
+                    }
+                },
                 {
                     "data": null, 'render': function (data, type, row) {
                         return `
-                            <a class="btn btn-sm btn-success" href="#/supplier/edit/${row.id_supplier}"><i class="fa fa-pencil"></i></a>
+                            <a class="btn btn-sm btn-success" href="#/supplier/edit/${row.id_supplier}"><i class="mdi mdi-grease-pencil"></i></a>
                             <button class="btn btn-sm btn-danger delete" data-id="${row.id_supplier}"><i class="fa fa-trash"></i></button>
                         `
 					}

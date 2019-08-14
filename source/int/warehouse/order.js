@@ -26,13 +26,21 @@ $(function () {
                 }  },
                 { "data": 'warehouse.nama_warehouse' },
                 { "data": 'supplier.nama_supplier' },
-                { "data": 'status_order' },
+                {
+                    "data": null, 'render': function (data, type, row) {
+                        if (row.status_order === 'Open') {
+                            return `<span class="label label-info m-r-10">${row.status_order}</span>`;
+                        } else {
+                            return `<span class="label label-danger m-r-10">${row.status_order}</span>`;
+                        }
+                    }
+                },
                 { "data": 'tgl_order' },
                 {
                     "data": null, 'render': function (data, type, row) {
                         if(row.status_order === 'Open'){
                             return `
-                                <a class="btn btn-sm btn-success" href="#/order/edit/${row.no_order}"><i class="fa fa-pencil"></i></a>
+                                <a class="btn btn-sm btn-success" href="#/order/edit/${row.no_order}"><i class="mdi mdi-grease-pencil"></i></a>
                                 <button class="btn btn-sm btn-danger delete" data-id="${row.no_order}"><i class="fa fa-trash"></i></button>
                             `
                         } else {

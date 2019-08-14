@@ -30,7 +30,15 @@ $(function () {
                 { "data": 'tgl_invoice' },
                 { "data": 'tgl_tempo' },
                 { "data": 'grand_total' },
-                { "data": 'status_invoice' },
+                {
+                    "data": null, 'render': function (data, type, row) {
+                        if (row.status_invoice === 'Open') {
+                            return `<span class="label label-info m-r-10">${row.status_invoice}</span>`;
+                        } else {
+                            return `<span class="label label-danger m-r-10">${row.status_invoice}</span>`;
+                        }
+                    }
+                },
                 {
                     "data": null, 'render': function (data, type, row) {
                         if (row.status_invoice === 'Open') {

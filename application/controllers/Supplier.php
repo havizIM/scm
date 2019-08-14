@@ -65,5 +65,25 @@ class Supplier extends CI_Controller {
 			}
 		}
 	}
+
+	public function payment($id = null)
+	{
+		if($id == null){
+			$this->load->view('Supplier/payment/data');
+		} else {
+			switch($id){
+				case 'add':
+					$this->load->view('Supplier/payment/add');
+				break;
+
+				case 'edit':
+					$this->load->view('Supplier/payment/edit');
+				break;
+
+				default:
+					$this->load->view('Supplier/payment/detail');
+			}
+		}
+	}
     
 }

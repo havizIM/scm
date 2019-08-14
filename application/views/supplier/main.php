@@ -146,6 +146,9 @@
                             <a class="" href="#/invoice" aria-expanded="false"><i class="fas fa-file-invoice-dollar"></i><span class="hide-menu"> Invoice </span></a>
                         </li>
                         <li>
+                            <a class="" href="#/payment" aria-expanded="false"><i class="fas fa-file-invoice-dollar"></i><span class="hide-menu"> Payment </span></a>
+                        </li>
+                        <li>
                             <a class="" href="#/lap_piutang" aria-expanded="false"><i class="fas fa-copy"></i><span class="hide-menu"> Laporan Piutang </span></a>
                         </li>
 

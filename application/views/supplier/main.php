@@ -23,6 +23,7 @@
     <link href="<?= base_url() ?>assets/plugins/toast-master/css/jquery.toast.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.2/css/responsive.bootstrap4.min.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
     <script src="<?= base_url() ?>assets/plugins/jquery/jquery.min.js"></script>
     <script src="<?= base_url() ?>assets/plugins/jquery/jquery.min.js"></script>
@@ -58,9 +59,9 @@
                         <b>
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                             <!-- Dark Logo icon -->
-                            <img src="<?= base_url() ?>assets/image/logo-icon.png" alt="homepage" class="dark-logo" />
+                            <img src="<?= base_url() ?>assets/image/scm/small_logo.png" alt="homepage" class="dark-logo" style="width:40px;" />
                             <!-- Light Logo icon -->
-                            <img src="<?= base_url() ?>assets/image/logo-light-icon.png" alt="homepage" class="light-logo" />
+                            <img src="<?= base_url() ?>assets/image/scm/small_logo.png" alt="homepage" class="light-logo" style="width:40px;" />
                         </b>
                         <!--End Logo icon -->
                         <!-- Logo text -->
@@ -130,22 +131,22 @@
                     <ul id="sidebarnav">
                         <li class="nav-small-cap">PERSONAL</li>
                         <li>
-                            <a class="" href="#/dashboard" aria-expanded="false"><i class="mdi mdi-home"></i><span class="hide-menu">Dashboard </span></a>
+                            <a class="" href="#/dashboard" aria-expanded="false"><i class="mdi mdi-home"></i><span class="hide-menu"> Dashboard </span></a>
                         </li>
                         <li>
-                            <a class="" href="#/product" aria-expanded="false"><i class="mdi mdi-home"></i><span class="hide-menu">Product </span></a>
+                            <a class="" href="#/product" aria-expanded="false"><i class="fas fa-box"></i><span class="hide-menu">  Product </span></a>
                         </li>
                         <li>
-                            <a class="" href="#/order" aria-expanded="false"><i class="mdi mdi-home"></i><span class="hide-menu">Order </span></a>
+                            <a class="" href="#/order" aria-expanded="false"><i class="fas fa-inbox"></i><span class="hide-menu"> Order </span></a>
                         </li>
                         <li>
-                            <a class="" href="#/shipping" aria-expanded="false"><i class="mdi mdi-home"></i><span class="hide-menu">Shipping </span></a>
+                            <a class="" href="#/shipping" aria-expanded="false"><i class="fas fa-dolly-flatbed"></i><span class="hide-menu"> Shipping </span></a>
                         </li>
                         <li>
-                            <a class="" href="#/invoice" aria-expanded="false"><i class="mdi mdi-home"></i><span class="hide-menu">Invoice </span></a>
+                            <a class="" href="#/invoice" aria-expanded="false"><i class="fas fa-file-invoice-dollar"></i><span class="hide-menu"> Invoice </span></a>
                         </li>
                         <li>
-                            <a class="" href="#/lap_piutang" aria-expanded="false"><i class="mdi mdi-home"></i><span class="hide-menu">Laporan Piutang </span></a>
+                            <a class="" href="#/lap_piutang" aria-expanded="false"><i class="fas fa-copy"></i><span class="hide-menu"> Laporan Piutang </span></a>
                         </li>
 
                     </ul>
@@ -160,7 +161,7 @@
         <!-- ============================================================== -->
         <!-- Page wrapper  -->
         <!-- ============================================================== -->
-        <div class="page-wrapper">
+        <div class="page-wrapper" style="background-image:url('<?= base_url() ?>assets/image/scm/pattern.png')">
             <!-- ============================================================== -->
             <!-- Container fluid  -->
             <!-- ============================================================== -->

@@ -119,7 +119,7 @@
                     <!-- User profile image -->
                     <div class="profile-img"> <img src="<?= base_url() ?>doc/default_user.png"  alt="user" /> </div>
                     <!-- User profile text-->
-                    <div class="profile-text"> <a class="" role="button" aria-haspopup="true" aria-expanded="true">Markarn Doe</a>
+                    <div class="profile-text"> <a class="session_name" role="button" aria-haspopup="true" aria-expanded="true"></a>
 
                     </div>
                 </div>

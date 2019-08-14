@@ -30,7 +30,7 @@ $(function () {
                    <div class="pull-right text-right">
 									 <h5>To,</h5>
 									 <address>
-									 <h3> &nbsp;<b>Dominos Pizza</b></h3>
+									 <h3> &nbsp;<b>PT.Dominos Pizza Indonesia</b></h3>
 									 <p class="text-muted m-l-5">Jl. Tomang Raya No.32 Blok B.11 Kav.No.39 Kel. Jatipulo Kec. Palmerah,
 										 <br/> Telepon :  021-2933 6741
 

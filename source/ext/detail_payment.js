@@ -2,39 +2,31 @@ $(function () {
 	const renderUI = (() => {
 		return {
 			renderDetail: function (data) {
-
 				var html = '';
-				var total_ppn = 0
-				var sub_total = 0
 
 			   html += `
 
          <div class="col-md-12">
            <div class="card card-body printableArea">
-           <img src="${BASE_URL}assets/image/scm/logo_full.png" alt="homepage" class="light-logo" style="width:200px; margin-bottom:0px; position:absolute;" />
-             <h3> <span class="pull-right">#${data.no_invoice}</span><b class="text-danger pull-right">No Invoice</b></h3>
+           <img src="${BASE_URL}assets/image/scm/logo_full.png" alt="homepage" class="light-logo" style="width:200px; margin-bottom:0px;" />
              <hr>
              <div class="row">
                <div class="col-md-12">
-                 <div class="pull-left mt-3">
+                 <div class="pull-left">
                    <address>
-									 		<h5>To,</h5>
-										 <h3> &nbsp;<b>PT.Dominos Pizza Indonesia</b></h3>
-										 <p class="text-muted m-l-5">Jl. Tomang Raya No.32 Blok B.11 Kav.No.39 Kel. Jatipulo Kec. Palmerah,
-											 <br/> Telepon :  021-2933 6741<br/>
-
-                       <h3> <b class="text-danger pull-left">No Order</b> <span class="pull-left">#${data.no_order}</span></h3>
+									 		<h5> From,</h5>
+                     <h3> &nbsp;<b>PT.Dominos Pizza Indonesia</b></h3>
+                     <p class="text-muted m-l-5">Jl. Tomang Raya No.32 Blok B.11 Kav.No.39 Kel. Jatipulo Kec. Palmerah,
+                       <br/> Telepon :  021-2933 6741
                      </address>
                    </div>
                    <div class="pull-right text-right">
                      <address>
-										 <h5>From,</h5>
+										 <h5> To,</h5>
                      <h3> &nbsp;<b>${data.supplier.nama_supplier}</b></h3>
                      <p class="text-muted m-l-5">${data.supplier.alamat},
                        <br/> Telepon : ${data.supplier.telepon},
                        <br/> Fax : ${data.supplier.fax}
-                         <p class="m-t-30"><b>Invoice Date :</b> <i class="fa fa-calendar"></i> ${data.tgl_invoice}</p>
-                         <p class="m-t-30"><b>Due Date :</b> <i class="fa fa-calendar"></i> ${data.tgl_tempo}</p>
                        </address>
                      </div>
                    </div>
@@ -43,21 +35,20 @@ $(function () {
                        <table class="table table-hover">
                          <thead>
                            <tr>
-                             <th>Produk</th>
-                             <th>Qty</th>
-                             <th>Price</th>
+                             <th>No Invoice</th>
+                             <th>No PO</th>
+                             <th>Supplier</th>
                              <th>Total</th>
                            </tr>
                          </thead>
                          <tbody>`
                          $.each(data.detail,function(k,v) {
-													 total_ppn += parseInt(v.ppn)
-													 sub_total += parseInt(v.total_harga)
+
                    html+= `<tr>
-                             <td>${v.deskripsi}</td>
-                             <td>${v.qty}</td>
-                             <td>${v.harga}</td>
-                             <td>${v.total_harga}</td>
+                             <td>${v.no_invoice}</td>
+                             <td>${v.no_order}</td>
+                             <td>${v.nama_supplier}</td>
+                             <td>${v.jml_bayar}</td>
                            </tr>`
 
                          });
@@ -66,15 +57,17 @@ $(function () {
                      </div>
                    </div>
                    <div class="col-md-12">
-                   <div class="pull-left m-t-30 text-left">
-                           <div style="margin-bottom:140px;"></div>
-											<h3>(_____________________)</h3>
+
+                     <div class="pull-left m-t-30 text-left">
+                         <span class="fa fa-money-check-alt fa-3x" style="margin-bottom: 10px; align-items:center;"></span>
+                         <h4>${data.account.nama_bank}</h4>
+                         <h5>Cabang ${data.account.cabang}</h5>
+                         <h5>${data.account.no_rekening}</h5>
+                         <h5>${data.account.pemilik_account}</h5>
                      </div>
-                   <div class="pull-right m-t-30 text-right">
-										 <h5>Sub Total : Rp. ${sub_total}</h5>
-										 <h5>Tax 10% : Rp. ${total_ppn}</h5>
-                    	<hr>
-											<h3>Grand Total : Rp. ${data.grand_total}</h3>
+                     <div class="pull-right m-t-30 text-right">
+                           <hr>
+                         <h3><b>Grand Total :</b> Rp. ${data.total_bayar}</h3>
                      </div>
                      <div class="clearfix"></div>
                      <hr>
@@ -98,15 +91,15 @@ $(function () {
 
 	const detailController = ((UI) => {
 		const fetchData = () => {
-			let ID_INVOICE = location.hash.substr(10);
+			let ID_PAYMENT = location.hash.substr(10);
 			// alert(ID_WAREHOUSE)
 			$.ajax({
-				url: `${BASE_URL}int/invoice?no_invoice=${ID_INVOICE}`,
+				url: `${BASE_URL}ext/payment?no_payment=${ID_PAYMENT}`,
 				type: 'GET',
 				dataType: 'JSON',
 				beforeSend: function (xhr) {
 					xhr.setRequestHeader("Authorization", "Basic " + btoa(USERNAME + ":" + PASSWORD))
-					xhr.setRequestHeader("SCM-INT-KEY", TOKEN)
+					xhr.setRequestHeader("SCM-EXT-KEY", TOKEN)
 				},
 				success: function (res) {
 					$.each(res.data, function (k, v) {

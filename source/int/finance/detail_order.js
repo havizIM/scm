@@ -13,8 +13,9 @@ $(function () {
              <hr>
              <div class="row">
                <div class="col-md-12">
-                 <div class="pull-left">
+                 <div class="pull-left mt-3">
                    <address>
+									 <h5>From,</h5>
                      <h3> &nbsp;<b>${data.warehouse.nama_warehouse}</b></h3>
                      <p class="text-muted m-l-5">${data.warehouse.alamat},
                        <br/> Telepon : ${data.warehouse.telepon},
@@ -23,6 +24,7 @@ $(function () {
                    </div>
                    <div class="pull-right text-right">
                      <address>
+										 <h5>To,</h5>
                      <h3> &nbsp;<b>${data.supplier.nama_supplier}</b></h3>
                      <p class="text-muted m-l-5">${data.supplier.alamat},
                        <br/> Telepon : ${data.supplier.telepon},

@@ -13,5 +13,5 @@
 
 </div>
 <script>
-    $.getScript(`${BASE_URL}source/int/warehouse/detail_shipping.js`)
+    $.getScript(`${BASE_URL}source/int/finance/detail_shipping.js`)
 </script>

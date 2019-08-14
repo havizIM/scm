@@ -16,5 +16,5 @@
 
 </div>
 <script>
-   $.getScript(`${BASE_URL}source/int/finance/detail_payment.js`)
+   $.getScript(`${BASE_URL}source/ext/detail_payment.js`)
 </script>

@@ -36,7 +36,7 @@
              ->from('payment_detail a')
              ->join('invoice b ','b.no_invoice = a.no_invoice', 'left')
              ->join('order c', 'c.no_order = b.no_order', 'left')
-             ->join('supplier d', 'c.id_supplier = c.id_supplier', 'left');
+             ->join('supplier d', 'd.id_supplier = c.id_supplier', 'left');
 
         if(!empty($where)){
             foreach($where as $key => $value){
@@ -55,6 +55,28 @@
 
         if(!empty($detail)){
             $this->db->insert_batch('payment_detail', $detail);
+        }
+
+        $this->db->trans_complete();
+
+        if ($this->db->trans_status() === FALSE){
+            $this->db->trans_rollback();
+            return false;
+        } else {
+            $this->db->trans_commit();
+            return true;
+        }
+    }
+
+    function edit($where, $data, $detail)
+    {
+        $this->db->trans_start();
+        $this->db->where($where)->update('payment', $data);
+        
+
+        if(!empty($pic)){
+            $this->db->where($where)->delete('payment_detail', $detail);
+            $this->db->where($where)->insert_batch('payment_detail', $detail);
         }
 
         $this->db->trans_complete();

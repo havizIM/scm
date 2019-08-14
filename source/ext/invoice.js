@@ -21,10 +21,10 @@ $(function () {
                             <td class="text-right">
                                 Rp. ${total}
 
-                                <input type="hidden" class="form-control" id="deskripsi" name="deskripsi[]" value="${v.id_product}" />
-                                <input type="hidden" class="form-control" id="harga" name="harga[]" />
-                                <input type="hidden" class="form-control" id="qty" name="qty[]" />
-                                <input type="hidden" class="form-control" id="harga" name="harga[]" />
+                                <input type="hidden" class="form-control" id="deskripsi" name="deskripsi[]" value="${v.id_product} - ${v.nama_product}" />
+                                <input type="hidden" class="form-control" id="harga" name="harga[]" value="${v.harga}"/>
+                                <input type="hidden" class="form-control" id="qty" name="qty[]" value="${v.qty}"/>
+                                <input type="hidden" class="form-control" id="total_harga" name="total_harga[]" value="${v.harga * v.qty}" />
                             </td>
                         </tr>
                     `
@@ -189,7 +189,7 @@ $(function () {
                         },
                         success: function (res) {
                             makeNotif('success', 'Success', res.message, 'bottom-right')
-                            location.hash = '#/shipping'
+                            location.hash = '#/invoice'
                         },
                         error: function (err) {
                             const { message } = err.responseJSON

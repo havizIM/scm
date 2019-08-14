@@ -6,15 +6,12 @@
             <li class="breadcrumb-item active">Payment</li>
         </ol>
     </div>
-    <div class="col-md-7 col-4 align-self-center">
-        <a style="float: right;" href="#/payment/add" class="btn btn-md btn-info">Add</a>
-    </div>
 </div>
 
 <div class="row">
     <div class="col-12">
         <div class="card">
-            <div class="card-header bg-danger">
+            <div class="card-header bg-primary">
                 <h4 class="m-b-0 text-white">Data Payment</h4>
             </div>
             <div class="card-body">
@@ -23,10 +20,10 @@
                         <thead>
                             <tr>
                                 <th>No Payment</th>
-                                <th>Nama Supplier</th>
                                 <th>Bank</th>
                                 <th>Tanggal</th>
                                 <th>Total Bayar</th>
+                                <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -39,5 +36,5 @@
 </div>
 
 <script>
-    $.getScript(`${BASE_URL}source/int/finance/payment.js`)
+    $.getScript(`${BASE_URL}source/ext/payment.js`)
 </script>

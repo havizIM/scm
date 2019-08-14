@@ -111,7 +111,7 @@ class Invoice extends CI_Controller {
             $this->form_validation->set_rules('no_order', 'Order', 'required|trim');
             $this->form_validation->set_rules('tgl_tempo', 'Tanggal Tempo', 'required|trim');
 
-            $this->form_validation->set_rules('deksripsi[]', 'Product', 'required|trim');
+            $this->form_validation->set_rules('deskripsi[]', 'Product', 'required|trim');
             $this->form_validation->set_rules('harga[]', 'Harga', 'required|trim');
             $this->form_validation->set_rules('qty[]', 'Qty', 'required|trim');
             $this->form_validation->set_rules('total_harga[]', 'Total Harga', 'required|trim');
@@ -139,7 +139,7 @@ class Invoice extends CI_Controller {
                 
                 $detail  = array();
 
-                foreach($post['id_product'] as $key => $val){
+                foreach($post['deskripsi'] as $key => $val){
                     $detail[] = array(
                         'no_invoice'    => $no_invoice,
                         'deskripsi'     => $post['deskripsi'][$key],

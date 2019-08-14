@@ -32,7 +32,8 @@ class Shipping extends CI_Controller {
             
             $where = array(
                 'a.no_shipping'    => $this->get('no_shipping'),
-                'd.id_supplier'   => $user->id_supplier
+                'a.no_order'       => $this->get('no_order'),
+                'd.id_supplier'    => $user->id_supplier
             );
 
             $show   = $this->ShippingModel->show($where)->result();

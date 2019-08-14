@@ -25,7 +25,6 @@
                                 <th>No Invoice</th>
                                 <th>No Order</th>
                                 <th>Warehouse</th>
-                                <th>Supplier</th>
                                 <th>Tgl Invoice</th>
                                 <th>Tgl Tempo</th>
                                 <th>Total</th>

@@ -99,5 +99,118 @@ class Invoice extends CI_Controller {
             $this->response($response, 200);
         }
     }
+    
+    public function add_post()
+    {
+        if($this->user->num_rows() == 0){
+            $this->response(array('status' => false, 'error' => 'Unauthorization token'), 401);
+        } else {
+            $user = $this->user->row();
+            $this->form_validation->set_data($this->post());
+            
+            $this->form_validation->set_rules('no_order', 'Order', 'required|trim');
+            $this->form_validation->set_rules('tgl_tempo', 'Tanggal Tempo', 'required|trim');
+
+            $this->form_validation->set_rules('deksripsi[]', 'Product', 'required|trim');
+            $this->form_validation->set_rules('harga[]', 'Harga', 'required|trim');
+            $this->form_validation->set_rules('qty[]', 'Qty', 'required|trim');
+            $this->form_validation->set_rules('total_harga[]', 'Total Harga', 'required|trim');
+
+            if($this->form_validation->run() == FALSE){
+
+                $this->response(array(
+                    'status'    => false,
+                    'message'   => 'Field is required',
+                    'error'     => $this->form_validation->error_array()
+                ), 400);
+
+            } else {
+
+                $post           = $this->post();
+                $no_invoice     = $this->KodeModel->buatKode('invoice', 'INV-', 'no_invoice', 7);
+
+
+                $data           = array(
+                    'no_invoice'        => $no_invoice,
+                    'no_order'          => $post['no_order'],
+                    'tgl_tempo'         => $post['tgl_tempo'],
+                    'status_invoice'    => 'Open'
+                );
+                
+                $detail  = array();
+
+                foreach($post['id_product'] as $key => $val){
+                    $detail[] = array(
+                        'no_invoice'    => $no_invoice,
+                        'deskripsi'     => $post['deskripsi'][$key],
+                        'harga'         => $post['harga'][$key],
+                        'qty'           => $post['qty'][$key],
+                        'ppn'           => $post['total_harga'][$key] * 0.10,
+                        'total_harga'   => $post['total_harga'][$key]
+                    );
+                }
+
+                $add = $this->InvoiceModel->add($data, $detail);
+
+                if(!$add){
+                    $this->response(array(
+                        'status'    => false,
+                        'error'     => 'Failed add invoice'
+                    ), 400);
+                } else {
+                    $this->response(array(
+                        'status'    => true,
+                        'message'   => 'Success add invoice'
+                    ), 200);
+                }
+            }
+        } 
+    }
+
+    public function delete_delete()
+    {
+        if($this->user->num_rows() == 0){
+            $this->response(array('status' => false, 'error' => 'Unauthorization token'), 401);
+        } else {
+            $config = array(
+                array(
+                    'field' => 'no_invoice',
+                    'label' => 'Invoice',
+                    'rules' => 'required|trim'
+                )
+            );
+
+            $this->form_validation->set_data($this->delete());
+            $this->form_validation->set_rules($config);
+
+            if($this->form_validation->run() == FALSE){
+
+                $this->response(array(
+                    'status'    => false,
+                    'message'   => 'Field is required',
+                    'error'     => $this->form_validation->error_array()
+                ), 400);
+
+            } else {
+                $where  = array(
+                    'no_invoice'   => $this->delete('no_invoice') 
+                );
+
+                $delete = $this->InvoiceModel->delete($where);
+
+                if(!$delete){
+                    $this->response(array(
+                        'status'    => false,
+                        'error'     => 'Failed delete invoice'
+                    ), 400);
+                } else {
+                    $this->response(array(
+                        'status'    => true,
+                        'message'   => 'Success delete invoice'
+                    ), 200);
+                }
+            }
+        } 
+    }
 
 }

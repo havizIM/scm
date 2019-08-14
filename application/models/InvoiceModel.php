@@ -43,6 +43,26 @@
         return $this->db->get();
     }
 
+    function add($data, $detail)
+    {
+        $this->db->trans_start();
+        $this->db->insert('invoice', $data);
+        
+        if(!empty($detail)){
+            $this->db->insert_batch('invoice_detail', $detail);
+        }
+
+        $this->db->trans_complete();
+
+        if ($this->db->trans_status() === FALSE){
+            $this->db->trans_rollback();
+            return false;
+        } else {
+            $this->db->trans_commit();
+            return true;
+        }
+    }
+
     function edit($where, $data, $detail)
     {
         $this->db->trans_start();
@@ -63,6 +83,11 @@
             $this->db->trans_commit();
             return true;
         }
+    }
+
+    function delete($where)
+    {
+        return $this->db->where($where)->delete('invoice');
     }
 
   }

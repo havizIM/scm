@@ -59,8 +59,9 @@ class Payment extends CI_Controller {
                     'pemilik_account'    => $key->pemilik_account,
                     'no_rekening'        => $key->no_rekening
                 );
-                $json['tgl_payment']   = $key->tgl_payment;
-                $json['total_bayar']   = $key->total_bayar;
+                $json['tgl_payment']    = $key->tgl_payment;
+                $json['status_payment'] = $key->status_payment;
+                $json['total_bayar']    = $key->total_bayar;
                 
                 $json['detail']         = array();
 
@@ -134,7 +135,8 @@ class Payment extends CI_Controller {
                     'no_payment'      => $no_payment,
                     'id_account'      => $post['id_account'],
                     'tgl_payment'     => $post['tgl_payment'],
-                    'total_bayar'     => $post['total_bayar']
+                    'total_bayar'     => $post['total_bayar'],
+                    'status_payment'  => 'Open'
                 );
 
                 $add = $this->PaymentModel->add($data, $detail);

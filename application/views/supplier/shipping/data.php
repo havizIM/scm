@@ -29,7 +29,7 @@
                                 <th>Tgl Shipping</th>
                                 <th>Tgl Receive</th>
                                 <th>Status</th>
-                                <th>Action</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody></tbody>

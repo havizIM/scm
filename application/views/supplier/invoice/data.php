@@ -29,7 +29,7 @@
                                 <th>Tgl Tempo</th>
                                 <th>Total</th>
                                 <th>Status</th>
-                                <th>Action</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody></tbody>

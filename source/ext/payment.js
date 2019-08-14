@@ -35,7 +35,15 @@ $(function () {
                 },
                 { "data": 'tgl_payment' },
                 { "data": 'total_bayar' },
-                { "data": 'status_payment' },
+                {
+                    "data": null, 'render': function (data, type, row) {
+                        if (row.status_payment === 'Open') {
+                            return `<span class="label label-info m-r-10">${row.status_payment}</span>`;
+                        } else {
+                            return `<span class="label label-danger m-r-10">${row.status_payment}</span>`;
+                        }
+                    }
+                },
                 {
                     "data": null, 'render': function (data, type, row) {
                         if (row.status_payment === 'Open') {

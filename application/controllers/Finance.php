@@ -99,5 +99,18 @@ class Finance extends CI_Controller {
 			}
 		}
 	}
+
+	public function laporan($id)
+	{
+		switch($id){
+				case 'payment':
+					$this->load->view('Finance/laporan/payment');
+				break;
+
+				case 'hutang':
+					$this->load->view('Finance/laporan/hutang');
+				break;
+			}
+	}
     
 }

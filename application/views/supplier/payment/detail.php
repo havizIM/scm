@@ -12,9 +12,10 @@
     </div> -->
 </div>
 
-<div class="row" id="content_profile">
-
+<div class="row">
+    <div class="col-md-12" id="content_profile"></div>
 </div>
+
 <script>
    $.getScript(`${BASE_URL}source/ext/detail_payment.js`)
 </script>

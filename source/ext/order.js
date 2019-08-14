@@ -26,7 +26,15 @@ $(function () {
                 }  },
                 { "data": 'warehouse.nama_warehouse' },
                 { "data": 'supplier.nama_supplier' },
-                { "data": 'status_order' },
+                {
+                    "data": null, 'render': function (data, type, row) {
+                        if (row.status_order === 'Open') {
+                            return `<span class="label label-info m-r-10">${row.status_order}</span>`;
+                        } else {
+                            return `<span class="label label-danger m-r-10">${row.status_order}</span>`;
+                        }
+                    }
+                },
                 { "data": 'tgl_order' },
                 {
                     "data": null, 'render': function (data, type, row) {

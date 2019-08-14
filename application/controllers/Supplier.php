@@ -85,5 +85,10 @@ class Supplier extends CI_Controller {
 			}
 		}
 	}
+
+	public function lap_piutang()
+	{
+		$this->load->view('Supplier/laporan/piutang');
+	}
     
 }

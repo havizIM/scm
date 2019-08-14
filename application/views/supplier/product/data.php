@@ -25,7 +25,7 @@
                                 <th>Supplier</th>
                                 <th>Satuan</th>
                                 <th>Harga</th>
-                                <th>Action</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody></tbody>

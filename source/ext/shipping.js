@@ -56,12 +56,20 @@ $(function () {
                 { "data": 'warehouse.nama_warehouse' },
                 { "data": 'tgl_shipping' },
                 { "data": 'tgl_receive' },
-                { "data": 'status_shipping' },
+                {
+                    "data": null, 'render': function (data, type, row) {
+                        if (row.status_shipping === 'Aktif') {
+                            return `<span class="label label-info m-r-10">${row.status_shipping}</span>`;
+                        } else {
+                            return `<span class="label label-danger m-r-10">${row.status_shipping}</span>`;
+                        }
+                    }
+                },
                 {
                     "data": null, 'render': function (data, type, row) {
                         if (row.status_shipping === 'Open') {
                             return `
-                                <a class="btn btn-sm btn-success" href="#/shipping/edit/${row.no_shipping}"><i class="fa fa-pencil"></i></a>
+                                <a class="btn btn-sm btn-success" href="#/shipping/edit/${row.no_shipping}"><i class="mdi mdi-grease-pencil"></i></a>
                                 <button class="btn btn-sm btn-danger delete" data-id="${row.no_shipping}"><i class="fa fa-trash"></i></button>
                             `
                         } else {

@@ -156,6 +156,93 @@ class Payment extends CI_Controller {
         } 
     }
 
+    public function laporan_post()
+    {
+        if($this->user->num_rows() == 0){
+            $this->response(array('status' => false, 'error' => 'Unauthorization token'), 401);
+        } else {
+            $user = $this->user->row();
+            $this->form_validation->set_data($this->post());
+            
+           $this->form_validation->set_rules('bulan', 'bulan', 'required|trim');
+           $this->form_validation->set_rules('tahun', 'tahun', 'required|trim');
+
+            if($this->form_validation->run() == FALSE){
+
+                $this->response(array(
+                    'status'    => false,
+                    'message'   => 'Field is required',
+                    'error'     => $this->form_validation->error_array()
+                ), 400);
+
+            } else {
+
+                 $where = array(
+                    'MONTH(a.tgl_payment)'  => $this->post('bulan'),
+                    'YEAR(a.tgl_payment)'   => $this->post('tahun'),
+                    'a.status_payment'      => 'Close'
+                );
+
+                $show       = $this->PaymentModel->show($where)->result();
+                $payment    = array();
+
+                foreach($show as $key){
+                    $json = array();
+
+                    $json['no_payment']       = $key->no_payment;
+                    $json['supplier']       = array(
+                        'id_supplier'        => $key->id_supplier,
+                        'nama_supplier'      => $key->nama_supplier,
+                        'alamat'             => $key->alamat,
+                        'telepon'            => $key->telepon,
+                        'fax'                => $key->fax,
+                        'email'              => $key->email,
+                        'npwp'               => $key->npwp,
+                        'status_supplier'    => $key->status_supplier
+                    );
+                    $json['account']       = array(
+                        'id_account'         => $key->id_account,
+                        'id_supplier'        => $key->id_supplier,
+                        'nama_supplier'      => $key->nama_supplier,
+                        'nama_bank'          => $key->nama_bank,
+                        'cabang'             => $key->cabang,
+                        'pemilik_account'    => $key->pemilik_account,
+                        'no_rekening'        => $key->no_rekening
+                    );
+                    $json['tgl_payment']    = $key->tgl_payment;
+                    $json['status_payment'] = $key->status_payment;
+                    $json['total_bayar']    = $key->total_bayar;
+                    
+                    $json['detail']         = array();
+
+                    $where_2   = array('a.no_payment' => $key->no_payment);
+                    $detail   = $this->PaymentModel->detail($where_2);
+
+                    foreach($detail->result() as $key1){
+                        $json_ba = array();
+
+                        $json_ba['no_invoice']      = $key1->no_invoice;
+                        $json_ba['no_order']        = $key1->no_order;
+                        $json_ba['nama_supplier']   = $key1->nama_supplier;
+                        $json_ba['jml_bayar']       = $key1->jml_bayar;
+
+                        $json['detail'][] = $json_ba;
+                    }
+
+                    $payment[] = $json;
+                }
+
+                $response = array(
+                    'status'    => true,
+                    'message'   => 'Success fetch report',
+                    'data'      => $payment
+                );
+
+                $this->response($response, 200);
+            }
+        }
+    }
+
     public function edit_put()
     {
         if($this->user->num_rows() == 0){

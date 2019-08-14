@@ -153,10 +153,10 @@
                             <a class="waves-effect waves-dark" href="#/payment"><i class="fa fa-money"></i> <span class="hide-menu">Payment</span></a>
                         </li>
                         <li>
-                            <a class="waves-effect waves-dark" href="#/lap_hutang"><i class="fa fa-copy"></i> <span class="hide-menu">Laporan Hutang</span></a>
+                            <a class="waves-effect waves-dark" href="#/laporan/hutang"><i class="fa fa-copy"></i> <span class="hide-menu">Laporan Hutang</span></a>
                         </li>
                         <li>
-                            <a class="waves-effect waves-dark" href="#/lap_payment"><i class="fa fa-copy"></i> <span class="hide-menu">Laporan Payment</span></a>
+                            <a class="waves-effect waves-dark" href="#/laporan/payment"><i class="fa fa-copy"></i> <span class="hide-menu">Laporan Payment</span></a>
                         </li>
                     </ul>
                 </nav>

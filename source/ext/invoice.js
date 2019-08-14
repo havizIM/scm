@@ -85,12 +85,20 @@ $(function () {
                 { "data": 'tgl_invoice' },
                 { "data": 'tgl_tempo' },
                 { "data": 'grand_total' },
-                { "data": 'status_invoice' },
+                {
+                    "data": null, 'render': function (data, type, row) {
+                        if (row.status_invoice === 'Open') {
+                            return `<span class="label label-info m-r-10">${row.status_invoice}</span>`;
+                        } else {
+                            return `<span class="label label-danger m-r-10">${row.status_invoice}</span>`;
+                        }
+                    }
+                },
                 {
                     "data": null, 'render': function (data, type, row) {
                         if (row.status_invoice === 'Open') {
                             return `
-                                <a class="btn btn-sm btn-success" href="#/invoice/edit/${row.no_invoice}"><i class="fa fa-pencil"></i></a>
+                                <a class="btn btn-sm btn-success" href="#/invoice/edit/${row.no_invoice}"><i class="mdi mdi-grease-pencil"></i></a>
                                 <button class="btn btn-sm btn-danger delete" data-id="${row.no_invoice}"><i class="fa fa-trash"></i></button>
                             `
                         } else {

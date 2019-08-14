@@ -32,11 +32,13 @@
              ->select('b.*')
              ->select('c.*')
              ->select('d.*')
+             ->select('e.*')
         
              ->from('payment_detail a')
              ->join('invoice b ','b.no_invoice = a.no_invoice', 'left')
              ->join('order c', 'c.no_order = b.no_order', 'left')
-             ->join('supplier d', 'd.id_supplier = c.id_supplier', 'left');
+             ->join('supplier d', 'd.id_supplier = c.id_supplier', 'left')
+             ->join('payment e', 'e.no_payment = a.no_payment', 'left');
 
         if(!empty($where)){
             foreach($where as $key => $value){

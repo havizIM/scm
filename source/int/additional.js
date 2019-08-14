@@ -21,6 +21,7 @@ var makeNotif = (icon, heading, text, position) => {
 }
 
 var setSession = (data) => {
+	console.log(data);
 	$('.session_name').text(data.nama_lengkap);
 	$('#session_email').text(data.email);
 
@@ -35,6 +36,13 @@ var setSession = (data) => {
 	$('#info_tgl_reg_user').text(data.tgl_reg_user);
 
 	if(data.warehouse.length !== 0){
-
+		$('#info_id_warehouse').text(data.warehouse.id_warehouse);
+		$('#info_nama_warehouse').text(data.warehouse.nama_warehouse);
+		$('#info_nama_group').text(data.warehouse.group.nama_group);
+		$('#info_lokasi_group').text(data.warehouse.group.lokasi_group);
+		$('#info_alm_warehouse').text(data.warehouse.alm_warehouse);
+		$('#info_telp_supplier').text(data.warehouse.telp_supplier);
+		$('#info_fax').text(data.warehouse.fax);
+		$('#info_tgl_reg_warehouse').text(data.warehouse.tgl_reg_warehouse);
 	}
 }

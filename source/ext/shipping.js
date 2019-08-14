@@ -92,6 +92,9 @@ $(function () {
                     xhr.setRequestHeader("Authorization", "Basic " + btoa(USERNAME + ":" + PASSWORD))
                     xhr.setRequestHeader("SCM-EXT-KEY", TOKEN)
                 },
+                dataSrc: function({data}){
+                   return data.filter(order => order.status_order === 'Close') 
+                }
             },
             columns: [
                 {

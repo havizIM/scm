@@ -100,6 +100,9 @@ $(function () {
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader("Authorization", "Basic " + btoa(USERNAME + ":" + PASSWORD))
                     xhr.setRequestHeader("SCM-INT-KEY", TOKEN)
+                },
+                dataSrc: function ({ data }) {
+                    return data.filter(invoice => invoice.status_invoice === 'Close')
                 }
             },
             columns: [

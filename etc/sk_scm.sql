@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 13 Agu 2019 pada 21.53
+-- Waktu pembuatan: 14 Agu 2019 pada 08.40
 -- Versi server: 10.1.40-MariaDB
 -- Versi PHP: 7.1.29
 
@@ -103,7 +103,7 @@ CREATE TABLE `invoice` (
 --
 
 INSERT INTO `invoice` (`no_invoice`, `no_order`, `status_invoice`, `tgl_invoice`, `tgl_tempo`) VALUES
-('INV-0000001', 'PO-00000001', 'Open', '2019-08-13 08:36:35', '2019-08-15');
+('INV-0000001', 'PO-00000001', 'Close', '2019-08-13 20:42:35', '2019-08-15');
 
 -- --------------------------------------------------------
 
@@ -147,8 +147,8 @@ CREATE TABLE `order` (
 --
 
 INSERT INTO `order` (`no_order`, `id_warehouse`, `id_supplier`, `status_order`, `tgl_order`) VALUES
-('PO-00000001', 'WH-00000001', 'SP-00000001', 'Open', '2019-08-13 08:31:18'),
-('PO-00000002', 'WH-00000001', 'SP-00000001', 'Open', '2019-08-13 15:37:49');
+('PO-00000001', 'WH-00000001', 'SP-00000001', 'Close', '2019-08-13 20:07:14'),
+('PO-00000002', 'WH-00000001', 'SP-00000001', 'Close', '2019-08-13 20:06:35');
 
 -- --------------------------------------------------------
 
@@ -184,6 +184,7 @@ CREATE TABLE `payment` (
   `id_account` int(11) NOT NULL,
   `tgl_payment` date NOT NULL,
   `total_bayar` int(10) NOT NULL,
+  `status_payment` enum('Open','Close') NOT NULL,
   `tgl_input_payment` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -191,8 +192,8 @@ CREATE TABLE `payment` (
 -- Dumping data untuk tabel `payment`
 --
 
-INSERT INTO `payment` (`no_payment`, `id_account`, `tgl_payment`, `total_bayar`, `tgl_input_payment`) VALUES
-('PVC-0000001', 7, '2019-08-13', 220000, '2019-08-13 15:59:14');
+INSERT INTO `payment` (`no_payment`, `id_account`, `tgl_payment`, `total_bayar`, `status_payment`, `tgl_input_payment`) VALUES
+('PVC-0000001', 7, '2019-08-13', 220000, 'Close', '2019-08-14 05:41:45');
 
 -- --------------------------------------------------------
 
@@ -282,7 +283,7 @@ CREATE TABLE `shipping` (
 
 INSERT INTO `shipping` (`no_shipping`, `no_order`, `tgl_shipping`, `status_shipping`, `tgl_receive`) VALUES
 ('DO-00000001', 'PO-00000001', '2019-08-13', 'Close', '2019-08-13'),
-('DO-00000002', 'PO-00000002', '2019-08-13', 'Open', '0000-00-00');
+('DO-00000002', 'PO-00000001', '2019-08-14', 'Close', '2019-08-14');
 
 -- --------------------------------------------------------
 
@@ -301,8 +302,7 @@ CREATE TABLE `shipping_detail` (
 --
 
 INSERT INTO `shipping_detail` (`no_shipping`, `id_product`, `actual_qty`) VALUES
-('DO-00000002', 'PR-00000003', 2),
-('DO-00000002', 'PR-00000002', 3),
+('DO-00000002', 'PR-00000002', 2),
 ('DO-00000002', 'PR-00000001', 100);
 
 -- --------------------------------------------------------

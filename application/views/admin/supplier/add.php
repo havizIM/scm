@@ -114,13 +114,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td><input type="text" name="nama_bank[]"  id="nama_bank" class="form-control"></td>
-                                        <td><input type="text" name="cabang[]"  id="cabang" class="form-control"></td>
-                                        <td><input type="text" name="pemilik_account[]"  id="pemilik_account" class="form-control"></td>
-                                        <td><input type="text" name="no_rekening[]"  id="no_rekening" class="form-control"></td>
-                                        <td></td>
-                                    </tr>
+                                   
                                 </tbody>
                                 
                                 

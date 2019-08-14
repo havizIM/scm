@@ -26,11 +26,11 @@
 <!-- ============================================================== -->
 <div class="row" style="margin-top:75px;">
   <div class="col-md-12" style="margin-bottom:50px;">
-    <h1 class="welcome">Selamat datang</h1>
-    <h4 class="text-center">Sistem Informasi Suply Chain Management</h4>
+    <h1 class="welcome animated bounceInDown" style="animation-delay:0.1s;">Selamat datang</h1>
+    <h4 class="text-center animated bounceInDown">Sistem Informasi Suply Chain Management</h4>
   </div>
   <div class="col-md-3">
-    <div class="card">
+    <div class="card animated bounceInRight">
       <div class="card-body">
         <div class="d-flex flex-row">
           <div class="round round-lg align-self-center round-danger"><i class="fas fa-inbox"></i></div>
@@ -43,7 +43,7 @@
     </div>
   </div>
   <div class="col-md-3">
-    <div class="card">
+    <div class="card animated bounceInRight" style="animation-delay:0.1s;">
       <div class="card-body">
         <div class="d-flex flex-row">
           <div class="round round-lg align-self-center round-warning"><i class="fas fa-inbox"></i></div>
@@ -56,7 +56,7 @@
     </div>
   </div>
   <div class="col-md-3">
-    <div class="card">
+    <div class="card animated bounceInRight" style="animation-delay:0.2s;">
       <div class="card-body">
         <div class="d-flex flex-row">
           <div class="round round-lg align-self-center round-primary"><i class="fas fa-file"></i></div>
@@ -69,7 +69,7 @@
     </div>
   </div>
   <div class="col-md-3">
-    <div class="card">
+    <div class="card animated bounceInRight" style="animation-delay:0.3s;">
       <div class="card-body">
         <div class="d-flex flex-row">
           <div class="round round-lg align-self-center round-success"><i class="fas fa-money"></i></div>
@@ -82,7 +82,7 @@
     </div>
   </div>
   <div class="col-md-6">
-    <div class="card">
+    <div class="card animated bounceInUp">
       <div class="card-header">
         <h5>Statistik</h5>
       </div>
@@ -92,7 +92,7 @@
     </div>
   </div>
   <div class="col-md-6">
-    <div class="card">
+    <div class="card animated bounceInUp" style="animation-delay:0.1s;">
       <div class="card-header">
         <h5>Statistik</h5>
       </div>

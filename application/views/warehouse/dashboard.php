@@ -29,12 +29,12 @@
     <div class="row">
       <div class="col-md-8" style="align-self: center;">
         <div>
-          <h1 class="welcome">Selamat datang</h1>
-          <h4 class="text-center">Sistem Informasi Suply Chain Management</h4>
+          <h1 class="welcome animated bounceInDown" style="animation-delay:0.1s;">Selamat datang</h1>
+          <h4 class="text-center animated bounceInDown">Sistem Informasi Suply Chain Management</h4>
         </div>
       </div>
       <div class="col-md-4">
-        <div class="card">
+        <div class="card animated bounceInRight">
           <div class="card-body">
             <div class="d-flex flex-row">
               <div class="round round-lg align-self-center round-danger"><i class="fas fa-shopping-basket"></i></div>
@@ -44,7 +44,7 @@
               </div>
             </div>
           </div>
-        <div class="card">
+        <div class="card animated bounceInRight" style="animation-delay:0.1s;">
           <div class="card-body">
             <div class="d-flex flex-row">
               <div class="round round-lg align-self-center round-info"><i class="fas fa-file"></i></div>
@@ -58,7 +58,7 @@
     </div>
   </div>
   <div class="col-md-6">
-    <div class="card">
+    <div class="card animated bounceInUp">
       <div class="card-header">
         <h5>Statistik</h5>
       </div>
@@ -68,7 +68,7 @@
     </div>
   </div>
   <div class="col-md-6">
-    <div class="card">
+    <div class="card animated bounceInUp" style="animation-delay:0.1s;">
       <div class="card-header">
         <h5>Statistik</h5>
       </div>

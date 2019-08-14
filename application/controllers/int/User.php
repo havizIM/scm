@@ -116,7 +116,7 @@ class User extends CI_Controller {
                     'jenis_kelamin' => $this->post('jenis_kelamin'),
                     'alamat'        => $this->post('alamat'),
                     'username'      => $this->post('username'),
-                    'password'      => substr(str_shuffle("01234567890abcdefghijklmnopqestuvwxyz"), 0, 5),
+                    'password'      => $this->post('username'),
                     'level'         => $this->post('level'),
                     'status'        => $this->post('status'),
                     'token'         => sha1($this->post('email'))

@@ -8,3 +8,10 @@
         </ol>
     </div>
 </div>
+
+<div class="row" id="content_profile">
+
+</div>
+<script>
+   $.getScript(`${BASE_URL}source/ext/detail_invoice.js`)
+</script>

@@ -30,10 +30,9 @@ $(function () {
                    <div class="pull-right text-right">
 									 <h5>To,</h5>
 									 <address>
-										 <h3> &nbsp;<b>${data.warehouse.nama_warehouse}</b></h3>
-										 <p class="text-muted m-l-5">${data.warehouse.alamat},
-											 <br/> Telepon : ${data.warehouse.telepon},
-											 <br/> Fax : ${data.warehouse.fax}
+									 <h3> &nbsp;<b>Dominos Pizza</b></h3>
+									 <p class="text-muted m-l-5">Jl. Tomang Raya No.32 Blok B.11 Kav.No.39 Kel. Jatipulo Kec. Palmerah,
+										 <br/> Telepon :  021-2933 6741
 
 											 <h3> <span class="pull-right">#${data.no_order}</span><b class="text-danger pull-right">No Order</b></h3>
 										 </address>

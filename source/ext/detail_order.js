@@ -8,30 +8,30 @@ $(function () {
 
          <div class="col-md-12">
            <div class="card card-body printableArea">
-
-             <div class="row">
-						 <div class="col-md-6"><h3> <b class="text-danger">No Order</b><span>#${data.no_order}</span></h3></div>
-						 <div class="col-md-6"><img src="${BASE_URL}assets/image/scm/logo_full.png" alt="homepage" class="" style="width:200px; margin-bottom:50px; float:right;" /></div>
+					 <img src="${BASE_URL}assets/image/scm/logo_full.png" alt="homepage" class="light-logo" style="width:200px; margin-bottom:0px; position:absolute;" />
+						 <h3> <span class="pull-right">#${data.no_order}</span><b class="text-danger pull-right">No Order</b></h3>
 						 <hr>
+             <div class="row">
                <div class="col-md-12">
                  <div class="pull-left">
-								 <address>
-								 	 <h5>From,</h5>
-									 <h3> &nbsp;<b>${data.supplier.nama_supplier}</b></h3>
-									 <p class="text-muted m-l-5">${data.supplier.alamat},
-										 <br/> Telepon : ${data.supplier.telepon},
-										 <br/> Fax : ${data.supplier.fax}
-										 <p class="m-t-30"><b>Order Date :</b> <i class="fa fa-calendar"></i> ${data.tgl_order}</p>
-									 </address>
-                   </div>
-                   <div class="pull-right text-right">
-									 <address>
-									 <h5>To,</h5>
+								 		<address>
+									 	 <h5>From,</h5>
 										 <h3> &nbsp;<b>${data.warehouse.nama_warehouse}</b></h3>
 										 <p class="text-muted m-l-5">${data.warehouse.alamat},
 											 <br/> Telepon : ${data.warehouse.telepon},
 											 <br/> Fax : ${data.warehouse.fax}
-										 </address>
+									 	</address>
+                   </div>
+                   <div class="pull-right text-right">
+									 		<address>
+											 <h5>To,</h5>
+											 <h3> &nbsp;<b>${data.supplier.nama_supplier}</b></h3>
+											 <p class="text-muted m-l-5">${data.supplier.alamat},
+												 <br/> Telepon : ${data.supplier.telepon},
+												 <br/> Fax : ${data.supplier.fax}
+												 <p class="m-t-30"><b>Order Date :</b> <i class="fa fa-calendar"></i> ${data.tgl_order}</p>
+
+										  </address>
                      </div>
                    </div>
                    <div class="col-md-12">

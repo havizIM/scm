@@ -27,32 +27,32 @@
 
                             <div class="form-group">
                                 <label>Nama Supplier</label>
-                                <input type="text" name="nama_supplier" class="form-control">
+                                <input type="text" name="nama_supplier" id="nama_supplier" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label>Alamat</label>
-                                <input type="text" name="alamat" class="form-control">
+                                <input type="text" name="alamat" id="alamat" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label>Telepon</label>
-                                <input type="text" name="telepon" class="form-control">
+                                <input type="text" name="telepon" id="telepon"  class="form-control">
                             </div>
                             <div class="form-group">
                                 <label>Fax</label>
-                                <input type="text" name="fax" class="form-control">
+                                <input type="text" name="fax" id="fax" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label>Npwp</label>
-                                <input type="text" name="npwp" class="form-control">
+                                <input type="text" name="npwp" id="npwp" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label>Email</label>
-                                <input type="text" name="email" class="form-control">
+                                <input type="text" name="email" id="email" class="form-control">
                             </div>
 
                             <div class="form-group">
                                 <label>Status supplier</label>
-                                <select name="status_supplier" class="form-control">
+                                <select name="status_supplier" class="form-control" id="status_supplier">
                                     <option value=""> -- Status Supplier -- </option>
                                     <option value="Aktif">Aktif</option>
                                     <option value="Nonaktif">Non Aktif</option>
@@ -64,22 +64,22 @@
                             <h3 class="card-title mt-3"><i class="fa fa-user"></i> PIC Info</h3><hr/>
                             <div class="form-group">
                                 <label>Nama PIC</label>
-                                <input type="text" name="nama_pic" class="form-control">
+                                <input type="text" name="nama_pic" id="nama_pic" class="form-control">
                             </div>
 
                             <div class="form-group">
                                 <label>Handphone</label>
-                                <input type="text" name="handphone" class="form-control">
+                                <input type="text" name="handphone" id="handphone" class="form-control">
                             </div>
 
                             <div class="form-group">
                                 <label>Email PIC</label>
-                                <input type="text" name="email_pic" class="form-control">
+                                <input type="text" name="email_pic" id="email_pic" class="form-control">
                             </div>
 
                             <div class="form-group">
                                 <label>Username</label>
-                                <input type="text" name="username" class="form-control">
+                                <input type="text" name="username" id="username" class="form-control">
                             </div>
 
                             <h3 class="card-title mt-3"><i class="fa fa-user"></i> Group Info</h3><hr/>
@@ -125,6 +125,7 @@
 
 
                 <div class="container text-center" style="margin-top: 16px;" >
+                    <input type="hidden" name="id_supplier" id="id_supplier" class="form-control">
                     <button type="submit" class="btn btn-success btn-block" id="submit_edit" >Simpan</button>
                 </div>
 
@@ -164,5 +165,5 @@
 
 <script>
     $.getScript(`${BASE_URL}source/int/admin/supplier.js`)
-    $.getScript(`${BASE_URL}source/int/admin/detail_supplier.js`)
+    $.getScript(`${BASE_URL}source/int/admin/edit_supplier.js`)
 </script>

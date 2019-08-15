@@ -109,17 +109,15 @@ $(function(){
 				var lokasi = $(this).data('lokasi');
 				var html = '';
 
-				count = count + 1;
-
 				html += `
-                    <tr class="row_${count}">
+                    <tr class="row_${id}">
                         <td>
                             <input type="hidden" name="id_group[]" id="id_group" value="${id}">
                             ${name}
                         </td>
                         <td>${lokasi}</td>
                         <td>
-                            <button class="btn btn-danger btn-sm remove_group" data-id="${count}"><i class="fa fa-trash"></i></button>
+                            <button class="btn btn-danger btn-sm remove_group" data-id="${id}"><i class="fa fa-trash"></i></button>
                         </td>
                     </tr>
                 `;

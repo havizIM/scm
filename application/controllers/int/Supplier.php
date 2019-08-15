@@ -209,51 +209,26 @@ class Supplier extends CI_Controller {
         if($this->user->num_rows() == 0){
             $this->response(array('status' => false, 'error' => 'Unauthorization token'), 401);
         } else {
-            $config = array(
-                array(
-                    'field' => 'id_warehouse',
-                    'label' => 'ID Warehouse',
-                    'rules' => 'required|trim'
-                ),
-                array(
-                    'field' => 'group',
-                    'label' => 'Group',
-                    'rules' => 'required|trim'
-                ),
-                array(
-                    'field' => 'user',
-                    'label' => 'User',
-                    'rules' => 'required|trim'
-                ),
-                array(
-                    'field' => 'nama_warehouse',
-                    'label' => 'Nama Warehouse',
-                    'rules' => 'required|trim'
-                ),
-                array(
-                    'field' => 'alamat',
-                    'label' => 'Alamat',
-                    'rules' => 'required|trim'
-                ),
-                array(
-                    'field' => 'telepon',
-                    'label' => 'Telepon',
-                    'rules' => 'required|trim'
-                ),
-                array(
-                    'field' => 'fax',
-                    'label' => 'Fax',
-                    'rules' => 'required|trim'
-                ),
-                array(
-                    'field' => 'email',
-                    'label' => 'Email',
-                    'rules' => 'required|trim'
-                )
-            );
 
             $this->form_validation->set_data($this->put());
-            $this->form_validation->set_rules($config);
+
+            $this->form_validation->set_rules('id_supplier', 'ID Supplier', 'required|trim');
+            $this->form_validation->set_rules('nama_supplier', 'Nama Supplier', 'required|trim');
+            $this->form_validation->set_rules('alamat', 'Alamat', 'required|trim');
+            $this->form_validation->set_rules('telepon', 'Telepon', 'required|trim');
+            $this->form_validation->set_rules('email', 'Email', 'required|trim');
+            $this->form_validation->set_rules('npwp', 'NPWP', 'required|trim');
+            $this->form_validation->set_rules('status_supplier', 'Status', 'required|trim');
+            $this->form_validation->set_rules('nama_pic', 'Nama PIC', 'required|trim');
+            $this->form_validation->set_rules('username', 'Username', 'required|trim');
+            $this->form_validation->set_rules('handphone', 'Handphone', 'required|trim');
+
+            $this->form_validation->set_rules('no_rekening[]', 'No Rekening', 'required|trim');
+            $this->form_validation->set_rules('nama_bank[]', 'Nama Bank', 'required|trim');
+            $this->form_validation->set_rules('cabang[]', 'Cabanag', 'required|trim');
+            $this->form_validation->set_rules('pemilik_account[]', 'Pemilik Account', 'required|trim');
+
+            $this->form_validation->set_rules('id_group[]', 'Group', 'required|trim');
 
             if($this->form_validation->run() == FALSE){
 
@@ -264,31 +239,61 @@ class Supplier extends CI_Controller {
                 ), 400);
 
             } else {
-                $where  = array(
-                    'id_warehouse'   => $this->put('id_warehouse') 
+
+                $put           = $this->put();
+
+                $where          = array(
+                    'id_supplier'       => $put['id_supplier'],
                 );
 
-                $data   = array(
-                    'group'             => $this->put('group'),
-                    'user'              => $this->put('user'),
-                    'nama_warehouse'    => $this->put('nama_warehouse'),
-                    'alamat'            => $this->put('alamat'),
-                    'telepon'           => $this->put('telepon'),
-                    'fax'               => $this->put('fax'),
-                    'email'             => $this->put('email')
+                $data           = array(
+                    'nama_supplier'     => $put['nama_supplier'],
+                    'alamat'            => $put['alamat'],
+                    'telepon'           => $put['telepon'],
+                    'fax'               => $put['fax'],
+                    'npwp'              => $put['npwp'],
+                    'email'             => $put['email'],
+                    'status_supplier'   => $put['status_supplier']
                 );
 
-                $edit = $this->SupplierModel->edit($where, $data);
+                $pic            = array(
+                    'id_supplier'  => $put['id_supplier'],
+                    'nama_pic'     => $put['nama_pic'],
+                    'handphone'    => $put['handphone'],
+                    'email_pic'    => $put['email_pic']
+                );
+                
+                $bank           = array();
+                $supply_group   = array();
+
+                foreach($put['no_rekening'] as $key => $val){
+                    $bank[] = array(
+                        'id_supplier'       => $put['id_supplier'],
+                        'nama_bank'         => $put['nama_bank'][$key],
+                        'cabang'            => $put['cabang'][$key],
+                        'pemilik_account'   => $put['pemilik_account'][$key],
+                        'no_rekening'       => $put['no_rekening'][$key]
+                    );
+                }
+
+                foreach($put['id_group'] as $key => $val){
+                    $supply_group[] = array(
+                        'id_supplier'       => $put['id_supplier'],
+                        'id_group'       => $put['id_group'][$key]
+                    );
+                }
+
+                $edit = $this->SupplierModel->edit($where, $data, $pic, $bank, $supply_group);
 
                 if(!$edit){
                     $this->response(array(
                         'status'    => false,
-                        'error'     => 'Failed edit warehouse'
+                        'error'     => 'Failed edit supplier'
                     ), 400);
                 } else {
                     $this->response(array(
                         'status'    => true,
-                        'message'   => 'Success edit warehouse'
+                        'message'   => 'Success edit supplier'
                     ), 200);
                 }
             }

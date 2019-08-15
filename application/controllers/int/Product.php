@@ -149,6 +149,11 @@ class Product extends CI_Controller {
                     'rules' => 'required|trim'
                 ),
                 array(
+                    'field' => 'id_supplier',
+                    'label' => 'Kategori',
+                    'rules' => 'required|trim'
+                ),
+                array(
                     'field' => 'nama_product',
                     'label' => 'Nama Product',
                     'rules' => 'required|trim'
@@ -182,11 +187,11 @@ class Product extends CI_Controller {
                 );
 
                 $data   = array(
-                    'id_supplier'  => $this->post('id_supplier'),
-                    'id_category'  => $this->post('id_category'),
-                    'satuan'       => $this->post('satuan'),
-                    'nama_product' => $this->post('nama_product'),
-                    'harga'        => $this->post('harga')
+                    'id_supplier'  => $this->put('id_supplier'),
+                    'id_category'  => $this->put('id_category'),
+                    'satuan'       => $this->put('satuan'),
+                    'nama_product' => $this->put('nama_product'),
+                    'harga'        => $this->put('harga')
                 );
 
                 $edit = $this->ProductModel->edit($where, $data);

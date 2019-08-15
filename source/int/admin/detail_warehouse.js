@@ -88,7 +88,6 @@ $(function () {
 	const detailController = ((UI) => {
 		const fetchData = () => {
 			let ID_WAREHOUSE = location.hash.substr(12);
-			// alert(ID_WAREHOUSE)
 			$.ajax({
 				url: `${BASE_URL}int/warehouse?id_warehouse=${ID_WAREHOUSE}`,
 				type: 'GET',

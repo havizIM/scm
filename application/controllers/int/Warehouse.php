@@ -219,8 +219,8 @@ class Warehouse extends CI_Controller {
                 );
 
                 $data   = array(
-                    'id_group'             => $this->put('id_group'),
-                    'id_user'              => $this->put('id_user'),
+                    'id_group'          => $this->put('id_group'),
+                    'id_user'           => $this->put('id_user'),
                     'nama_warehouse'    => $this->put('nama_warehouse'),
                     'alamat'            => $this->put('alamat'),
                     'telepon'           => $this->put('telepon'),

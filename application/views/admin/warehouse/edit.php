@@ -37,23 +37,23 @@
                     </div>
                     <div class="form-group">
                         <label for="nama_warehouse">Nama Warehouse</label>
-                        <input type="text" class="form-control" name="nama_warehouse">
+                        <input type="text" class="form-control" name="nama_warehouse" id="nama_warehouse">
                     </div>
                     <div class="form-group">
                         <label for="alamat">Alamat</label>
-                        <textarea class="form-control" name="alamat"></textarea>
+                        <textarea class="form-control" name="alamat" id="alamat"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="telepon">Telepon</label>
-                        <input type="text" class="form-control" name="telepon">
+                        <input type="text" class="form-control" name="telepon" id="telepon">
                     </div>
                     <div class="form-group">
                         <label for="fax">Fax</label>
-                        <input type="text" class="form-control" name="fax">
+                        <input type="text" class="form-control" name="fax" id="fax">
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" class="form-control" name="email">
+                        <input type="email" class="form-control" name="email" id="email">
                     </div>
 
                     <div class="form-group">
@@ -145,5 +145,5 @@
 
 <script>
     $.getScript(`${BASE_URL}source/int/admin/warehouse.js`)
-    $.getScript(`${BASE_URL}source/int/admin/detail_warehouse.js`)
+    $.getScript(`${BASE_URL}source/int/admin/edit_warehouse.js`)
 </script>

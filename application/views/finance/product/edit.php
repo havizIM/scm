@@ -49,6 +49,7 @@
                         <label for="">Harga</label>
                         <input type="text" id="harga" name="harga" class="form-control">
                     </div>
+                    <input type="hidden" id="id_product" name="id_product" class="form-control">
                     <button class="btn btn-info btn-block btn-md" id="submit_edit">Submit</button>
                 </form>
             </div>
@@ -129,4 +130,5 @@
 
 <script>
     $.getScript(`${BASE_URL}source/int/finance/product.js`)
+    $.getScript(`${BASE_URL}source/int/finance/detail_product.js`)
 </script>

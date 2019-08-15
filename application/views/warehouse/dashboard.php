@@ -57,26 +57,6 @@
       </div>
     </div>
   </div>
-  <div class="col-md-6">
-    <div class="card animated bounceInUp">
-      <div class="card-header">
-        <h5>Statistik</h5>
-      </div>
-      <div class="card-body">
-
-      </div>
-    </div>
-  </div>
-  <div class="col-md-6">
-    <div class="card animated bounceInUp" style="animation-delay:0.1s;">
-      <div class="card-header">
-        <h5>Statistik</h5>
-      </div>
-      <div class="card-body">
-
-      </div>
-    </div>
-  </div>
 </div>
 
 <script type="text/javascript">

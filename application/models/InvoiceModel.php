@@ -9,8 +9,8 @@
     {
         $this->db->select('a.*')
                 ->select('b.*')
-                ->select('c.*')
-                ->select('d.*')
+                ->select('c.id_warehouse, c.nama_warehouse, c.alamat as alamat_warehouse, c.telepon as telepon_warehouse, c.fax as fax_warehouse, c.email as email_warehouse')
+                ->select('d.id_supplier, d.nama_supplier, d.alamat as alamat_supplier, d.telepon as telepon_supplier, d.fax as fax_supplier, d.email as email_supplier, d.npwp, d.status_supplier')
 
                 ->from('invoice a')
                 ->join('order b ','b.no_order = a.no_order', 'left')

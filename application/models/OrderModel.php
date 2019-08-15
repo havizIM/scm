@@ -7,8 +7,8 @@ class OrderModel extends CI_Model {
     function show($where)
     {
         $this->db->select('a.*')
-               ->select('b.*')
-               ->select('c.*')
+               ->select('b.id_supplier, b.nama_supplier, b.alamat as alamat_supplier, b.telepon as telepon_supplier, b.fax as fax_supplier, b.email as email_supplier, b.npwp, b.status_supplier')
+               ->select('c.id_warehouse, c.nama_warehouse, c.alamat as alamat_warehouse, c.telepon as telepon_warehouse, c.fax as fax_warehouse, c.email as email_warehouse')
                
                ->from('order a')
                ->join('supplier b', 'b.id_supplier = a.id_supplier')

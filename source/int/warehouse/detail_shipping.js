@@ -159,13 +159,25 @@ $(function () {
 
 				}
 			})
-		}
+    }
+    
+    const printAble = function () {
+      $(document).on('click', '#print', function () {
+        var mode = 'iframe'; //popup
+        var close = mode == "popup";
+        var options = {
+          mode: mode,
+          popClose: close
+        };
 
-
+        $('.printableArea').printArea(options);
+      })
+    }
 
 		return {
 			init: function () {
-				fetchData();
+        fetchData();
+        printAble();
 			}
 		}
 

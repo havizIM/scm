@@ -47,18 +47,18 @@ class Shipping extends CI_Controller {
                 $json['warehouse']      = array(
                     'id_warehouse'      => $key->id_warehouse,
                     'nama_warehouse'    => $key->nama_warehouse,
-                    'alamat'            => $key->alamat,
-                    'telepon'           => $key->telepon,
-                    'fax'               => $key->fax,
-                    'email'             => $key->email
+                    'alamat'            => $key->alamat_warehouse,
+                    'telepon'           => $key->telepon_warehouse,
+                    'fax'               => $key->fax_warehouse,
+                    'email'             => $key->email_warehouse
                 );
                 $json['supplier']           = array(
                     'id_supplier'        => $key->id_supplier,
                     'nama_supplier'      => $key->nama_supplier,
-                    'alamat'             => $key->alamat,
-                    'telepon'            => $key->telepon,
-                    'fax'                => $key->fax,
-                    'email'              => $key->email,
+                    'alamat'             => $key->alamat_supplier,
+                    'telepon'            => $key->telepon_supplier,
+                    'fax'                => $key->fax_supplier,
+                    'email'              => $key->email_supplier,
                     'npwp'               => $key->npwp,
                     'status_supplier'    => $key->status_supplier
                 );

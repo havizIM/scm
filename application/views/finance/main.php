@@ -343,6 +343,7 @@
 
     <script src="<?= base_url() ?>assets/plugins/toast-master/js/jquery.toast.js"></script>
     <script src="<?= base_url() ?>assets/plugins/wizard/jquery.validate.min.js"></script>
+    <script src="<?= base_url() ?>assets/internal/js/jquery.PrintArea.js" type="text/JavaScript"></script>
 
     <script src="<?= base_url() ?>assets/internal/js/custom.min.js"></script>
 

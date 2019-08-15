@@ -326,6 +326,7 @@
     <!--stickey kit -->
     <script src="<?= base_url() ?>assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
     <script src="<?= base_url() ?>assets/plugins/sparkline/jquery.sparkline.min.js"></script>
+    <script src="<?= base_url() ?>assets/eksternal/js/jquery.PrintArea.js" type="text/JavaScript"></script>
     <!--Custom JavaScript -->
     <script src="<?= base_url() ?>assets/eksternal/js/custom.js"></script>
     <!-- ============================================================== -->

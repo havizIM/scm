@@ -103,8 +103,8 @@
                                         <div class="dw-user-box">
                                             <div class=""><img src="<?= base_url() ?>doc/default_user.png" class="img-fluid" alt="user"></div>
                                             <div class="mt-2 text-center">
-                                                <h6 id="session_name"></h6>
-                                                <p class="text-muted" id="session_email"></p>
+                                                <h6 id="session_pic"></h6>
+                                                <p class="text-muted" id="session_supplier"></p>
                                                 <button id="setting" class="btn btn-rounded btn-info btn-sm btn-block mb-1">Account Settings</button>
                                                 <button id="logout" class="btn btn-rounded btn-danger btn-sm btn-block">Logout</button>
                                             </div>
@@ -193,79 +193,70 @@
                                             <h4>Data User</h4>
                                             <table class="table" style="font-size: 12px">
                                                 <tr>
-                                                    <td>ID User</td>
-                                                    <td id="info_id_user"></td>
+                                                    <td>ID PIC</td>
+                                                    <td id="info_id_pic"></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Nama</td>
-                                                    <td id="info_nama_lengkap"></td>
+                                                    <td id="info_nama_pic"></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Jenis Kelamin</td>
-                                                    <td id="info_jenis_kelamin"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Telepon</td>
-                                                    <td id="info_telepon"></td>
+                                                    <td>Handphone</td>
+                                                    <td id="info_handphone"></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Email</td>
-                                                    <td id="info_email"></td>
+                                                    <td id="info_email_pic"></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Alamat</td>
-                                                    <td id="info_alamat"></td>
+                                                    <td>Username</td>
+                                                    <td id="info_username"></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Level</td>
-                                                    <td id="info_level"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Status</td>
-                                                    <td id="info_status"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Tgl Registrasi</td>
-                                                    <td id="info_tgl_reg_user"></td>
+                                                    <td>Tgl Registrasi PIC</td>
+                                                    <td id="info_tgl_reg_pic"></td>
                                                 </tr>
                                             </table>
                                         </div>
                                         <div class="col-md-6">
-                                            <h4>Data Warehouse</h4>
+                                            <h4>Data Supplier</h4>
                                             <table class="table" style="font-size: 12px">
                                                 <tr>
-                                                    <td>ID Warehouse</td>
-                                                    <td id="info_id_warehouse">-</td>
+                                                    <td>ID Supplier</td>
+                                                    <td id="info_id_supplier">-</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Nama Warehouse</td>
-                                                    <td id="info_nama_warehouse">-</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Group</td>
-                                                    <td id="info_nama_group">-</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Lokasi Group</td>
-                                                    <td id="info_lokasi_group">-</td>
+                                                    <td>Nama Supplier</td>
+                                                    <td id="info_nama_supplier">-</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Alamat</td>
-                                                    <td id="info_alm_warehouse">-</td>
+                                                    <td id="info_alamat">-</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Telepon</td>
-                                                    <td id="info_telp_supplier">-</td>
+                                                    <td id="info_telepon">-</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Fax</td>
                                                     <td id="info_fax">-</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Tgl Registrasi</td>
-                                                    <td id="info_tgl_reg_warehouse">-</td>
+                                                    <td>NPWP</td>
+                                                    <td id="info_npwp">-</td>
                                                 </tr>
-
+                                                <tr>
+                                                    <td>Email</td>
+                                                    <td id="info_email">-</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Tgl Supplier</td>
+                                                    <td id="info_tgl_reg_supplier">-</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Status Supplier</td>
+                                                    <td id="info_status_supplier">-</td>
+                                                </tr>
                                             </table>
                                         </div>
                                     </div>

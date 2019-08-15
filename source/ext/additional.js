@@ -21,20 +21,26 @@ var makeNotif = (icon, heading, text, position) => {
 }
 
 var setSession = (data) => {
-	$('#session_name').text(data.nama_lengkap);
-	$('#session_email').text(data.email);
+	$('#session_pic').text(data.nama_pic);
+	$('#session_supplier').text(data.supplier.nama_supplier);
 
-	$('#info_id_user').text(data.id_user);
-	$('#info_nama_lengkap').text(data.nama_lengkap);
-	$('#info_jenis_kelamin').text(data.jenis_kelamin);
-	$('#info_telepon').text(data.telepon);
-	$('#info_email').text(data.email);
-	$('#info_alamat').text(data.alamat);
-	$('#info_level').text(data.level);
-	$('#info_status').text(data.status);
-	$('#info_tgl_reg_user').text(data.tgl_reg_user);
+	$('#info_id_pic').text(data.id_pic);
+	$('#info_nama_pic').text(data.nama_pic);
 
-	if (data.warehouse.length !== 0) {
+	$('#info_handphone').text(data.handphone);
+	$('#info_email_pic').text(data.email_pic);
+	$('#info_username').text(data.username);
+	$('#info_tgl_reg_pic').text(data.tgl_reg_pic);
 
+	if (data.supplier.length !== 0) {
+		$('#info_id_supplier').text(data.supplier.id_supplier);
+		$('#info_nama_supplier').text(data.supplier.nama_supplier);
+		$('#info_alamat').text(data.supplier.alamat);
+		$('#info_telepon').text(data.supplier.telepon);
+		$('#info_fax').text(data.supplier.fax);
+		$('#info_npwp').text(data.supplier.npwp);
+		$('#info_email').text(data.supplier.email);
+		$('#info_tgl_reg_supplier').text(data.supplier.tgl_reg_supplier);
+		$('#info_status_supplier').text(data.supplier.status_supplier);
 	}
 }

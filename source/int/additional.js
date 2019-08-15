@@ -21,7 +21,6 @@ var makeNotif = (icon, heading, text, position) => {
 }
 
 var setSession = (data) => {
-	console.log(data);
 	$('.session_name').text(data.nama_lengkap);
 	$('#session_email').text(data.email);
 

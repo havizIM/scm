@@ -30,7 +30,7 @@ $(function () {
                 {
                     "data": null, 'render': function (data, type, row) {
                         return `
-                            <a class="btn btn-sm btn-success" href="#/product/edit/${row.id_product}"><i class="fa fa-pencil"></i></a>
+                            <a class="btn btn-sm btn-success" href="#/product/edit/${row.id_product}"><i class="mdi mdi-grease-pencil"></i></a>
                             <button class="btn btn-sm btn-danger delete" data-id="${row.id_product}"><i class="fa fa-trash"></i></button>
                         `
                     }

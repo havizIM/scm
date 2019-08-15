@@ -23,7 +23,7 @@
     <link href="<?= base_url() ?>assets/plugins/toast-master/css/jquery.toast.css" rel="stylesheet">
 
     <script src="<?= base_url() ?>assets/plugins/jquery/jquery.min.js"></script>
-    <script src="<?= base_url().'source/int/additional.js'?>"></script>
+    <script src="<?= base_url().'source/ext/additional.js'?>"></script>
     <script src="<?= base_url().'source/ext/at_login.js'?>"></script>
 
     <style media="screen">

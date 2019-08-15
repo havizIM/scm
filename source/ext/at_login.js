@@ -1,4 +1,3 @@
-
 if (TOKEN) {
     $.ajax({
         url: `${BASE_URL}ext/setting/user_info`,
@@ -10,7 +9,7 @@ if (TOKEN) {
         },
         success: function (res) {
             if (res.data.length !== 0) {
-                const { status_supplier } = res.data;
+                const { status_supplier } = res.data.supplier;
 
                 if (status_supplier === 'Aktif') {
                     window.location.replace(`${BASE_URL}supplier/`)

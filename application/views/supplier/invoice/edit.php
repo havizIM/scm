@@ -47,6 +47,7 @@
                             </div>
                         </div>
                     </div>
+                    <input type="hidden" id="no_invoice" name="no_invoice">
                     <button class="btn btn-info btn-block btn-md" id="submit_edit">Submit</button>
                 </form>
             </div>
@@ -89,5 +90,5 @@
 
 <script>
     $.getScript(`${BASE_URL}source/ext/invoice.js`)
-    $.getScript(`${BASE_URL}source/ext/detail_invoice.js`)
+    $.getScript(`${BASE_URL}source/ext/edit_invoice.js`)
 </script>

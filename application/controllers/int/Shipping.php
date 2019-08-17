@@ -131,7 +131,9 @@ class Shipping extends CI_Controller {
                     'tgl_receive' => date('Y-m-d')
                 );
 
-                $edit = $this->ShippingModel->edit($where, $data);
+                $detail = array();
+
+                $edit = $this->ShippingModel->edit($where, $data, $detail);
 
                 if(!$edit){
                     $this->response(array(

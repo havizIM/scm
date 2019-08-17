@@ -78,7 +78,7 @@
 
         if(!empty($detail)){
             $this->db->where($where)->delete('payment_detail');
-            $this->db->where($where)->insert_batch('payment_detail', $detail);
+            $this->db->insert_batch('payment_detail', $detail);
         }
 
         $this->db->trans_complete();

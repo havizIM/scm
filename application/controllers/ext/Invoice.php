@@ -278,6 +278,74 @@ class Invoice extends CI_Controller {
         } 
     }
 
+    public function edit_put()
+    {
+        if($this->user->num_rows() == 0){
+            $this->response(array('status' => false, 'error' => 'Unauthorization token'), 401);
+        } else {
+            $user = $this->user->row();
+            $this->form_validation->set_data($this->put());
+            
+            $this->form_validation->set_rules('no_invoice', 'Invoice', 'required|trim');
+            $this->form_validation->set_rules('no_order', 'Order', 'required|trim');
+            $this->form_validation->set_rules('tgl_tempo', 'Tanggal Tempo', 'required|trim');
+
+            $this->form_validation->set_rules('deskripsi[]', 'Product', 'required|trim');
+            $this->form_validation->set_rules('harga[]', 'Harga', 'required|trim');
+            $this->form_validation->set_rules('qty[]', 'Qty', 'required|trim');
+            $this->form_validation->set_rules('total_harga[]', 'Total Harga', 'required|trim');
+
+            if($this->form_validation->run() == FALSE){
+
+                $this->response(array(
+                    'status'    => false,
+                    'message'   => 'Field is required',
+                    'error'     => $this->form_validation->error_array()
+                ), 400);
+
+            } else {
+
+                $put           = $this->put();
+
+                $where          = array(
+                    'no_invoice'        => $put['no_invoice']
+                );
+
+                $data           = array(
+                    'no_order'          => $put['no_order'],
+                    'tgl_tempo'         => $put['tgl_tempo']
+                );
+                
+                $detail  = array();
+
+                foreach($put['deskripsi'] as $key => $val){
+                    $detail[] = array(
+                        'no_invoice'    => $put['no_invoice'],
+                        'deskripsi'     => $put['deskripsi'][$key],
+                        'harga'         => $put['harga'][$key],
+                        'qty'           => $put['qty'][$key],
+                        'ppn'           => $put['total_harga'][$key] * 0.10,
+                        'total_harga'   => $put['total_harga'][$key]
+                    );
+                }
+
+                $edit = $this->InvoiceModel->edit($where, $data, $detail);
+
+                if(!$edit){
+                    $this->response(array(
+                        'status'    => false,
+                        'error'     => 'Failed edit invoice'
+                    ), 400);
+                } else {
+                    $this->response(array(
+                        'status'    => true,
+                        'message'   => 'Success edit invoice'
+                    ), 200);
+                }
+            }
+        } 
+    }
+
     public function delete_delete()
     {
         if($this->user->num_rows() == 0){

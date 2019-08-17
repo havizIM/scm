@@ -76,7 +76,7 @@ class OrderModel extends CI_Model {
 
         if(!empty($detail)){
             $this->db->where($where)->delete('order_detail');
-            $this->db->where($where)->insert_batch('order_detail', $detail);
+            $this->db->insert_batch('order_detail', $detail);
         }
 
         $this->db->trans_complete();

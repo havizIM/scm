@@ -69,9 +69,9 @@
         $this->db->where($where)->update('invoice', $data);
         
 
-        if(!empty($pic)){
-            $this->db->where($where)->delete('invoice_detail', $detail);
-            $this->db->where($where)->insert_batch('invoice_detail', $detail);
+        if(!empty($detail)){
+            $this->db->where($where)->delete('invoice_detail');
+            $this->db->insert_batch('invoice_detail', $detail);
         }
 
         $this->db->trans_complete();

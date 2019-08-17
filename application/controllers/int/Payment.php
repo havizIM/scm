@@ -19,6 +19,7 @@ class Payment extends CI_Controller {
         $this->where    = array('token' => $this->input->get_request_header('SCM-INT-KEY', TRUE));
         $this->user     = $this->AuthModel->cekAuthInt($this->where);
 
+        $this->load->model('InvoiceModel');
         $this->load->model('PaymentModel');
     }
 
@@ -70,11 +71,23 @@ class Payment extends CI_Controller {
 
                 foreach($detail->result() as $key1){
                     $json_ba = array();
+                    $sub_total = 0;
+                    $ppn_total = 0;
 
                     $json_ba['no_invoice']      = $key1->no_invoice;
                     $json_ba['no_order']        = $key1->no_order;
                     $json_ba['nama_supplier']   = $key1->nama_supplier;
                     $json_ba['jml_bayar']       = $key1->jml_bayar;
+
+                    $where_3   = array('no_invoice' => $key1->no_invoice);
+                    $hutang   = $this->InvoiceModel->detail($where_3);
+
+                    foreach($hutang->result() as $key1){
+                        $sub_total += $key1->total_harga;
+                        $ppn_total += $key1->ppn;
+                    }
+
+                    $json_ba['hutang']         = $sub_total + $ppn_total;
 
                     $json['detail'][] = $json_ba;
                 }
@@ -248,51 +261,16 @@ class Payment extends CI_Controller {
         if($this->user->num_rows() == 0){
             $this->response(array('status' => false, 'error' => 'Unauthorization token'), 401);
         } else {
-            $config = array(
-                array(
-                    'field' => 'id_warehouse',
-                    'label' => 'ID Warehouse',
-                    'rules' => 'required|trim'
-                ),
-                array(
-                    'field' => 'group',
-                    'label' => 'Group',
-                    'rules' => 'required|trim'
-                ),
-                array(
-                    'field' => 'user',
-                    'label' => 'User',
-                    'rules' => 'required|trim'
-                ),
-                array(
-                    'field' => 'nama_warehouse',
-                    'label' => 'Nama Warehouse',
-                    'rules' => 'required|trim'
-                ),
-                array(
-                    'field' => 'alamat',
-                    'label' => 'Alamat',
-                    'rules' => 'required|trim'
-                ),
-                array(
-                    'field' => 'telepon',
-                    'label' => 'Telepon',
-                    'rules' => 'required|trim'
-                ),
-                array(
-                    'field' => 'fax',
-                    'label' => 'Fax',
-                    'rules' => 'required|trim'
-                ),
-                array(
-                    'field' => 'email',
-                    'label' => 'Email',
-                    'rules' => 'required|trim'
-                )
-            );
-
+            $user = $this->user->row();
             $this->form_validation->set_data($this->put());
-            $this->form_validation->set_rules($config);
+            
+            $this->form_validation->set_rules('no_payment', 'Payment', 'required|trim');
+            $this->form_validation->set_rules('id_account', 'Account', 'required|trim');
+            $this->form_validation->set_rules('tgl_payment', 'Tanggal Payment', 'required|trim');
+            $this->form_validation->set_rules('total_bayar', 'Total Bayar', 'required|trim');
+
+            $this->form_validation->set_rules('no_invoice[]', 'No invoice', 'required|trim');
+            $this->form_validation->set_rules('jml_bayar[]', 'Jumlah Bayar', 'required|trim');
 
             if($this->form_validation->run() == FALSE){
 
@@ -303,35 +281,44 @@ class Payment extends CI_Controller {
                 ), 400);
 
             } else {
-                $where  = array(
-                    'id_warehouse'   => $this->put('id_warehouse') 
+
+                $put           = $this->put();
+
+                $detail  = array();
+
+                foreach($put['no_invoice'] as $key => $val){
+                    $detail[] = array(
+                        'no_payment'     => $put['no_payment'],
+                        'no_invoice'     => $put['no_invoice'][$key],
+                        'jml_bayar'      => $put['jml_bayar'][$key]
+                    );
+                }
+
+                $data           = array(
+                    'id_account'      => $put['id_account'],
+                    'tgl_payment'     => $put['tgl_payment'],
+                    'total_bayar'     => $put['total_bayar']
                 );
 
-                $data   = array(
-                    'group'             => $this->put('group'),
-                    'user'              => $this->put('user'),
-                    'nama_warehouse'    => $this->put('nama_warehouse'),
-                    'alamat'            => $this->put('alamat'),
-                    'telepon'           => $this->put('telepon'),
-                    'fax'               => $this->put('fax'),
-                    'email'             => $this->put('email')
+                $where          = array(
+                    'no_payment'      => $put['no_payment'],
                 );
 
-                $edit = $this->SupplierModel->edit($where, $data);
+                $edit = $this->PaymentModel->edit($where, $data, $detail);
 
                 if(!$edit){
                     $this->response(array(
                         'status'    => false,
-                        'error'     => 'Failed edit warehouse'
+                        'error'     => 'Failed edit payment'
                     ), 400);
                 } else {
                     $this->response(array(
                         'status'    => true,
-                        'message'   => 'Success edit warehouse'
+                        'message'   => 'Success edit payment'
                     ), 200);
                 }
             }
-        } 
+        }
     }
 
     public function delete_delete()

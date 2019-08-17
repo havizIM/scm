@@ -76,8 +76,8 @@
         $this->db->where($where)->update('payment', $data);
         
 
-        if(!empty($pic)){
-            $this->db->where($where)->delete('payment_detail', $detail);
+        if(!empty($detail)){
+            $this->db->where($where)->delete('payment_detail');
             $this->db->where($where)->insert_batch('payment_detail', $detail);
         }
 

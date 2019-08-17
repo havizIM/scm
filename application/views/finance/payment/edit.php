@@ -50,6 +50,7 @@
                             </div>
                         </div>
                     </div>
+                    <input type="hidden" id="no_payment" name="no_payment">
                     <button class="btn btn-info btn-block btn-md" id="submit_edit">Submit</button>
                 </form>
             </div>
@@ -128,5 +129,5 @@
 
 <script>
     $.getScript(`${BASE_URL}source/int/finance/payment.js`)
-    $.getScript(`${BASE_URL}source/int/finance/detail_payment.js`)
+    $.getScript(`${BASE_URL}source/int/finance/edit_payment.js`)
 </script>

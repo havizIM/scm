@@ -46,6 +46,7 @@
                             </div>
                         </div>
                     </div>
+                    <input type="hidden" id="no_shipping" name="no_shipping">
                     <button class="btn btn-info btn-block btn-md" id="submit_edit">Submit</button>
                 </form>
             </div>
@@ -88,5 +89,5 @@
 
 <script>
     $.getScript(`${BASE_URL}source/ext/shipping.js`)
-    $.getScript(`${BASE_URL}source/ext/detail_shipping.js`)
+    $.getScript(`${BASE_URL}source/ext/edit_shipping.js`)
 </script>

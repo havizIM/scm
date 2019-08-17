@@ -159,6 +159,69 @@ class Shipping extends CI_Controller {
         } 
     }
 
+    public function edit_put()
+    {
+        if($this->user->num_rows() == 0){
+            $this->response(array('status' => false, 'error' => 'Unauthorization token'), 401);
+        } else {
+            $user = $this->user->row();
+            $this->form_validation->set_data($this->put());
+            
+            $this->form_validation->set_rules('no_shipping', 'Shipping', 'required|trim');
+            $this->form_validation->set_rules('no_order', 'Order', 'required|trim');
+            $this->form_validation->set_rules('tgl_shipping', 'Tanggal Shipping', 'required|trim');
+            $this->form_validation->set_rules('id_product[]', 'Product', 'required|trim');
+            $this->form_validation->set_rules('actual_qty[]', 'Qty', 'required|trim');
+
+            if($this->form_validation->run() == FALSE){
+
+                $this->response(array(
+                    'status'    => false,
+                    'message'   => 'Field is required',
+                    'error'     => $this->form_validation->error_array()
+                ), 400);
+
+            } else {
+
+                $put           = $this->put();
+
+                $where          = array(
+                    'no_shipping'       => $put['no_shipping'],
+                );
+
+
+                $data           = array(
+                    'no_order'          => $put['no_order'],
+                    'tgl_shipping'      => $put['tgl_shipping']
+                );
+                
+                $detail  = array();
+
+                foreach($put['id_product'] as $key => $val){
+                    $detail[] = array(
+                        'no_shipping'    => $put['no_shipping'],
+                        'id_product'     => $put['id_product'][$key],
+                        'actual_qty'     => $put['actual_qty'][$key]
+                    );
+                }
+
+                $edit = $this->ShippingModel->edit($where, $data, $detail);
+
+                if(!$edit){
+                    $this->response(array(
+                        'status'    => false,
+                        'error'     => 'Failed edit shipping'
+                    ), 400);
+                } else {
+                    $this->response(array(
+                        'status'    => true,
+                        'message'   => 'Success edit shipping'
+                    ), 200);
+                }
+            }
+        } 
+    }
+
     public function delete_delete()
     {
         if($this->user->num_rows() == 0){

@@ -70,10 +70,15 @@
         }
     }
 
-    function edit($where, $data)
+    function edit($where, $data, $detail)
     {
         $this->db->trans_start();
         $this->db->where($where)->update('shipping', $data);
+
+        if(!empty($detail)){
+            $this->db->where($where)->delete('shipping_detail');
+            $this->db->insert_batch('shipping_detail', $detail);
+        }
 
         $this->db->trans_complete();
 

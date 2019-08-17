@@ -43,6 +43,7 @@
                             </div>
                         </div>
                     </div>
+                    <input type="hidden" id="no_order" name="no_order">
                     <button class="btn btn-info btn-block btn-md" id="submit_edit">Submit</button>
                 </form>
             </div>
@@ -120,5 +121,5 @@
 
 <script>
     $.getScript(`${BASE_URL}source/int/warehouse/order.js`)
-    $.getScript(`${BASE_URL}source/int/warehouse/detail_order.js`)
+    $.getScript(`${BASE_URL}source/int/warehouse/edit_order.js`)
 </script>

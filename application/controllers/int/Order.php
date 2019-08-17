@@ -158,51 +158,13 @@ class Order extends CI_Controller {
         if($this->user->num_rows() == 0){
             $this->response(array('status' => false, 'error' => 'Unauthorization token'), 401);
         } else {
-            $config = array(
-                array(
-                    'field' => 'id_warehouse',
-                    'label' => 'ID Warehouse',
-                    'rules' => 'required|trim'
-                ),
-                array(
-                    'field' => 'group',
-                    'label' => 'Group',
-                    'rules' => 'required|trim'
-                ),
-                array(
-                    'field' => 'user',
-                    'label' => 'User',
-                    'rules' => 'required|trim'
-                ),
-                array(
-                    'field' => 'nama_warehouse',
-                    'label' => 'Nama Warehouse',
-                    'rules' => 'required|trim'
-                ),
-                array(
-                    'field' => 'alamat',
-                    'label' => 'Alamat',
-                    'rules' => 'required|trim'
-                ),
-                array(
-                    'field' => 'telepon',
-                    'label' => 'Telepon',
-                    'rules' => 'required|trim'
-                ),
-                array(
-                    'field' => 'fax',
-                    'label' => 'Fax',
-                    'rules' => 'required|trim'
-                ),
-                array(
-                    'field' => 'email',
-                    'label' => 'Email',
-                    'rules' => 'required|trim'
-                )
-            );
-
+            $user = $this->user->row();
             $this->form_validation->set_data($this->put());
-            $this->form_validation->set_rules($config);
+            
+            $this->form_validation->set_rules('no_order', 'No Order', 'required|trim');
+            $this->form_validation->set_rules('id_supplier', 'Supplier', 'required|trim');
+            $this->form_validation->set_rules('id_product[]', 'Product', 'required|trim');
+            $this->form_validation->set_rules('qty[]', 'Qty', 'required|trim');
 
             if($this->form_validation->run() == FALSE){
 
@@ -213,31 +175,38 @@ class Order extends CI_Controller {
                 ), 400);
 
             } else {
-                $where  = array(
-                    'id_warehouse'   => $this->put('id_warehouse') 
+
+                $put           = $this->put();
+
+                $where          = array(
+                    'no_order'        => $put['no_order'],
                 );
 
-                $data   = array(
-                    'group'             => $this->put('group'),
-                    'user'              => $this->put('user'),
-                    'nama_warehouse'    => $this->put('nama_warehouse'),
-                    'alamat'            => $this->put('alamat'),
-                    'telepon'           => $this->put('telepon'),
-                    'fax'               => $this->put('fax'),
-                    'email'             => $this->put('email')
+                $data           = array(
+                    'id_supplier'     => $put['id_supplier'],
+                    'id_warehouse'    => $user->id_warehouse,
                 );
+                
+                $detail  = array();
+                foreach($put['id_product'] as $key => $val){
+                    $detail[] = array(
+                        'no_order'       => $put['no_order'],
+                        'id_product'     => $put['id_product'][$key],
+                        'qty'            => $put['qty'][$key]
+                    );
+                }
 
-                $edit = $this->SupplierModel->edit($where, $data);
+                $edit = $this->OrderModel->edit($where, $data, $detail);
 
                 if(!$edit){
                     $this->response(array(
                         'status'    => false,
-                        'error'     => 'Failed edit warehouse'
+                        'error'     => 'Failed edit order'
                     ), 400);
                 } else {
                     $this->response(array(
                         'status'    => true,
-                        'message'   => 'Success edit warehouse'
+                        'message'   => 'Success edit order'
                     ), 200);
                 }
             }
